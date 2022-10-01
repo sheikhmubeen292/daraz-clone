@@ -8,7 +8,6 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-
 import ShareIcon from "@mui/icons-material/Share";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddIcon from "@mui/icons-material/Add";
@@ -16,9 +15,9 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
-import CategoryData from "../components/CategoryPage/CategoryData";
-
 import { useParams } from "react-router-dom";
+
+import categoryData from "../components/CategoryPage/CategoryData";
 
 import robe1 from "../assets/robe1.jpg";
 import robe2 from "../assets/robe2.jpg";
@@ -28,12 +27,12 @@ import banner from "../assets/banner.jpg";
 const ProductPage = () => {
   const [image, setImage] = useState(robe1);
 
-  const [DAta, setdata] = useState(CategoryData);
+  const [data, setData] = useState(categoryData);
 
   const { id } = useParams();
 
-  const newData = DAta.filter((x) => x.id == id);
-  console.log(newData[0].imgsrc);
+  const newData = data.filter((x) => x.id == id);
+  console.log(newData[0]?.imgsrc);
   console.log(newData, "new dtaa");
   return (
     <Box sx={{ bgcolor: "#EFF0F5", py: 5 }}>
