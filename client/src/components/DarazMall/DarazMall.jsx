@@ -89,6 +89,7 @@ const DarazMall = () => {
                       boxShadow: "0 0 4px 0 rgb(0 0 0 / 25%)",
                       "&:hover": {
                         boxShadow: "0 0 4px 0 rgb(0 0 0 / 85%)",
+                        cursor: "pointer",
                       },
                     }}
                   >
