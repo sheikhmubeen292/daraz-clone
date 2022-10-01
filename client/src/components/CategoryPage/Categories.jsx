@@ -13,6 +13,7 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import CategoriesSidebar from "./CategoriesSidebar";
 import CategotyCard from "./CategoryCard";
+import { NavLink } from "react-router-dom";
 const Categories = () => {
   const [age, setAge] = React.useState("");
   const [data, setdata] = React.useState(cardData);
@@ -22,7 +23,7 @@ const Categories = () => {
   };
 
   return (
-    <Box py={5}>
+    <Box>
       <Container>
         <Grid container>
           <Grid item md={3} sx={3}>
@@ -92,7 +93,12 @@ const Categories = () => {
                 return (
                   <>
                     <Grid item md={3} xs={12} key={i}>
-                      <CategotyCard cardItem={cardItem} />
+                      <NavLink
+                        to={`/product/${cardItem.id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <CategotyCard cardItem={cardItem} />
+                      </NavLink>
                     </Grid>
                   </>
                 );

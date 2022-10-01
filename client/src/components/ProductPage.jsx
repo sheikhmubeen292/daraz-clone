@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+
 import ShareIcon from "@mui/icons-material/Share";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddIcon from "@mui/icons-material/Add";
@@ -15,6 +16,9 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import CategoryData from "../components/CategoryPage/CategoryData";
+
+import { useParams } from "react-router-dom";
 
 import robe1 from "../assets/robe1.jpg";
 import robe2 from "../assets/robe2.jpg";
@@ -23,6 +27,14 @@ import banner from "../assets/banner.jpg";
 
 const ProductPage = () => {
   const [image, setImage] = useState(robe1);
+
+  const [DAta, setdata] = useState(CategoryData);
+
+  const { id } = useParams();
+
+  const newData = DAta.filter((x) => x.id == id);
+  console.log(newData[0].imgsrc);
+  console.log(newData, "new dtaa");
   return (
     <Box sx={{ bgcolor: "#EFF0F5", py: 5 }}>
       <Container>
@@ -39,7 +51,7 @@ const ProductPage = () => {
               <Box width={{ xs: "100%", md: "40%" }}>
                 <Box
                   component="img"
-                  src={image}
+                  src={newData[0].imgsrc}
                   alt=""
                   width="100%"
                   height="315px"
@@ -50,7 +62,7 @@ const ProductPage = () => {
                   <Box
                     onMouseEnter={() => setImage(robe1)}
                     component="img"
-                    src={robe1}
+                    src={newData[0].imgsrc}
                     alt=""
                     width="70px"
                     height="70px"
@@ -62,7 +74,7 @@ const ProductPage = () => {
                   <Box
                     onMouseEnter={() => setImage(robe2)}
                     component="img"
-                    src={robe2}
+                    src={newData[0].imgsrc}
                     alt=""
                     width="70px"
                     height="70px"
@@ -74,7 +86,7 @@ const ProductPage = () => {
                   <Box
                     onMouseEnter={() => setImage(robe3)}
                     component="img"
-                    src={robe3}
+                    src={newData[0].imgsrc}
                     alt=""
                     width="70px"
                     height="70px"
@@ -87,8 +99,7 @@ const ProductPage = () => {
               </Box>
               <Box width={{ xs: "100%", md: "60%" }} p={1}>
                 <Typography width="100%" variant="h6">
-                  Bathrobe Premium & Luxury Cotton Shawl Collar Plush Bathrobes
-                  / Aveesha Textiles
+                  {newData[0].des}
                 </Typography>
 
                 <Box
@@ -132,14 +143,13 @@ const ProductPage = () => {
                 <Box component="img" src={banner} alt="" width="90%" mt={3} />
 
                 <Typography color="#F57224" sx={{ fontSize: "24px", mt: 3 }}>
-                  Rs. 999
+                  Rs.{newData[0].price}
                 </Typography>
                 <Typography sx={{ fontSize: "12px", mb: 3 }}>
-                  <span style={{ color: "grey" }}>
-                    {" "}
-                    <s>Rs. 1500</s>
+                  <span style={{ color: "grey", marginRight: "1rem" }}>
+                    <s>{newData[0].delprice}</s>
                   </span>
-                  -33%
+                  {newData[0].percent}
                 </Typography>
                 <Divider color="#eff0f5" />
 
@@ -151,14 +161,14 @@ const ProductPage = () => {
                     <Typography>Brown</Typography>
                     <Box
                       component="img"
-                      src={robe1}
+                      src={newData[0].imgsrc}
                       alt=""
                       width="50px"
                       height="50px"
                     />
                     <Box
                       component="img"
-                      src={robe2}
+                      src={newData[0].imgsrc}
                       alt=""
                       width="50px"
                       height="50px"
@@ -167,7 +177,7 @@ const ProductPage = () => {
                     <Box
                       component="img"
                       ml={1}
-                      src={robe3}
+                      src={newData[0].imgsrc}
                       alt=""
                       width="50px"
                       height="50px"
