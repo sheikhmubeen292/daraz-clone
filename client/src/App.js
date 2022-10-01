@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/navbar";
 import Slider from "./components/slider/Slider";
 import CategoryPage from "./components/CategoryPage/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FlashSale from "./components/FlashSale/FlashSale";
 function App() {
   return (
     <div>
@@ -24,6 +25,7 @@ function App() {
               <>
                 <Navbar />
                 <Slider />
+                <FlashSale />
                 <DarazMall />
                 <Categories />
               </>
