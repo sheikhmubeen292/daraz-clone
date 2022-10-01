@@ -16,77 +16,106 @@ import diningSets from "./CategoriesImg/diningSets.jpg";
 import nailsGun from "./CategoriesImg/nailsGun.jpg";
 import lifter from "./CategoriesImg/lifter.jpg";
 import polishers from "./CategoriesImg/polishers.jpg";
+import { NavLink, useParams } from "react-router-dom";
 
 const Categories = () => {
+  const {} = useParams();
   const categories = [
     {
       img: goloves,
       text: "  Cleaning Gloves",
+      name: "Cleaning-Gloves",
     },
     {
       img: mobile,
-      text: " Mobiles",
+      text: "Mobiles",
+      name: "mobiles",
     },
     {
       img: pressureWasher,
       text: "Pressure Washers",
+      name: "pressure-washers",
     },
     {
       img: card,
       text: "SD Card",
+      name: "sD-card",
     },
     {
       img: microSd,
       text: "Micro SD Card",
+      name: "micro-sdcard",
     },
     {
       img: paintGun,
       text: "Paint Guns",
+      name: "paint-guns",
     },
     {
       img: dryBox,
       text: "Dry Box",
+      name: "dry-box",
     },
     {
       img: garlicTool,
       text: "Garlic Tools",
+      name: "garlic-tools",
     },
     {
       img: featurePhone,
       text: "Feature Phone",
+      name: "feature-phone",
     },
     {
       img: clock,
       text: "Alaram Clocks",
+      name: "alaram-clocks",
     },
     {
       img: kids,
       text: "Kids Wears",
+      name: "kids-wears",
     },
     {
       img: pencils,
       text: "Pencils",
+      name: "pencils",
     },
     {
       img: diningSets,
       text: "Dining Sets",
+      name: "dining-sets",
     },
     {
       img: nailsGun,
       text: "Nails Gun",
+      name: "nails-gun",
     },
     {
       img: lifter,
       text: "lifters",
+      name: "lifters",
     },
     {
       img: polishers,
       text: "Polishers",
+      name: "polishers",
     },
   ];
   return (
     <Box sx={{ mt: 11 }}>
       <Container>
+        <Typography
+          sx={{
+            fontFamily: "Roboto-Regular",
+            fontSize: "22px",
+            color: "#424242",
+            fontWeight: 400,
+            my: "20px",
+          }}
+        >
+          Categories
+        </Typography>
         <Box
           sx={{
             display: "flex",
@@ -96,7 +125,7 @@ const Categories = () => {
             justifyContent: "center",
           }}
         >
-          {categories.map(({ img, text }) => {
+          {categories.map(({ img, text, name }) => {
             return (
               <Box
                 sx={{
@@ -110,27 +139,32 @@ const Categories = () => {
                   ml: "2px",
                 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItem: "center",
-                    justifyContent: "center",
-                    width: "100%",
-                  }}
+                <NavLink
+                  to={`/categoryPage/${name}`}
+                  style={{ textDecoration: "none" }}
                 >
-                  <img src={img} alt="" width="110px" />
-                </Box>
-                <Typography
-                  sx={{
-                    fontSize: "14px",
-                    color: "#212121",
-                    display: "flex",
-                    alignItem: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {text}
-                </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItem: "center",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <img src={img} alt="" width="110px" />
+                  </Box>
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      color: "#212121",
+                      display: "flex",
+                      alignItem: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {text}
+                  </Typography>
+                </NavLink>
               </Box>
             );
           })}
