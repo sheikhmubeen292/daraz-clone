@@ -9,10 +9,12 @@ import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
-    paperStyle: { marginTop: 115, padding: 20, height: '70vh', width: 280, margin: "20px auto", },
+    paperStyle: { marginTop: 115, padding: 20, height: '70vh', width: 390, margin: "20px auto", },
     avatarStyle: { backgroundColor: '#1bbd7e' },
-    btnstyle: { margin: '8px 0' },
-    spanstyle: { color: "red", marginTop: "10px" }
+    btnstyle: { margin: '7px 0',  },
+    spanstyle: { color: "red", marginTop: "10px" },
+    textFields:{ padding:"1rem"},
+    typo: {padding:"1rem"}
 }));
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -57,12 +59,12 @@ const Login = () => {
                     <Avatar className={classes.avatarStyle}><LoginIcon /></Avatar>
                     <h2>Sign In</h2>
                 </Grid>
-                <TextField label='Email' placeholder='Enter email' type='email' onChange={(e) => setEmail(e.target.value)} fullWidth required />
-                <TextField label='Password' placeholder='Enter password' type='password' onChange={(e) => setPassword(e.target.value)} fullWidth required />
-                <Button  color='primary' onClick={handleSubmit}  variant="contained" className={classes.btnstyle} fullWidth>Sign in</Button>
+                <TextField label='Email'className={classes.textFields} placeholder='Enter email' type='email' onChange={(e) => setEmail(e.target.value)} fullWidth required />
+                <TextField label='Password' className={classes.textFields} placeholder='Enter password' type='password' onChange={(e) => setPassword(e.target.value)} fullWidth required />
+                <Button  color='primary' onClick={handleSubmit} variant="contained" className={classes.btnstyle} fullWidth>Sign in</Button>
                 {error && <Box component="span" className={classes.spanstyle}>Email or Password is Incorrect!</Box>}
-                <Typography > Do you have an account?
-                    <Link to="/register">
+                <Typography className={classes.typo} > Do you have an account?
+                    <Link className={classes.typo} to="/register">
                         Register
                     </Link>
                 </Typography>

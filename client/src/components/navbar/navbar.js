@@ -12,8 +12,8 @@ import "./navbar.css";
 import AppBar from "@mui/material/AppBar";
 import Drawer from "@mui/material/Drawer";
 import Dropdown from 'react-bootstrap/Dropdown';
-
 import IconButton from "@mui/material/IconButton";
+import { useNavigate } from 'react-router-dom';
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import SearchIcon from "@mui/icons-material/Search";
@@ -26,6 +26,7 @@ import MenuItem from "@mui/material/MenuItem";
 const Navbar = () => {
   const matches = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const navigate = useNavigate();
   const drawerWidth = 240;
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -55,6 +56,13 @@ const Navbar = () => {
   const handleItemClick1 = () => {
     setMenuPosition1(null);
   };
+  function logout() {
+    localStorage.clear();
+    navigate('/login')
+}
+const currentUser=JSON.parse(localStorage.getItem("currentUser"))
+  console.log(currentUser,
+    "user........")
   return (
     <div>
       <AppBar sx={{ backgroundColor: "white" }} component="nav">
@@ -239,12 +247,12 @@ const Navbar = () => {
               </Grid>
               <Grid item md={2} >
                 <Dropdown >
-                  <Dropdown.Toggle variant="danger" id="dropdown-basic" style={{marginLeft:"15rem", fontSize:"1.3rem"}}>
-                    Name
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Logout</Dropdown.Item>
-                  </Dropdown.Menu>
+                {currentUser?(<> <Dropdown.Toggle id="dropdown-basic" style={{marginLeft:"15rem",backgroundColor:"#f57224", fontSize:"1.3rem"}}>
+                {currentUser?.data?.name}
+                  </Dropdown.Toggle><Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1" onClick={logout}>Logout</Dropdown.Item>
+                  </Dropdown.Menu></>):(<Dropdown.Item href="#/action-1">Login</Dropdown.Item>)}  
+               
                 </Dropdown>
               </Grid>
             </Grid>
