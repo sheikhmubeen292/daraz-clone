@@ -1,4 +1,6 @@
 import Categories from "./components/Categories/Categories";
+import Register from "./components/Singup/Register";
+import Login from "./components/Login/Login";
 import DarazMall from "./components/DarazMall/DarazMall";
 import ProductPage from "./components/ProductPage";
 import Navbar from "./components/navbar/navbar";
@@ -17,8 +19,9 @@ function App() {
       <Categories /> */}
 
       <BrowserRouter>
-        <Navbar />
+      <Login  />
         <Routes>
+          <Route path="/register" element={<Register/>} />
           <Route
             path="/"
             element={
@@ -36,7 +39,7 @@ function App() {
             element={<CategoryPage />}
           ></Route>
           <Route path="/product/:id" element={<ProductPage />}></Route>
-        </Routes>
+        </Routes> 
       </BrowserRouter>
     </div>
   );

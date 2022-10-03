@@ -11,6 +11,8 @@ import {
 import "./navbar.css";
 import AppBar from "@mui/material/AppBar";
 import Drawer from "@mui/material/Drawer";
+import Dropdown from 'react-bootstrap/Dropdown';
+
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
@@ -56,7 +58,7 @@ const Navbar = () => {
   return (
     <div>
       <AppBar sx={{ backgroundColor: "white" }} component="nav">
-        <Toolbar sx={{ display: "flex", justifyContent: "space-around" }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box
             sx={{
               width: "100%",
@@ -81,7 +83,7 @@ const Navbar = () => {
 
           <Container
             className="navbarDesktop"
-            sx={{ p: 1, pl: 3 }}
+            sx={{ p: 2, pl: 3 }}
             maxWidth="lg"
           >
             <Grid alignItems="center" container spacing={3}>
@@ -223,7 +225,7 @@ const Navbar = () => {
                   <SearchIcon />
                 </Box>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={1}>
                 <ShoppingCartSharpIcon
                   sx={{
                     color: "#000000",
@@ -232,14 +234,24 @@ const Navbar = () => {
                   }}
                 />
               </Grid>
-              <Grid item md={2}>
+              <Grid item md={1}>
                 <img src={download} width={250} height={60} alt="" />
+              </Grid>
+              <Grid item md={2} >
+                <Dropdown >
+                  <Dropdown.Toggle variant="danger" id="dropdown-basic" style={{marginLeft:"15rem", fontSize:"1.3rem"}}>
+                    Name
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Logout</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </Grid>
             </Grid>
           </Container>
         </Toolbar>
       </AppBar>
-      <Box component="nav" sx={{ paddingBottom: "7rem" }}>
+      <Box component="nav" sx={{ paddingBottom: "4rem" }}>
         <Drawer
           variant="temporary"
           open={mobileOpen}
