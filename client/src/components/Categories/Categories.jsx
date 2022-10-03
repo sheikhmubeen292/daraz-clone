@@ -24,7 +24,7 @@ const Categories = () => {
     {
       img: goloves,
       text: "  Cleaning Gloves",
-      name: "Cleaning-Gloves",
+      name: "cleaninggloves",
     },
     {
       img: mobile,

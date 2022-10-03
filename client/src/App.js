@@ -6,6 +6,7 @@ import Slider from "./components/slider/Slider";
 import CategoryPage from "./components/CategoryPage/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FlashSale from "./components/FlashSale/FlashSale";
+import AddProduct from "./components/AddProduct";
 function App() {
   return (
     <div>
@@ -36,6 +37,7 @@ function App() {
             element={<CategoryPage />}
           ></Route>
           <Route path="/product/:id" element={<ProductPage />}></Route>
+          <Route path="/addproduct" element={<AddProduct />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
