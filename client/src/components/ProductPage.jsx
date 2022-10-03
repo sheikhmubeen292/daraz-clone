@@ -31,6 +31,8 @@ const ProductPage = () => {
 
   const { id } = useParams();
 
+  console.log(id, "my Id");
+
   const newData = data.filter((x) => x.id == id);
   console.log(newData[0]?.imgsrc);
   console.log(newData, "new dtaa");
