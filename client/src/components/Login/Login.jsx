@@ -20,7 +20,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
-    const classes = useStyles();
+    const classes = useStyles(); 
     const navigate = useNavigate();
 
     const currentUser =JSON.parse(localStorage.getItem('currentUser'));
