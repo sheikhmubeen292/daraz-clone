@@ -6,6 +6,7 @@ import Slider from "./components/slider/Slider";
 import CategoryPage from "./components/CategoryPage/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FlashSale from "./components/FlashSale/FlashSale";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <div>
@@ -28,6 +29,7 @@ function App() {
                 <FlashSale />
                 <DarazMall />
                 <Categories />
+                <Footer />
               </>
             }
           ></Route>
