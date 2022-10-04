@@ -239,20 +239,22 @@ const currentUser=JSON.parse(localStorage.getItem("currentUser"))
                     color: "#000000",
                     fontSize: "3rem",
                     marginLeft: "1rem",
+                    
                   }}
                 />
               </Grid>
               <Grid item md={1}>
-                <img src={download} width={250} height={60} alt="" />
+                <img src={download} width={180} height={45} alt="" />
               </Grid>
               <Grid item md={2} >
-                <Dropdown >
-                {currentUser?(<> <Dropdown.Toggle id="dropdown-basic" style={{marginLeft:"15rem",backgroundColor:"#f57224", fontSize:"1.3rem"}}>
+                <Dropdown>
+                {currentUser?(<> <Dropdown.Toggle id="dropdown-basic" style={{marginLeft:"7rem",fontFamily:"Times New Roman", padding:"10px",backgroundColor:"#f57224", fontSize:"1.3rem", borderRadius:"50px",}}>
                 {currentUser?.data?.name}
                   </Dropdown.Toggle><Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1" onClick={logout}>Logout</Dropdown.Item>
-                  </Dropdown.Menu></>):(<Dropdown.Item href="#/action-1">Login</Dropdown.Item>)}  
-               
+                    <Dropdown.Item href="/login" onClick={logout} style={{backgroundColor:"#f57224", textDecoration:"none", color:"black",
+                  fontFamily:"Times New Roman", fontSize:"16px", display:"block", borderRadius:"10px", padding:"10px"}} >Logout</Dropdown.Item>
+                  </Dropdown.Menu></>):(<Dropdown.Item href="/login"  style={{backgroundColor:"#f57224", textDecoration:"none", color:"black",
+                  fontFamily:"Times New Roman", fontSize:"16px", display:"block", borderRadius:"10px", padding:"10px",marginLeft:"7rem",width:"60px"}} >Login</Dropdown.Item>)}  
                 </Dropdown>
               </Grid>
             </Grid>
@@ -292,10 +294,12 @@ const currentUser=JSON.parse(localStorage.getItem("currentUser"))
                     alignItems: "center",
                   }}
                 >
+                  <Box mb={2}>
+
                   <TextField
                     id="outlined-basic"
                     variant="outlined"
-                    sx={{ width: 150 }}
+                    sx={{ width: 100 }}
                   />
                   <SearchIcon
                     sx={{
@@ -303,13 +307,24 @@ const currentUser=JSON.parse(localStorage.getItem("currentUser"))
                       width: "2rem",
                       height: "3rem",
                       borderRadius: "50%",
+                      position:"absolute"
                     }}
                   />
+                  </Box>
                   <ShoppingCartSharpIcon
-                    sx={{ color: "#000000", fontSize: "2rem" }}
+                    sx={{ color: "#000000", fontSize: "2rem", marginBottom:"1rem"}}
                   />
 
-                  <img src={download} width={150} height={60} alt="" />
+                  <Dropdown>
+                {currentUser?(<> <Dropdown.Toggle id="dropdown-basic" style={{fontFamily:"Times New Roman", padding:"10px",backgroundColor:"#f57224", fontSize:"1.3rem", borderRadius:"50px"}}>
+                {currentUser?.data?.name}
+                  </Dropdown.Toggle><Dropdown.Menu>
+                    <Dropdown.Item href="/login" onClick={logout} style={{backgroundColor:"#f57224", textDecoration:"none", color:"black",
+                  fontFamily:"Times New Roman", fontSize:"16px", display:"block", borderRadius:"10px", padding:"10px"}} >Logout</Dropdown.Item>
+                  </Dropdown.Menu></>):(<Dropdown.Item href="/login" style={{backgroundColor:"#f57224", textDecoration:"none", color:"black",
+                  fontFamily:"Times New Roman", fontSize:"16px", display:"block", borderRadius:"10px", padding:"10px"}}>Login</Dropdown.Item>)}  
+               
+                </Dropdown>
                 </Box>
               </Grid>
             </Grid>

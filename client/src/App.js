@@ -1,5 +1,6 @@
 import Register from "./components/Singup/Register";
-import Login from "./components/Login/Login";
+// import Login from "./components/Login/Login";
+import Loginfoam from "./components/Login/Login1";
 import ProductPage from "./components/ProductPage";
 import HomeScreen from "./components/HomeScreen";
 import CategoryPage from "./components/CategoryPage/Categories";
@@ -26,7 +27,7 @@ function App() {
               }
             /> */}
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/login" element={<Loginfoam />}></Route>
           <Route path="/" element={<HomeScreen />}></Route>
           <Route
             path="/categoryPage/:category"
