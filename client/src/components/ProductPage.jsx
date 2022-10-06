@@ -16,7 +16,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import { useParams } from "react-router-dom";
-
+import { add } from "../store/cartSlice";
+import {useDispatch} from 'react-redux'
 import categoryData from "../components/CategoryPage/CategoryData";
 
 import robe1 from "../assets/robe1.jpg";
@@ -26,6 +27,7 @@ import banner from "../assets/banner.jpg";
 import axios from "axios";
 
 const ProductPage = () => {
+  const dispatch = useDispatch()
   const [image, setImage] = useState(robe1);
 
   const [newData, setData] = useState([]);
@@ -43,7 +45,7 @@ const ProductPage = () => {
       );
       const newData = res.data.filter((x) => x._id == id);
 
-      console.log(res.data, "------------------all");
+      // console.log(res.data, "------------------all");
       console.log(newData, "newdata---");
 
       setData(newData);
@@ -53,7 +55,10 @@ const ProductPage = () => {
   useEffect(() => {
     getAllProducts();
   }, []);
-
+ const handleAdd=(product)=>{
+  console.log(product, "newdata .........>")
+   dispatch(add(product))
+ }
   return (
     <Box sx={{ bgcolor: "#EFF0F5", py: 5 }}>
       <Container>
@@ -238,12 +243,17 @@ const ProductPage = () => {
                         Buy Now
                       </Button>
                       <Button
+                       onClick={()=>{
+                         
+                        handleAdd(data)
+                       }}
                         sx={{
                           bgcolor: "#F57224",
                           color: "white",
                           px: 3,
                           ml: 2,
                           "&:hover": { bgcolor: "#F57224a1" },
+                          
                         }}
                       >
                         Add to Cart

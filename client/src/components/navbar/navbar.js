@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "@mui/system";
 
 import {
   Grid,
-  ListItemButton,
   Button,
   Box,
   TextField,
@@ -23,8 +22,10 @@ import logo from "../../assets/daraz.png";
 import download from "../../assets/download.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useSelector } from "react-redux";
 
-const Navbar = () => {
+const Navbar = ({getresult}) => {
+  const items = useSelector((state)=>state.cart)
   const matches = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -60,6 +61,20 @@ const Navbar = () => {
   function logout() {
     localStorage.clear();
     navigate("/login");
+  }
+  const searchHandle= async (event)=>{
+  let key =event.target.value;
+  if(key){
+
+    let result = await fetch(`http://localhost:5000/api/products/search/${key}`)
+    result = await result.json();
+    console.log(result, "result ..........12")
+    if(result){
+    getresult(result);
+    }
+  }else{
+    getresult();
+  }
   }
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   console.log(currentUser, "user........");
@@ -235,6 +250,7 @@ const Navbar = () => {
                     id="outlined-basic"
                     variant="outlined"
                     placeholder="search in daraz"
+                    onChange={searchHandle}
                     sx={{ width: 900, marginLeft: "4rem" }}
                   />
                   <Box
@@ -257,6 +273,10 @@ const Navbar = () => {
                       marginLeft: "1rem",
                     }}
                   />
+                  <Box className='item__count'>
+                  <span>{items.length}</span>
+                </Box>
+                  {/* <span style={{color:"black"}}>Cart Items:{items.length}</span> */}
                 </Grid>
                 <Grid item md={1}>
                   <img src={download} width={200} height={50} alt="" />

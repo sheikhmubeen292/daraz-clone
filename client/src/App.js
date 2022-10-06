@@ -6,21 +6,28 @@ import ProductPage from "./components/ProductPage";
 import HomeScreen from "./components/HomeScreen";
 import CategoryPage from "./components/CategoryPage/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {Provider} from 'react-redux'
 import FlashSale from "./components/FlashSale/FlashSale";
 import AddProduct from "./components/AddProduct";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/Footer/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import store from "./store/Store";
 
 function App() {
+  const[resultdata, setResultdata] = useState()
+  console.log(resultdata);
   return (
     <div>
+      <Provider store={store}>
+
       <BrowserRouter>
-        <Navbar />
+        <Navbar getresult={setResultdata} />
         <Routes>
           <Route path="/register" element={<Signup />} />
           <Route path="/login" element={<Loginfoam />}></Route>
-          <Route path="/" element={<HomeScreen />}></Route>
+          <Route path="/" element={<HomeScreen dataOfResult={resultdata} />}></Route>
           <Route
             path="/categoryPage/:category"
             element={<CategoryPage />}
@@ -30,6 +37,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+      </Provider>
     </div>
   );
 }

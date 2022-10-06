@@ -8,7 +8,7 @@ import { Avatar, Box, CardActionArea } from "@mui/material";
 const CategotyCard = ({ cardItem }) => {
   return (
     <Box py={2}>
-      <Card sx={{ maxWidth: 345 }} className="bs">
+      <Card sx={{ maxWidth: 345,height:"100%" }} className="bs">
         <CardActionArea>
           <CardMedia
             component="img"

@@ -377,6 +377,7 @@ function Signup() {
             <MenuItem value={1}>Male</MenuItem>
             <MenuItem value={2}>Female</MenuItem>
           </Select>
+          
         </FormControl>
       </Box>
     );

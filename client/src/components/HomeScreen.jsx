@@ -6,12 +6,14 @@ import Categories from "./Categories/Categories";
 import FlashSale from "./FlashSale/FlashSale";
 import JustForYou from "./JustForYou/JustForYou";
 
-export default function HomeScreen() {
+export default function HomeScreen({dataOfResult}) {
+
   return (
     <div>
+      
       <Slider />
-      <FlashSale />
-      <DarazMall />
+      <FlashSale dataOfResult={dataOfResult}  />
+      <DarazMall dataOfDaraz= {dataOfResult} />
       <Categories />
       <JustForYou />
     </div>
