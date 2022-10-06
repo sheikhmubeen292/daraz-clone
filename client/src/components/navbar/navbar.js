@@ -322,24 +322,83 @@ const Navbar = () => {
                     alignItems: "center",
                   }}
                 >
-                  <TextField
-                    id="outlined-basic"
-                    variant="outlined"
-                    sx={{ width: 150 }}
-                  />
-                  <SearchIcon
+                  <Box mb={2}>
+                    <TextField
+                      id="outlined-basic"
+                      variant="outlined"
+                      sx={{ width: 100 }}
+                    />
+                    <SearchIcon
+                      sx={{
+                        backgroundColor: "#F57208",
+                        width: "2rem",
+                        height: "3rem",
+                        borderRadius: "50%",
+                        position: "absolute",
+                      }}
+                    />
+                  </Box>
+                  <ShoppingCartSharpIcon
                     sx={{
-                      backgroundColor: "#F57208",
-                      width: "2rem",
-                      height: "3rem",
-                      borderRadius: "50%",
+                      color: "#000000",
+                      fontSize: "2rem",
+                      marginBottom: "1rem",
                     }}
                   />
-                  <ShoppingCartSharpIcon
-                    sx={{ color: "#000000", fontSize: "2rem" }}
-                  />
 
-                  <img src={download} width={150} height={60} alt="" />
+                  <Dropdown>
+                    {currentUser ? (
+                      <>
+                        {" "}
+                        <Dropdown.Toggle
+                          id="dropdown-basic"
+                          style={{
+                            fontFamily: "Times New Roman",
+                            padding: "10px",
+                            backgroundColor: "#f57224",
+                            fontSize: "1.3rem",
+                            borderRadius: "50px",
+                          }}
+                        >
+                          {currentUser?.data?.name}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item
+                            href="/login"
+                            onClick={logout}
+                            style={{
+                              backgroundColor: "#f57224",
+                              textDecoration: "none",
+                              color: "black",
+                              fontFamily: "Times New Roman",
+                              fontSize: "16px",
+                              display: "block",
+                              borderRadius: "10px",
+                              padding: "10px",
+                            }}
+                          >
+                            Logout
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </>
+                    ) : (
+                      <Dropdown.Item
+                        href="/login"
+                        style={{
+                          backgroundColor: "#f57224",
+                          textDecoration: "none",
+                          color: "black",
+                          fontFamily: "Times New Roman",
+                          fontSize: "16px",
+                          display: "block",
+                          borderRadius: "10px",
+                          padding: "10px",
+                        }}
+                      >
+                        Login
+                      </Dropdown.Item>
+                    )}
+                  </Dropdown>
                 </Box>
               </Grid>
             </Grid>
