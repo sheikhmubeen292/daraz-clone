@@ -29,8 +29,8 @@ async function validatePassword(plainPassword, hashedPassword) {
 }
 router.post("/register", upload.single("image"), async (req, res, next) => {
   try {
-    const { name, email, password, role } = req.body;
-    if (!name || !email || !password) {
+    const { name, email, password,gender, role } = req.body;
+    if (!name || !email || !password || !gender) {
         res.status(400);
         throw new Error("Please add all fields");
       }
@@ -53,6 +53,7 @@ router.post("/register", upload.single("image"), async (req, res, next) => {
       name,
       email,
       password: hashedPassword,
+      gender,
       role: role || "user",
     });
     const accessToken = jwt.sign(
