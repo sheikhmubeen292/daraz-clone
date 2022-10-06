@@ -6,25 +6,15 @@ import CategoryPage from "./components/CategoryPage/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FlashSale from "./components/FlashSale/FlashSale";
 import AddProduct from "./components/AddProduct";
+import Navbar from "./components/navbar/navbar";
+import Footer from "./components/Footer/Footer";
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <div>
-      {/* <Navbar />
-      <Slider />
-      <ProductPage />
-      <CategoryPage />
-      <DarazMall />
-      <Categories /> */}
-
       <BrowserRouter>
+        <Navbar />
         <Routes>
-          {/* <Route path="/" element={<HomeScreen />} render={props => currentUser ? (
-                  <HomeScreen {...props} currentUser={currentUser}/>
-                ) : (
-                  <Navigate to="/login" />
-                )
-              }
-            /> */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<HomeScreen />}></Route>
@@ -35,6 +25,7 @@ function App() {
           <Route path="/product/:id" element={<ProductPage />}></Route>
           <Route path="/addproduct" element={<AddProduct />}></Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

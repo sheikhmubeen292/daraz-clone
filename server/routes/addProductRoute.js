@@ -59,7 +59,7 @@ router.post(
 
 // ----------------------------------get all products
 
-router.get("/products", async (req, res) => {
+router.get("/allproducts", async (req, res) => {
   try {
     const products = await ProductModal.find({});
     res.json(products);

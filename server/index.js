@@ -16,8 +16,6 @@ app.use("/api/products", addProdutRoute);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// const _dirname = path.resolve();
-
 app.use("/api/users/", router);
 
 app.listen(port, (req, res) => {

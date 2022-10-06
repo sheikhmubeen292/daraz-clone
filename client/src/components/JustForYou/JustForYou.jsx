@@ -1,0 +1,110 @@
+import React from "react";
+import { Box, Container, Grid, Typography, Button } from "@mui/material";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
+const JustForYou = () => {
+  const [data, setData] = React.useState([]);
+  const [visible, setVisible] = React.useState(12);
+
+  const showMoreItems = () => {
+    setVisible((prevValue) => prevValue + 6);
+  };
+
+  const fetchAllProduct = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:5000/api/products/allproducts"
+      );
+      setData(res.data);
+    } catch (error) {}
+  };
+  React.useEffect(() => {
+    fetchAllProduct();
+  }, [data]);
+  return (
+    <div>
+      <Box sx={{ mt: 2 }}>
+        <Container maxWidth="lg">
+          <Typography
+            sx={{ color: "#757575", fontSize: "22px", fontWeight: 400, my: 2 }}
+          >
+            Just For You
+          </Typography>
+          <Grid container>
+            {data?.slice(0, visible).map(({ image, name, price, _id }) => {
+              return (
+                <Grid
+                  item
+                  xs={6}
+                  sm={6}
+                  md={2}
+                  sx={{
+                    display: "flex",
+                    alignItem: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <NavLink
+                    to={`/product/${_id}`}
+                    style={{ textDecoration: "none", color: "#212121" }}
+                  >
+                    <Box
+                      sx={{
+                        marginTop: "1rem",
+                        p: "4px",
+                        width: "90%",
+                        bgcolor: "#fff",
+                        boxShadow: "0 0 4px 0 rgb(0 0 0 / 25%)",
+                        "&:hover": {
+                          boxShadow: "0 0 4px 0 rgb(0 0 0 / 85%)",
+                          cursor: "pointer",
+                        },
+                      }}
+                    >
+                      <Box>
+                        <img
+                          src={`http://localhost:5000/uploads/${image}`}
+                          alt=""
+                          width="100%"
+                        />
+                      </Box>{" "}
+                      <Typography
+                        sx={{
+                          fontSize: "15px",
+                          display: "-webkit-box !important",
+                          WebkitLineClamp: "2",
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {name}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: "#F95606",
+                          fontSize: "18px",
+                          fontWeight: 400,
+                        }}
+                      >
+                        Rs.{price}
+                      </Typography>
+                    </Box>
+                  </NavLink>
+                </Grid>
+              );
+            })}
+            <Button
+              onClick={showMoreItems}
+              size="large"
+              sx={{ margin: "1rem 0rem", fontSize: "1rem" }}
+            >
+              Show More
+            </Button>
+          </Grid>
+        </Container>
+      </Box>
+    </div>
+  );
+};
+
+export default JustForYou;

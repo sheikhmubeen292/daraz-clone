@@ -1,17 +1,19 @@
 import React from "react";
-import Navbar from "./navbar/navbar";
+
 import Slider from "./slider/Slider";
 import DarazMall from "./DarazMall/DarazMall";
 import Categories from "./Categories/Categories";
 import FlashSale from "./FlashSale/FlashSale";
+import JustForYou from "./JustForYou/JustForYou";
+
 export default function HomeScreen() {
   return (
     <div>
-      <Navbar />
       <Slider />
       <FlashSale />
       <DarazMall />
       <Categories />
+      <JustForYou />
     </div>
   );
 }

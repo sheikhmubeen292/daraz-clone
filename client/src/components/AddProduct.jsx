@@ -157,6 +157,8 @@ export default function AddProduct() {
                   name="Qauntity"
                   autoComplete="Qauntity"
                 />
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth

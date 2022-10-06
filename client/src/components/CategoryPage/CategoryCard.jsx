@@ -7,20 +7,20 @@ import StarBorderPurple500Sharp from "@mui/icons-material/StarBorderPurple500Sha
 import { Avatar, Box, CardActionArea } from "@mui/material";
 const CategotyCard = ({ cardItem }) => {
   return (
-    <Box py={2} height="30%">
+    <Box py={2}>
       <Card sx={{ maxWidth: 345 }} className="bs">
         <CardActionArea>
           <CardMedia
             component="img"
             height="150px"
-            image={cardItem.imgsrc}
+            image={`http://localhost:5000/uploads/${cardItem.image}`}
             alt="green iguana"
             sx={{ width: "100%" }}
           />
           <CardContent>
             <Avatar
               variant="square"
-              src={cardItem.imgsrc}
+              src={`http://localhost:5000/uploads/${cardItem.image}`}
               sx={{ border: "1px solid red" }}
               sizes="small"
             ></Avatar>
@@ -31,20 +31,20 @@ const CategotyCard = ({ cardItem }) => {
               variant="p"
               component="div"
             >
-              {cardItem.des}
+              {cardItem.name}
             </Typography>
             <Typography variant="body2" color="#F57647">
               Rs.{cardItem.price}
             </Typography>
-            <Typography variant="body2" color="#9A9A9A">
+            {/* <Typography variant="body2" color="#9A9A9A">
               <del style={{ marginRight: "0.5rem", marginTop: "1rem" }}>
                 Rs.{cardItem.delprice}
               </del>
               {cardItem.percent}
-            </Typography>
+            </Typography> */}
             <Typography variant="body2" color="">
               {[1, 2, 3, 4, 5].map(() => {
-                return <StarBorderPurple500Sharp />;
+                return <StarBorderPurple500Sharp sx={{ fontSize: "1rem" }} />;
               })}
             </Typography>
           </CardContent>

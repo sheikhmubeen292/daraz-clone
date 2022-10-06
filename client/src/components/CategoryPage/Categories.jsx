@@ -14,16 +14,39 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import CategoriesSidebar from "./CategoriesSidebar";
 import CategotyCard from "./CategoryCard";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 const Categories = () => {
   const [age, setAge] = React.useState("");
-  const [data, setdata] = React.useState(cardData);
+  const [data, setData] = React.useState([]);
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
 
+  const { category } = useParams();
+  console.log(category, "my Id");
+
+  const getAllProducts = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:5000/api/products/allproducts"
+      );
+      const newData = res.data.filter((x) => x.category == category);
+
+      console.log(res.data, "------------------all");
+      console.log(newData, "newdata---");
+
+      setData(newData);
+    } catch (error) {}
+  };
+
+  React.useEffect(() => {
+    getAllProducts();
+  }, []);
+
   return (
-    <Box>
+    <Box py={6}>
       <Container>
         <Grid container>
           <Grid item md={3} sx={3}>
@@ -35,11 +58,14 @@ const Categories = () => {
             <Grid container>
               <Grid item md={6}>
                 <Box sx={{ color: "#262626" }}>
-                  <Typography variant="h6" sx={{ color: "#262626" }}>
-                    BathRobes
+                  <Typography
+                    variant="h6"
+                    sx={{ color: "#262626", textTransform: "capitalize" }}
+                  >
+                    {category}
                   </Typography>
                   <Typography variant="p">
-                    1443 item found in Bathrobes
+                    {`   ${data.length} item found in ${category}`}
                   </Typography>
                 </Box>
               </Grid>
@@ -88,13 +114,13 @@ const Categories = () => {
               </Grid>
             </Grid>
             <hr></hr>
-            <Grid container>
+            <Grid container spacing={1}>
               {data.map((cardItem, i) => {
                 return (
                   <>
                     <Grid item md={3} xs={12} key={i}>
                       <NavLink
-                        to={`/product/${cardItem.id}`}
+                        to={`/product/${cardItem._id}`}
                         style={{ textDecoration: "none" }}
                       >
                         <CategotyCard cardItem={cardItem} />

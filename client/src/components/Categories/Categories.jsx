@@ -34,47 +34,47 @@ const Categories = () => {
     {
       img: pressureWasher,
       text: "Pressure Washers",
-      name: "pressure-washers",
+      name: "pressurewashers",
     },
     {
       img: card,
       text: "SD Card",
-      name: "sD-card",
+      name: "sdcard",
     },
     {
       img: microSd,
       text: "Micro SD Card",
-      name: "micro-sdcard",
+      name: "microcard",
     },
     {
       img: paintGun,
       text: "Paint Guns",
-      name: "paint-guns",
+      name: "paintguns",
     },
     {
       img: dryBox,
       text: "Dry Box",
-      name: "dry-box",
+      name: "drybox",
     },
     {
       img: garlicTool,
       text: "Garlic Tools",
-      name: "garlic-tools",
+      name: "garlictools",
     },
     {
       img: featurePhone,
       text: "Feature Phone",
-      name: "feature-phone",
+      name: "featurephone",
     },
     {
       img: clock,
       text: "Alaram Clocks",
-      name: "alaram-clocks",
+      name: "alaramclocks",
     },
     {
       img: kids,
       text: "Kids Wears",
-      name: "kids-wears",
+      name: "kidswears",
     },
     {
       img: pencils,
@@ -84,12 +84,12 @@ const Categories = () => {
     {
       img: diningSets,
       text: "Dining Sets",
-      name: "dining-sets",
+      name: "diningsets",
     },
     {
       img: nailsGun,
       text: "Nails Gun",
-      name: "nails-gun",
+      name: "nailsgun",
     },
     {
       img: lifter,
