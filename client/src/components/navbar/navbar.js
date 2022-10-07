@@ -13,12 +13,13 @@ import AppBar from "@mui/material/AppBar";
 import Drawer from "@mui/material/Drawer";
 import Dropdown from "react-bootstrap/Dropdown";
 import IconButton from "@mui/material/IconButton";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import logo from "../../assets/daraz.png";
+import { useCart } from "react-use-cart";
 import download from "../../assets/download.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -33,6 +34,9 @@ const Navbar = ({getresult}) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+
+  const {totalUniqueItems}=useCart()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [menuPosition, setMenuPosition] = React.useState(null);
   const [menuPosition1, setMenuPosition1] = React.useState(null);
@@ -266,6 +270,7 @@ const Navbar = ({getresult}) => {
                   </Box>
                 </Grid>
                 <Grid item xs={1}>
+                <Link className="navLink" to="/cart">
                   <ShoppingCartSharpIcon
                     sx={{
                       color: "#000000",
@@ -273,8 +278,9 @@ const Navbar = ({getresult}) => {
                       marginLeft: "1rem",
                     }}
                   />
+                  </Link>
                   <Box className='item__count'>
-                  <span>{items.length}</span>
+                  <span>{totalUniqueItems}</span>
                 </Box>
                   {/* <span style={{color:"black"}}>Cart Items:{items.length}</span> */}
                 </Grid>
@@ -364,6 +370,7 @@ const Navbar = ({getresult}) => {
                       fontSize: "2rem",
                       marginBottom: "1rem",
                     }}
+                    // <Link to='/cart'></Link>
                   />
 
                   <Dropdown>

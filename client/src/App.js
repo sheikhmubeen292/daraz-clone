@@ -14,7 +14,7 @@ import Footer from "./components/Footer/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import store from "./store/Store";
-
+import Cart from "./components/Cart1";
 function App() {
   const[resultdata, setResultdata] = useState()
   console.log(resultdata);
@@ -28,12 +28,10 @@ function App() {
           <Route path="/register" element={<Signup />} />
           <Route path="/login" element={<Loginfoam />}></Route>
           <Route path="/" element={<HomeScreen dataOfResult={resultdata} />}></Route>
-          <Route
-            path="/categoryPage/:category"
-            element={<CategoryPage />}
-          ></Route>
+          <Route path="/categoryPage/:category" element={<CategoryPage />}></Route>
           <Route path="/product/:id" element={<ProductPage />}></Route>
           <Route path="/addproduct" element={<AddProduct />}></Route>
+          <Route path="/cart" element={<Cart />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
