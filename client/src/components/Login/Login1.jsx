@@ -39,7 +39,7 @@ function Loginfoam() {
           "currentUser",
           JSON.stringify(result.data)
         );
-        navigate("/");
+        navigate("/cart");
       }
     } catch (err) {
       console.log(err, "err");

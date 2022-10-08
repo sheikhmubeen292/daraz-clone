@@ -9,9 +9,7 @@ import {
 } from "@mui/material";
 import FormControl, {
   useFormControl,
-  UseFormControlfullname,
 } from "@mui/material/FormControl";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -23,7 +21,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 // import Stack from "@mui/material/Stack";
 import { Link, useNavigate } from "react-router-dom";
-import { spacing } from "@mui/material";
 
 function Signup() {
   const [image, setImage] = useState("");
@@ -83,7 +80,7 @@ function Signup() {
         paddingTop="50px"
         sx={{
           width: matches ? "100%" : "100vw",
-          height: matches ? "110%" : "70vh",
+          height: matches ? "110%" : "100vh",
         }}
       >
         <Container>
@@ -160,6 +157,7 @@ function Signup() {
                     placeholder="Enter your email"
                     type="email"
                     value={email}
+                    sx={{borderTop:"1px solid grey", borderRadius:"5px"}}
                     onChange={(e) => setEmail(e.target.value)}
                     fullWidth
                   />
@@ -176,6 +174,7 @@ function Signup() {
                     placeholder="Enter your password"
                     type="password"
                     value={password}
+                    sx={{borderTop:"1px solid grey", borderRadius:"5px"}}
                     onChange={(e) => setPassword(e.target.value)}
                     fullWidth
                   />
@@ -184,8 +183,8 @@ function Signup() {
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: matches ? "column" : "row",
-                      // spacing: 4
+                      flexDirection: matches ? "column" : "column",
+                      spacing: 4
                     }}
                   >
                     <Box>
@@ -197,12 +196,12 @@ function Signup() {
                         Upload Your Image
                       </Typography>
                       <InputBase
-                        fullWidth
                         // className={classes.imageStyle}
                         autoComplete="image"
                         id="image"
                         type="file"
                         name="image"
+                        sx={{borderBottom:"1px solid grey", borderRadius:"5px"}}
                         // value={image}
                         accept="image/*"
                         onChange={handlePhoto}
@@ -212,7 +211,7 @@ function Signup() {
 
                     <Box
                       sx={{
-                        width: "40%",
+                        width: "100%",
                         height: "300px",
                       }}
                     >
@@ -246,13 +245,13 @@ function Signup() {
                     // className={classes.formStyle}
                     value={name}
                     placeholder="Enter your name"
+                    sx={{borderTop:"1px solid grey", borderRadius:"5px"}}
                     onChange={(e) => setName(e.target.value)}
                     fullWidth
                   />
                   <br></br>
 
                   <CheckboxLabels />
-
                   <Box
                     sx={{
                       "& button": { m: 2 },

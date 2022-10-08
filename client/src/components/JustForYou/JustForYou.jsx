@@ -30,7 +30,7 @@ const JustForYou = () => {
           >
             Just For You
           </Typography>
-          <Grid container>
+          <Grid container sx={{display:"flex", justifyContent:"center"}}>
             {data?.slice(0, visible).map(({ image, name, price, _id }) => {
               return (
                 <Grid
@@ -67,7 +67,7 @@ const JustForYou = () => {
                           alt=""
                           width="100%"
                         />
-                      </Box>{" "}
+                      </Box>
                       <Typography
                         sx={{
                           fontSize: "15px",
@@ -96,7 +96,11 @@ const JustForYou = () => {
             <Button
               onClick={showMoreItems}
               size="large"
-              sx={{ margin: "1rem 0rem", fontSize: "1rem" }}
+              sx={{ margin: "2rem 0rem", fontSize: "1rem", backgroundColor:"#F57208", 
+              color:"white", display:"flex", alignItems:"center",  
+            "&:hover":{
+              backgroundColor:"#F57208"
+            } }}
             >
               Show More
             </Button>

@@ -44,7 +44,6 @@ router.post("/register", upload.single("image"), async (req, res, next) => {
       }
    
     req.body.image = req.file.filename;
-    console.log(req.body.image,"akljdfljl");
     const image = req.body.image;
     const hashedPassword = await hashPassword(password);
     console.log(hashPassword);

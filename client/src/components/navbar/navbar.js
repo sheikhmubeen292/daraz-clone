@@ -9,6 +9,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import "./navbar.css";
+
 import AppBar from "@mui/material/AppBar";
 import Drawer from "@mui/material/Drawer";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -34,8 +35,6 @@ const Navbar = ({getresult}) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-
   const {totalUniqueItems}=useCart()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [menuPosition, setMenuPosition] = React.useState(null);
@@ -64,7 +63,7 @@ const Navbar = ({getresult}) => {
   };
   function logout() {
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
   }
   const searchHandle= async (event)=>{
   let key =event.target.value;
@@ -195,10 +194,10 @@ const Navbar = ({getresult}) => {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem onClick={handleItemClick}>
+                    <MenuItem onMouseLeave={handleItemClick}>
                       Categories and Pets
                     </MenuItem>
-                    <MenuItem onClick={handleItemClick}>
+                    <MenuItem onMouseLeave={handleItemClick}>
                       Health and beauty
                     </MenuItem>
                     <MenuItem
@@ -255,7 +254,8 @@ const Navbar = ({getresult}) => {
                     variant="outlined"
                     placeholder="search in daraz"
                     onChange={searchHandle}
-                    sx={{ width: 900, marginLeft: "4rem" }}
+                    sx={{ width: 900, marginLeft: "4rem",borderTop:"1px solid grey", borderRadius:"5px" }}
+
                   />
                   <Box
                     sx={{
@@ -297,6 +297,8 @@ const Navbar = ({getresult}) => {
                             marginLeft: "8rem",
                             backgroundColor: "#f57224",
                             fontSize: "1.2rem",
+                            width:"120px",
+                            textTransform:"upperCase"
                           }}
                         >
                           {currentUser?.data?.name}
@@ -306,7 +308,19 @@ const Navbar = ({getresult}) => {
                         </Dropdown.Menu>
                       </>
                     ) : (
-                      <Dropdown.Item>Login</Dropdown.Item>
+                      <Dropdown.Item  style={{
+                        marginLeft: "8rem",
+                        backgroundColor: "#f57224",
+                        fontSize: "1.2rem",
+                        width:"120px",
+                        textTransform:"upperCase",
+                        borderRadius:"10px",
+                        height:"40px",
+                        padding:"6px 20px",
+                      
+
+                       }}><Link to="/login" style={{  textDecoration:"none",
+                       color:"white"}}>Login</Link></Dropdown.Item>
                     )}
                   </Dropdown>
                 </Grid>

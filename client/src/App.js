@@ -7,6 +7,7 @@ import HomeScreen from "./components/HomeScreen";
 import CategoryPage from "./components/CategoryPage/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {Provider} from 'react-redux'
+
 import FlashSale from "./components/FlashSale/FlashSale";
 import AddProduct from "./components/AddProduct";
 import Navbar from "./components/navbar/navbar";
@@ -21,7 +22,6 @@ function App() {
   return (
     <div>
       <Provider store={store}>
-
       <BrowserRouter>
         <Navbar getresult={setResultdata} />
         <Routes>
