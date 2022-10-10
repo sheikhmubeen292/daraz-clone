@@ -18,6 +18,7 @@ import AdminRoutes from "./components/AdminRoutes";
 import { useState } from "react";
 import store from "./store/Store";
 import Cart from "./components/Cart1";
+
 function App() {
   const [resultdata, setResultdata] = useState([]);
   console.log(resultdata,"app rwsult");
@@ -31,7 +32,7 @@ function App() {
             <Route path="/register" element={<Signup />} />
             <Route path="/login" element={<Loginfoam />} />
             <Route path="/" element={<HomeScreen dataOfResult={resultdata} />}  />
-            <Route path="/categoryPage/:category" element={<CategoryPage dataOfResult={resultdata}/>} />
+            <Route path="/categoryPage/:category" element={<CategoryPage dataOfCategory={resultdata} />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/addproduct" element={<AddProduct />} />
             <Route path="/admin-dashbord/*" element={<AdminRoutes />} />
