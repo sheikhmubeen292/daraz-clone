@@ -7,9 +7,7 @@ import {
   useMediaQuery,
   InputBase,
 } from "@mui/material";
-import FormControl, {
-  useFormControl,
-} from "@mui/material/FormControl";
+import FormControl, { useFormControl } from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -157,7 +155,7 @@ function Signup() {
                     placeholder="Enter your email"
                     type="email"
                     value={email}
-                    sx={{borderTop:"1px solid grey", borderRadius:"5px"}}
+                    sx={{ borderTop: "1px solid grey", borderRadius: "5px" }}
                     onChange={(e) => setEmail(e.target.value)}
                     fullWidth
                   />
@@ -174,7 +172,7 @@ function Signup() {
                     placeholder="Enter your password"
                     type="password"
                     value={password}
-                    sx={{borderTop:"1px solid grey", borderRadius:"5px"}}
+                    sx={{ borderTop: "1px solid grey", borderRadius: "5px" }}
                     onChange={(e) => setPassword(e.target.value)}
                     fullWidth
                   />
@@ -184,7 +182,7 @@ function Signup() {
                     sx={{
                       display: "flex",
                       flexDirection: matches ? "column" : "column",
-                      spacing: 4
+                      spacing: 4,
                     }}
                   >
                     <Box>
@@ -201,7 +199,10 @@ function Signup() {
                         id="image"
                         type="file"
                         name="image"
-                        sx={{borderBottom:"1px solid grey", borderRadius:"5px"}}
+                        sx={{
+                          borderBottom: "1px solid grey",
+                          borderRadius: "5px",
+                        }}
                         // value={image}
                         accept="image/*"
                         onChange={handlePhoto}
@@ -245,7 +246,7 @@ function Signup() {
                     // className={classes.formStyle}
                     value={name}
                     placeholder="Enter your name"
-                    sx={{borderTop:"1px solid grey", borderRadius:"5px"}}
+                    sx={{ borderTop: "1px solid grey", borderRadius: "5px" }}
                     onChange={(e) => setName(e.target.value)}
                     fullWidth
                   />
@@ -376,7 +377,6 @@ function Signup() {
             <MenuItem value={1}>Male</MenuItem>
             <MenuItem value={2}>Female</MenuItem>
           </Select>
-          
         </FormControl>
       </Box>
     );

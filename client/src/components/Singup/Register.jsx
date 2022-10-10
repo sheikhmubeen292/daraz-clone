@@ -14,7 +14,6 @@ import CreateIcon from "@mui/icons-material/Create";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
-import { url } from "../../constants";
 const useStyles = makeStyles(() => ({
   paperStyle: {
     marginTop: 115,
@@ -67,7 +66,7 @@ const Register = () => {
       
 
       const result = await axios.post(
-        `${url}/api/users/register`,
+        `http://localhost:5000/api/users/register`,
         form
       );
       console.log(result.data, "result data");

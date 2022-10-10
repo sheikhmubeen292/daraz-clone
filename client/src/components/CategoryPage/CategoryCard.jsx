@@ -43,13 +43,12 @@ const CategotyCard = ({ cardItem }) => {
               </del>
               {cardItem.percent}
             </Typography> */}
-            <Typography variant="body2" color="">
-              {[1, 2, 3, 4, 5].map(() => {
-                return <StarBorderPurple500Sharp sx={{ fontSize: "1rem" }} />;
-              })}
-            </Typography>
-          </CardContent>
-        {/* </CardActionArea> */}
+          <Typography variant="body2" color="">
+            {[1, 2, 3, 4, 5].map(() => {
+              return <StarBorderPurple500Sharp sx={{ fontSize: "1rem" }} />;
+            })}
+          </Typography>
+        </CardContent>
       </Card>
     </Box>
   );

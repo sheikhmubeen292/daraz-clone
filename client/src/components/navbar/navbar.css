@@ -133,11 +133,11 @@
     display: flex;
     justify-content: center;
   }
-    form{
+    /* form{
       display: flex;
       justify-content: center;
       width: 70%;
-    }
+    } */
       button{
         padding: 0px 8px;
         font-size: 20px;
