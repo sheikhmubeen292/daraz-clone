@@ -19,11 +19,10 @@ import {url} from '../../constants'
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import './loading.css'
-const Categories = ({dataOfCategory}) => {
-  console.log(dataOfCategory, "data of category")
+const Categories = () => {
   const [age, setAge] = React.useState("");
   const [data, setData] = React.useState([]);
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -34,19 +33,19 @@ const Categories = ({dataOfCategory}) => {
 
   const getAllProducts = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.get(
         `${url}/api/products/allproducts`
       );
       const newData = res.data.filter((x) => x.category == category);
-      setLoading(false)
+      setLoading(false);
       console.log(res.data, "------------------all");
       console.log(newData, "newdata---");
 
       setData(newData);
     } catch (error) {
       console.log(error);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -129,7 +128,7 @@ const Categories = ({dataOfCategory}) => {
              </div>
              </>) :(
                  <Grid container spacing={1}>
-                 {dataOfCategory?.length>0 ? dataOfCategory?.map((cardItem, i) => {
+                 {data.map((cardItem, i) => {
                    return (
                      <>
                        <Grid item md={3} xs={12} key={i}>
@@ -142,19 +141,6 @@ const Categories = ({dataOfCategory}) => {
                        </Grid>
                      </>
                    );
-                 }):data.map((cardItem, i)=>{
-                  return (
-                    <>
-                      <Grid item md={3} xs={12} key={i}>
-                        <NavLink
-                          to={`/product/${cardItem._id}`}
-                          style={{ textDecoration: "none" }}
-                        >
-                          <CategotyCard cardItem={cardItem} />
-                        </NavLink>
-                      </Grid>
-                    </>
-                  );
                  })}
                </Grid> 
              ) }

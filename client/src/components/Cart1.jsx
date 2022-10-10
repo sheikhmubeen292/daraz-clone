@@ -1,10 +1,23 @@
 import { useState } from "react";
-import { Box, Container,Paper,Typography,Table,TableBody,TableContainer,TableRow,Button,Grid,TextField,Avatar} from "@mui/material";
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  Table,
+  TableBody,
+  TableContainer,
+  TableRow,
+  Button,
+  Grid,
+  TextField,
+  Avatar,
+} from "@mui/material";
 import axios from "axios";
 import CreateIcon from "@mui/icons-material/Create";
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Modal from '@mui/material/Modal';
+import Modal from "@mui/material/Modal";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { url } from "../constants";
@@ -23,16 +36,15 @@ const useStyles = makeStyles(() => ({
   btnstyle: { margin: "10px 50px" },
   spanstyle: { color: "red", marginTop: "10px" },
   formStyle: {
-    marginLeft:"3rem",
-    padding:"10px"
+    marginLeft: "3rem",
+    padding: "10px",
   },
- 
 }));
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
 };
 
 const StyledTableCell = styled(TableCell)(() => ({
@@ -55,25 +67,23 @@ function Cart() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(false);
-   
-      const user = {
-        name,
-        phone,
-        address,
-      };
-      console.log(user, "user");
+
+    const user = {
+      name,
+      phone,
+      address,
+    };
+    console.log(user, "user");
     try {
       // let form = new FormData();
       // form.append("name", name);
       // form.append("phone", phone);
       // form.append("address", address);
-      const result = await axios.post(
-        `${url}/api/order/order`,{
-          name,
-          phone,
-          address,
-        }
-      );
+      const result = await axios.post(`${url}/api/order/order`, {
+        name,
+        phone,
+        address,
+      });
       console.log(result.data, "resultform data");
       if (result.data) {
         alert("Order Completed Successfully!");
@@ -83,7 +93,7 @@ function Cart() {
     }
   };
   // const { enqueueSnackbar }: any = useSnackbar();
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const {
     isEmpty,
     items,
@@ -116,10 +126,7 @@ function Cart() {
         <Grid container pt={4} spacing={3} justifyContent="center">
           <Grid md={8}>
             <Box pt={6} mx={2} pb={10} sx={{ bgcolor: "white" }}>
-              <Box
-                mb={4}
-                sx={{ display: "flex", justifyContent: "flex-end" }}
-              >
+              <Box mb={4} sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
                   onClick={() => emptyCart()}
                   sx={{
@@ -280,7 +287,14 @@ function Cart() {
             </Box>
           </Grid>
           <Grid md={4} container spacing={1}>
-            <Box pt={6} ml={1} px={1} pb={10} mt={1} sx={{ background: "white" }}>
+            <Box
+              pt={6}
+              ml={1}
+              px={1}
+              pb={10}
+              mt={1}
+              sx={{ background: "white" }}
+            >
               <Typography
                 sx={{
                   fontSize: "18px",
@@ -329,30 +343,37 @@ function Cart() {
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
                 <Typography sx={{ color: "black" }}>Total</Typography>
-                <Typography sx={{ color: "#F57208" }}> Rs. {cartTotal}</Typography>
+                <Typography sx={{ color: "#F57208" }}>
+                  {" "}
+                  Rs. {cartTotal}
+                </Typography>
               </Box>
-              {(!currentUser? (<Box>
-                <Link to="/login" style={{textDecoration:"none",}}>
-                <Button
-                  size="large"
-                  sx={{
-                    margin: "2rem 0rem",
-                    fontSize: "1rem",
-                    backgroundColor: "#F57208",
-                    color: "white",
-                    display: "flex",
-                    alignItems: "center",
-                    
-                    "&:hover": {
-                      backgroundColor: "#F57208",
-                    },
-                  }}
-                >
-                  PROCEED TO CHECKOUT
-                </Button>
-                </Link>
-              </Box>):(''))}
-              
+              {!currentUser ? (
+                <Box>
+                  <Link to="/login" style={{ textDecoration: "none" }}>
+                    <Button
+                      size="large"
+                      sx={{
+                        margin: "2rem 0rem",
+                        fontSize: "1rem",
+                        backgroundColor: "#F57208",
+                        color: "white",
+                        display: "flex",
+                        alignItems: "center",
+
+                        "&:hover": {
+                          backgroundColor: "#F57208",
+                        },
+                      }}
+                    >
+                      PROCEED TO CHECKOUT
+                    </Button>
+                  </Link>
+                </Box>
+              ) : (
+                ""
+              )}
+
               <Box>
                 <Button
                   size="large"
@@ -372,74 +393,70 @@ function Cart() {
                   Confirm Your Order
                 </Button>
                 <Modal
-        open={open}
-        onClose={handleClose}
-        // aria-labelledby="modal-modal-title"
-        // aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-        <Grid>
-      <Paper elevation={20} className={classes.paperStyle}>
-        <Grid align="center">
-          <Avatar className={classes.avatarStyle}>
-            <CreateIcon />
-          </Avatar>
-          <h2 className={classes.headerStyle}>Order Confirm</h2>
-          <Typography variant="caption" gutterBottom>
-            Please fill this form to confirm your order!
-          </Typography>
-        </Grid>
-        {/* <img src={''} alt="wrapper" className={classes.image} /> */}
-        <form onSubmit={handleSubmit}>
-          <Box mt={2}>
+                  open={open}
+                  onClose={handleClose}
+                  // aria-labelledby="modal-modal-title"
+                  // aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Grid>
+                      <Paper elevation={20} className={classes.paperStyle}>
+                        <Grid align="center">
+                          <Avatar className={classes.avatarStyle}>
+                            <CreateIcon />
+                          </Avatar>
+                          <h2 className={classes.headerStyle}>Order Confirm</h2>
+                          <Typography variant="caption" gutterBottom>
+                            Please fill this form to confirm your order!
+                          </Typography>
+                        </Grid>
+                        {/* {/ <img src={''} alt="wrapper" className={classes.image} /> /} */}
+                        <form onSubmit={handleSubmit}>
+                          <Box mt={2}>
+                            <TextField
+                              className={classes.formStyle}
+                              label="Name"
+                              placeholder="Enter your name"
+                              onChange={(e) => setName(e.target.value)}
+                              fullWidth
+                            />
+                            <TextField
+                              className={classes.formStyle}
+                              label="Phone Number"
+                              placeholder="Enter your Phone Number"
+                              type="text"
+                              onChange={(e) => setPhone(e.target.value)}
+                              fullWidth
+                            />
+                            <TextField
+                              className={classes.formStyle}
+                              label="address"
+                              placeholder="Enter your Address"
+                              type="text"
+                              onChange={(e) => setAddress(e.target.value)}
+                              fullWidth
+                            />
 
-          <TextField
-            className={classes.formStyle}
-            label="Name"
-            placeholder="Enter your name"
-            onChange={(e) => setName(e.target.value)}
-            fullWidth
-          />
-           <TextField
-            className={classes.formStyle}
-            label="Phone Number"
-            placeholder="Enter your Phone Number"
-            type="text"
-            onChange={(e) => setPhone(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            className={classes.formStyle}
-            label="address"
-            placeholder="Enter your Address"
-            type="text"
-            onChange={(e) => setAddress(e.target.value)}
-            fullWidth
-          /> 
-          
-
-          <Button
-            type="submit"
-            color="primary"
-            variant="contained"
-            className={classes.btnstyle}
-            fullWidth
-          >
-            Submit
-          </Button>
-          </Box>
-        </form>
-        {error && (
-          <Box component="span" className={classes.spanstyle}>
-            Something went wrong!
-          </Box>
-        )}
-      </Paper>
-    </Grid>
-        </Box>
-      </Modal>
-                
-                
+                            <Button
+                              type="submit"
+                              color="primary"
+                              variant="contained"
+                              className={classes.btnstyle}
+                              fullWidth
+                            >
+                              Submit
+                            </Button>
+                          </Box>
+                        </form>
+                        {error && (
+                          <Box component="span" className={classes.spanstyle}>
+                            Something went wrong!
+                          </Box>
+                        )}
+                      </Paper>
+                    </Grid>
+                  </Box>
+                </Modal>
               </Box>
             </Box>
           </Grid>
