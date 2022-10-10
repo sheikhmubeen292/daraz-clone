@@ -9,7 +9,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import "./navbar.css";
-
+import { url } from "../../constants";
 import AppBar from "@mui/material/AppBar";
 import Drawer from "@mui/material/Drawer";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -74,7 +74,7 @@ const Navbar = ({getresult}) => {
   let key =event.target.value;
   if(key){
 
-    let result = await fetch(`http://localhost:5000/api/products/search/${key}`)
+    let result = await fetch(`${url}/api/products/search/${key}`)
     result = await result.json();
     console.log(result, "result ..........12")
     if(result){

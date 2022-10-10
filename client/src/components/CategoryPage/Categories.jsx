@@ -15,6 +15,7 @@ import CategoriesSidebar from "./CategoriesSidebar";
 import CategotyCard from "./CategoryCard";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import {url} from '../../constants'
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import './loading.css'
@@ -34,7 +35,7 @@ const Categories = () => {
     try {
       setLoading(true)
       const res = await axios.get(
-        "http://localhost:5000/api/products/allproducts"
+        `${url}/api/products/allproducts`
       );
       const newData = res.data.filter((x) => x.category == category);
       setLoading(false)
@@ -72,7 +73,7 @@ const Categories = () => {
                     {category}
                   </Typography>
                   <Typography variant="p">
-                    {`   ${data.length} item found in ${category}`}
+                    {`${data.length} item found in ${category}`}
                   </Typography>
                 </Box>
               </Grid>

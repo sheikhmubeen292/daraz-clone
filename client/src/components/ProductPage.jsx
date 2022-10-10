@@ -21,6 +21,7 @@ import { add,increament } from "../store/cartSlice";
 import {useDispatch} from 'react-redux'
 import categoryData from "../components/CategoryPage/CategoryData";
 import { v4 as uuidv4 } from 'uuid';
+import { url } from "../constants";
 
 import robe1 from "../assets/robe1.jpg";
 import robe2 from "../assets/robe2.jpg";
@@ -45,7 +46,7 @@ const ProductPage = () => {
   const getAllProducts = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/products/allproducts"
+        `${url}/api/products/allproducts`
       );
       const newData = res.data.filter((x) => x._id == id);
 
@@ -79,7 +80,7 @@ const ProductPage = () => {
                     <Box width={{ xs: "100%", md: "40%" }}>
                       <Box
                         component="img"
-                        src={`http://localhost:5000/uploads/${data.image}`}
+                        src={`${url}/uploads/${data.image}`}
                         alt=""
                         width="100%"
                         height="315px"
@@ -90,7 +91,7 @@ const ProductPage = () => {
                         <Box
                           onMouseEnter={() => setImage(robe1)}
                           component="img"
-                          src={`http://localhost:5000/uploads/${data.image}`}
+                          src={`${url}/uploads/${data.image}`}
                           alt=""
                           width="70px"
                           height="70px"
@@ -102,7 +103,7 @@ const ProductPage = () => {
                         <Box
                           onMouseEnter={() => setImage(robe2)}
                           component="img"
-                          src={`http://localhost:5000/uploads/${data.image}`}
+                          src={`${url}/uploads/${data.image}`}
                           alt=""
                           width="70px"
                           height="70px"
@@ -114,7 +115,7 @@ const ProductPage = () => {
                         <Box
                           onMouseEnter={() => setImage(robe3)}
                           component="img"
-                          src={`http://localhost:5000/uploads/${data.image}`}
+                          src={`${url}/uploads/${data.image}`}
                           alt=""
                           width="70px"
                           height="70px"
@@ -198,14 +199,14 @@ const ProductPage = () => {
                           <Typography>Brown</Typography>
                           <Box
                             component="img"
-                            src={`http://localhost:5000/uploads/${data.image}`}
+                            src={`${url}/uploads/${data.image}`}
                             alt=""
                             width="50px"
                             height="50px"
                           />
                           <Box
                             component="img"
-                            src={`http://localhost:5000/uploads/${data.image}`}
+                            src={`${url}/uploads/${data.image}`}
                             alt=""
                             width="50px"
                             height="50px"
@@ -214,7 +215,7 @@ const ProductPage = () => {
                           <Box
                             component="img"
                             ml={1}
-                            src={`http://localhost:5000/uploads/${data.image}`}
+                            src={`${url}/uploads/${data.image}`}
                             alt=""
                             width="50px"
                             height="50px"

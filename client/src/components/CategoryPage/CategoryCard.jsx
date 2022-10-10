@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import StarBorderPurple500Sharp from "@mui/icons-material/StarBorderPurple500Sharp";
 import { Avatar, Box, CardActionArea } from "@mui/material";
+import { url } from "../../constants";
 const CategotyCard = ({ cardItem }) => {
   return (
     <Box py={2}>
@@ -13,14 +14,14 @@ const CategotyCard = ({ cardItem }) => {
           <CardMedia
             component="img"
             height="150px"
-            image={`http://localhost:5000/uploads/${cardItem.image}`}
+            image={`${url}/uploads/${cardItem.image}`}
             alt="green iguana"
             sx={{ width: "100%" }}
           />
           <CardContent>
             <Avatar
               variant="square"
-              src={`http://localhost:5000/uploads/${cardItem.image}`}
+              src={`${url}/uploads/${cardItem.image}`}
               sx={{ border: "1px solid red" }}
               sizes="small"
             ></Avatar>

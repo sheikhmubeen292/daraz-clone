@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Modal from '@mui/material/Modal';
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
-
+import { url } from "../constants";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { useCart } from "react-use-cart";
 const useStyles = makeStyles(() => ({
@@ -68,7 +68,7 @@ function Cart() {
       // form.append("phone", phone);
       // form.append("address", address);
       const result = await axios.post(
-        `http://localhost:5000/api/order/order`,{
+        `${url}/api/order/order`,{
           name,
           phone,
           address,
@@ -83,6 +83,7 @@ function Cart() {
     }
   };
   // const { enqueueSnackbar }: any = useSnackbar();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
   const {
     isEmpty,
     items,
@@ -152,7 +153,7 @@ function Cart() {
                           <TableRow key={id + i}>
                             <StyledTableCell>
                               <img
-                                src={`http://localhost:5000/uploads/${image}`}
+                                src={`${url}/uploads/${image}`}
                                 alt=""
                                 height="100px"
                                 width="100px"
@@ -330,7 +331,7 @@ function Cart() {
                 <Typography sx={{ color: "black" }}>Total</Typography>
                 <Typography sx={{ color: "#F57208" }}> Rs. {cartTotal}</Typography>
               </Box>
-              <Box>
+              {(!currentUser? (<Box>
                 <Link to="/login" style={{textDecoration:"none",}}>
                 <Button
                   size="large"
@@ -350,7 +351,8 @@ function Cart() {
                   PROCEED TO CHECKOUT
                 </Button>
                 </Link>
-              </Box>
+              </Box>):(''))}
+              
               <Box>
                 <Button
                   size="large"
