@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "@mui/system";
 
 import {
@@ -61,9 +61,14 @@ const Navbar = ({getresult}) => {
   const handleItemClick1 = () => {
     setMenuPosition1(null);
   };
+
   function logout() {
     localStorage.clear();
     navigate("/");
+  }
+  function home(){
+    navigate("/");
+
   }
   const searchHandle= async (event)=>{
   let key =event.target.value;
@@ -144,7 +149,7 @@ const Navbar = ({getresult}) => {
                       marginLeft: matches ? "1rem" : "0",
                     }}
                   >
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem >
                       Categories and Pets
                     </MenuItem>
                     <MenuItem
@@ -155,26 +160,26 @@ const Navbar = ({getresult}) => {
                     >
                       Health and beauty
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>Mens Fashion</MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onMouseLeave={handleClose}>Mens Fashion</MenuItem>
+                    <MenuItem onMouseLeave={handleClose}>
                       Categories and Pets
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>Health and beauty</MenuItem>
-                    <MenuItem onClick={handleClose}>Mens Fashion</MenuItem>
-                    <MenuItem onClick={handleClose}>Baby and Toys</MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onMouseLeave={handleClose}>Health and beauty</MenuItem>
+                    <MenuItem onMouseLeave={handleClose}>Mens Fashion</MenuItem>
+                    <MenuItem onMouseLeave={handleClose}>Baby and Toys</MenuItem>
+                    <MenuItem onMouseLeave={handleClose}>
                       Home and LifyStyle
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onMouseLeave={handleClose}>
                       Electronic Devices
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onMouseLeave={handleClose}>
                       Sports and Outdoor
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onMouseLeave={handleClose}>
                       Watches, bags and Jewellery
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onMouseLeave={handleClose}>
                       Electronic Devices
                     </MenuItem>
                   </Menu>
@@ -397,7 +402,7 @@ const Navbar = ({getresult}) => {
                             fontFamily: "Times New Roman",
                             padding: "10px",
                             backgroundColor: "#f57224",
-                            fontSize: "1.3rem",
+                            fontSize: "12px",
                             borderRadius: "50px",
                           }}
                         >
