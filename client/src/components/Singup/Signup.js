@@ -19,7 +19,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 // import Stack from "@mui/material/Stack";
 import { Link, useNavigate } from "react-router-dom";
-
+import {url} from '../../constants'
 function Signup() {
   const [image, setImage] = useState("");
   const [email, setEmail] = useState("");
@@ -53,7 +53,7 @@ function Signup() {
       form.append("image", image.image);
 
       const result = await axios.post(
-        `http://localhost:5000/api/users/register`,
+        `${url}/api/users/register`,
         form
       );
       console.log(result.data, "result data");

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Paper, Avatar, TextField, Button, Typography, Box } from '@mui/material'
 import { makeStyles } from "@mui/styles";
-
+import { url } from '../../constants';
 import LoginIcon from '@mui/icons-material/Login';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState ,useEffect} from 'react';
@@ -38,7 +38,7 @@ const Login = () => {
         console.log(user)
         // dispatch(loginUser(user));    
         try {
-            const result = await axios.post(`http://localhost:5000/api/users/login`, {
+            const result = await axios.post(`${url}/api/users/login`, {
                 email,
                 password,
             });

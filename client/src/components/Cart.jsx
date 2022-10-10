@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { remove } from '../store/cartSlice';
+import { url } from "../constants";
 import './cart.css';
 const Cart = () => {
     const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const Cart = () => {
                 {products.length === 0 ?(<h4 style={{margin:"2rem"}}>Cart is Empty</h4>):(<ul>
                     {products.map((product) => (
                         <div key={product.id} className="cartCard">
-                            <img src={`http://localhost:5000/uploads/${product.image}`} alt="" />
+                            <img src={`${url}/uploads/${product.image}`} alt="" />
                             <h5>{product.name}</h5>
                             <h5>{product.price}</h5>
                             <button

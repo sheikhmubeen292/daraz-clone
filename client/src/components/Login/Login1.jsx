@@ -3,6 +3,7 @@ import { Typography, Container, Box, TextField, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { url } from "../../constants";
 import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   spanstyle: { color: "red", marginTop: "10px" },
@@ -29,7 +30,7 @@ function Loginfoam() {
     console.log(user);
     // dispatch(loginUser(user));
     try {
-      const result = await axios.post(`http://localhost:5000/api/users/login`, {
+      const result = await axios.post(`${url}/api/users/login`, {
         email,
         password,
       });

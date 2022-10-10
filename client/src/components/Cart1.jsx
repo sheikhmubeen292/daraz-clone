@@ -20,7 +20,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Modal from "@mui/material/Modal";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
-
+import { url } from "../constants";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { useCart } from "react-use-cart";
 const useStyles = makeStyles(() => ({
@@ -79,7 +79,7 @@ function Cart() {
       // form.append("name", name);
       // form.append("phone", phone);
       // form.append("address", address);
-      const result = await axios.post(`http://localhost:5000/api/order/order`, {
+      const result = await axios.post(`${url}/api/order/order`, {
         name,
         phone,
         address,
@@ -160,7 +160,7 @@ function Cart() {
                           <TableRow key={id + i}>
                             <StyledTableCell>
                               <img
-                                src={`http://localhost:5000/uploads/${image}`}
+                                src={`${url}/uploads/${image}`}
                                 alt=""
                                 height="100px"
                                 width="100px"
@@ -373,6 +373,7 @@ function Cart() {
               ) : (
                 ""
               )}
+
               <Box>
                 <Button
                   size="large"
@@ -383,7 +384,6 @@ function Cart() {
                     backgroundColor: "#F57208",
                     color: "white",
                     display: "flex",
-                    fontSize: "1rem",
                     alignItems: "center",
                     "&:hover": {
                       backgroundColor: "green",
@@ -410,7 +410,7 @@ function Cart() {
                             Please fill this form to confirm your order!
                           </Typography>
                         </Grid>
-                        {/* <img src={''} alt="wrapper" className={classes.image} /> */}
+                        {/* {/ <img src={''} alt="wrapper" className={classes.image} /> /} */}
                         <form onSubmit={handleSubmit}>
                           <Box mt={2}>
                             <TextField

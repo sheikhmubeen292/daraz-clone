@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { url } from "../../constants";
 const JustForYou = () => {
   const [data, setData] = React.useState([]);
   const [visible, setVisible] = React.useState(12);
@@ -13,7 +14,7 @@ const JustForYou = () => {
   const fetchAllProduct = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/products/allproducts"
+        `${url}/api/products/allproducts`
       );
       setData(res.data);
     } catch (error) {}
@@ -63,7 +64,7 @@ const JustForYou = () => {
                     >
                       <Box>
                         <img
-                          src={`http://localhost:5000/uploads/${image}`}
+                          src={`${url}/uploads/${image}`}
                           alt=""
                           width="100%"
                         />

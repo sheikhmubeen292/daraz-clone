@@ -2,15 +2,15 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { url } from "../../constants";
 const FlashSale = ({dataOfResult}) => {
   console.log(dataOfResult, "result flash")
   const [flashSale, setData] = React.useState([]);
-  // const [search, setSearch] = useState([])
 
   const getAllProducts = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/products/allproducts"
+        `${url}/api/products/allproducts`
       );
       const newData = res.data.filter((x) => x.category == "flashsale");
 
@@ -33,7 +33,7 @@ const FlashSale = ({dataOfResult}) => {
             Flash Sale
           </Typography>
           <Grid container>
-            {  dataOfResult?.length>0? dataOfResult.map(({ image, name, price, _id }) => {
+            {  dataOfResult?.length>0 ? dataOfResult?.map(({ image, name, price, _id }) => {
               return (
                 <Grid
                   item
@@ -64,7 +64,7 @@ const FlashSale = ({dataOfResult}) => {
                     >
                       <Box>
                         <img
-                          src={`http://localhost:5000/uploads/${image}`}
+                          src={`${url}/uploads/${image}`}
                           alt=""
                           width="100%"
                         />
@@ -124,7 +124,7 @@ const FlashSale = ({dataOfResult}) => {
                     >
                       <Box>
                         <img
-                          src={`http://localhost:5000/uploads/${image}`}
+                          src={`${url}/uploads/${image}`}
                           alt=""
                           width="100%"
                         />
