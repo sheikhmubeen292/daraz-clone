@@ -19,7 +19,8 @@ import {url} from '../../constants'
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import './loading.css'
-const Categories = () => {
+const Categories = ({dataOfCategory}) => {
+  console.log(dataOfCategory, "data of category")
   const [age, setAge] = React.useState("");
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(false);
@@ -128,7 +129,7 @@ const Categories = () => {
              </div>
              </>) :(
                  <Grid container spacing={1}>
-                 {data.map((cardItem, i) => {
+                 {dataOfCategory?.length>0 ? dataOfCategory?.map((cardItem, i) => {
                    return (
                      <>
                        <Grid item md={3} xs={12} key={i}>
@@ -141,9 +142,23 @@ const Categories = () => {
                        </Grid>
                      </>
                    );
+                 }):data.map((cardItem, i)=>{
+                  return (
+                    <>
+                      <Grid item md={3} xs={12} key={i}>
+                        <NavLink
+                          to={`/product/${cardItem._id}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <CategotyCard cardItem={cardItem} />
+                        </NavLink>
+                      </Grid>
+                    </>
+                  );
                  })}
                </Grid> 
              ) }
+              
           </Grid>
         </Grid>
       </Container>
