@@ -6,7 +6,6 @@ import { url } from "../../constants";
 const FlashSale = ({dataOfResult}) => {
   console.log(dataOfResult, "result flash")
   const [flashSale, setData] = React.useState([]);
-  // const [search, setSearch] = useState([])
 
   const getAllProducts = async () => {
     try {
@@ -34,7 +33,7 @@ const FlashSale = ({dataOfResult}) => {
             Flash Sale
           </Typography>
           <Grid container>
-            {  dataOfResult?.length>0? dataOfResult.map(({ image, name, price, _id }) => {
+            {  dataOfResult?.length>0 ? dataOfResult?.map(({ image, name, price, _id }) => {
               return (
                 <Grid
                   item

@@ -13,7 +13,7 @@ export default function HomeScreen({dataOfResult}) {
       
       <Slider />
       <FlashSale dataOfResult={dataOfResult}  />
-      <DarazMall dataOfDaraz= {dataOfResult} />
+      <DarazMall />
       <Categories />
       <JustForYou />
     </div>

@@ -73,7 +73,6 @@ const Navbar = ({getresult}) => {
   const searchHandle= async (event)=>{
   let key =event.target.value;
   if(key){
-
     let result = await fetch(`${url}/api/products/search/${key}`)
     result = await result.json();
     console.log(result, "result ..........12")
