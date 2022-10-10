@@ -9,7 +9,7 @@ const CategotyCard = ({ cardItem }) => {
   return (
     <Box py={2}>
       <Card sx={{ maxWidth: 345,height:"100%" }} className="bs">
-        <CardActionArea>
+        {/* <CardActionArea> */}
           <CardMedia
             component="img"
             height="150px"
@@ -48,7 +48,7 @@ const CategotyCard = ({ cardItem }) => {
               })}
             </Typography>
           </CardContent>
-        </CardActionArea>
+        {/* </CardActionArea> */}
       </Card>
     </Box>
   );
