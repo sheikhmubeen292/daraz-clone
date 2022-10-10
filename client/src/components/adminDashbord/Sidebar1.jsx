@@ -23,6 +23,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import BookIcon from "@mui/icons-material/Book";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Search } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import {
   FormControl,
   InputAdornment,
@@ -36,13 +37,21 @@ import { NavLink } from "react-router-dom";
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
+  const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  console.log(currentUser.data.role);
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  React.useEffect(() => {
+    if (currentUser.data.role === "user ") {
+      navigate("/");
+    }
+  });
   const drawer = (
     <div>
       <Box
@@ -86,18 +95,7 @@ export default function ResponsiveDrawer(props) {
             <ListItemText primary="Products" />
           </ListItemButton>
         </NavLink>
-        <ListItemButton>
-          <ListItemIcon>
-            <BookIcon sx={{ color: "#466CFD" }} />
-          </ListItemIcon>
-          <ListItemText primary="Blogs" />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon>
-            <BorderColorIcon sx={{ color: "#466CFD" }} />
-          </ListItemIcon>
-          <ListItemText primary="Orders" />
-        </ListItemButton>
+
         <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>Setting</Box>
         <ListItemButton>
           <ListItemIcon>
@@ -128,13 +126,10 @@ export default function ResponsiveDrawer(props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
           backgroundColor: "white",
+          padding: "1rem 0rem",
         }}
       >
-        <Box
-          sx={{ display: "flex", justifyContent: "space-between" }}
-          px={4}
-          mt={2}
-        >
+        <Box sx={{ display: "flex", justifyContent: "space-between" }} px={4}>
           <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">
               Search

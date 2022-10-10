@@ -17,7 +17,7 @@ function Slider(props) {
   }, [activeIndex]);
 
   return (
-    <div className="slider-container" style={{ paddingTop: "10" }}>
+    <div className="slider-container" style={{ paddingTop: "2rem", marginBottom:"2rem" }}>
       <SliderContent activeIndex={activeIndex} sliderImage={sliderImage} />
       <Dots
         activeIndex={activeIndex}

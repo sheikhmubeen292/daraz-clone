@@ -1,30 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "@mui/system";
 
 import {
   Grid,
-  ListItemButton,
   Button,
   Box,
   TextField,
   useMediaQuery,
 } from "@mui/material";
 import "./navbar.css";
+
 import AppBar from "@mui/material/AppBar";
 import Drawer from "@mui/material/Drawer";
 import Dropdown from "react-bootstrap/Dropdown";
 import IconButton from "@mui/material/IconButton";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import logo from "../../assets/daraz.png";
+import { useCart } from "react-use-cart";
 import download from "../../assets/download.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useSelector } from "react-redux";
 
-const Navbar = () => {
+const Navbar = ({getresult}) => {
+  const items = useSelector((state)=>state.cart)
   const matches = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -32,6 +35,7 @@ const Navbar = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const {totalUniqueItems}=useCart()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [menuPosition, setMenuPosition] = React.useState(null);
   const [menuPosition1, setMenuPosition1] = React.useState(null);
@@ -59,7 +63,21 @@ const Navbar = () => {
   };
   function logout() {
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
+  }
+  const searchHandle= async (event)=>{
+  let key =event.target.value;
+  if(key){
+
+    let result = await fetch(`http://localhost:5000/api/products/search/${key}`)
+    result = await result.json();
+    console.log(result, "result ..........12")
+    if(result){
+    getresult(result);
+    }
+  }else{
+    getresult();
+  }
   }
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   console.log(currentUser, "user........");
@@ -176,10 +194,10 @@ const Navbar = () => {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem onClick={handleItemClick}>
+                    <MenuItem onMouseLeave={handleItemClick}>
                       Categories and Pets
                     </MenuItem>
-                    <MenuItem onClick={handleItemClick}>
+                    <MenuItem onMouseLeave={handleItemClick}>
                       Health and beauty
                     </MenuItem>
                     <MenuItem
@@ -235,7 +253,9 @@ const Navbar = () => {
                     id="outlined-basic"
                     variant="outlined"
                     placeholder="search in daraz"
-                    sx={{ width: 900, marginLeft: "4rem" }}
+                    onChange={searchHandle}
+                    sx={{ width: 900, marginLeft: "4rem",borderTop:"1px solid grey", borderRadius:"5px" }}
+
                   />
                   <Box
                     sx={{
@@ -250,6 +270,7 @@ const Navbar = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={1}>
+                <Link className="navLink" to="/cart">
                   <ShoppingCartSharpIcon
                     sx={{
                       color: "#000000",
@@ -257,6 +278,11 @@ const Navbar = () => {
                       marginLeft: "1rem",
                     }}
                   />
+                  </Link>
+                  <Box className='item__count'>
+                  <span>{totalUniqueItems}</span>
+                </Box>
+                  {/* <span style={{color:"black"}}>Cart Items:{items.length}</span> */}
                 </Grid>
                 <Grid item md={1}>
                   <img src={download} width={200} height={50} alt="" />
@@ -271,6 +297,8 @@ const Navbar = () => {
                             marginLeft: "8rem",
                             backgroundColor: "#f57224",
                             fontSize: "1.2rem",
+                            width:"120px",
+                            textTransform:"upperCase"
                           }}
                         >
                           {currentUser?.data?.name}
@@ -280,7 +308,19 @@ const Navbar = () => {
                         </Dropdown.Menu>
                       </>
                     ) : (
-                      <Dropdown.Item>Login</Dropdown.Item>
+                      <Dropdown.Item  style={{
+                        marginLeft: "8rem",
+                        backgroundColor: "#f57224",
+                        fontSize: "1.2rem",
+                        width:"120px",
+                        textTransform:"upperCase",
+                        borderRadius:"10px",
+                        height:"40px",
+                        padding:"6px 20px",
+                      
+
+                       }}><Link to="/login" style={{  textDecoration:"none",
+                       color:"white"}}>Login</Link></Dropdown.Item>
                     )}
                   </Dropdown>
                 </Grid>
@@ -344,6 +384,7 @@ const Navbar = () => {
                       fontSize: "2rem",
                       marginBottom: "1rem",
                     }}
+                    // <Link to='/cart'></Link>
                   />
 
                   <Dropdown>

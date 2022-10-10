@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import {useCart} from 'react-use-cart';
 import ShareIcon from "@mui/icons-material/Share";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddIcon from "@mui/icons-material/Add";
@@ -16,8 +17,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import { useParams } from "react-router-dom";
-
+import { add,increament } from "../store/cartSlice";
+import {useDispatch} from 'react-redux'
 import categoryData from "../components/CategoryPage/CategoryData";
+import { v4 as uuidv4 } from 'uuid';
 
 import robe1 from "../assets/robe1.jpg";
 import robe2 from "../assets/robe2.jpg";
@@ -26,6 +29,9 @@ import banner from "../assets/banner.jpg";
 import axios from "axios";
 
 const ProductPage = () => {
+  const { addItem } = useCart();
+   console.log(addItem,"hsdfhdjas")
+  // const dispatch = useDispatch()
   const [image, setImage] = useState(robe1);
 
   const [newData, setData] = useState([]);
@@ -43,7 +49,7 @@ const ProductPage = () => {
       );
       const newData = res.data.filter((x) => x._id == id);
 
-      console.log(res.data, "------------------all");
+      // console.log(res.data, "------------------all");
       console.log(newData, "newdata---");
 
       setData(newData);
@@ -57,7 +63,7 @@ const ProductPage = () => {
   return (
     <Box sx={{ bgcolor: "#EFF0F5", py: 5 }}>
       <Container>
-        {newData.map((data, i) => {
+        {newData.map((data, i,) => {
           return (
             <>
               <Grid container>
@@ -224,7 +230,7 @@ const ProductPage = () => {
                         >
                           <RemoveIcon sx={{ mx: 1 }} />
                           1
-                          <AddIcon sx={{ mx: 1 }} />
+                          <AddIcon sx={{ mx: 1 }}/>
                         </Box>
                       </Box>
                       <Button
@@ -238,12 +244,17 @@ const ProductPage = () => {
                         Buy Now
                       </Button>
                       <Button
+                       
                         sx={{
                           bgcolor: "#F57224",
                           color: "white",
                           px: 3,
                           ml: 2,
                           "&:hover": { bgcolor: "#F57224a1" },
+                          
+                        }}
+                        onClick={()=>{
+                          addItem(data)
                         }}
                       >
                         Add to Cart

@@ -38,7 +38,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function AddProduct() {
+export default function AddUser() {
   const [Product, setProduct] = React.useState({
     image: "",
     name: "",

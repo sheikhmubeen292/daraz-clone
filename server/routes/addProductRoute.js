@@ -68,6 +68,17 @@ router.get("/allproducts", async (req, res) => {
   }
 });
 
+// search products
+router.get("/search/:key", async (req, res) => {
+  let result = await ProductModal.find({
+    $or: [
+      {
+        name: { $regex: req.params.key },
+      },
+    ],
+  });
+  res.send(result)
+});
 router.post("/update", async (req, res) => {
   const { id, star } = req.body;
   // console.log(id, star, "star----->");
