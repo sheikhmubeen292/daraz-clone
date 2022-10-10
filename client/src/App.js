@@ -12,7 +12,7 @@ import FlashSale from "./components/FlashSale/FlashSale";
 import AddProduct from "./components/AddProduct";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/Footer/Footer";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import AdminRoutes from "./components/AdminRoutes";
 import { useState } from "react";

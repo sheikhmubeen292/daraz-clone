@@ -8,47 +8,45 @@ import { Avatar, Box, CardActionArea } from "@mui/material";
 const CategotyCard = ({ cardItem }) => {
   return (
     <Box py={2}>
-      <Card sx={{ maxWidth: 345,height:"100%" }} className="bs">
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="150px"
-            image={`http://localhost:5000/uploads/${cardItem.image}`}
-            alt="green iguana"
-            sx={{ width: "100%" }}
-          />
-          <CardContent>
-            <Avatar
-              variant="square"
-              src={`http://localhost:5000/uploads/${cardItem.image}`}
-              sx={{ border: "1px solid red" }}
-              sizes="small"
-            ></Avatar>
-            <Typography
-              mt={2}
-              gutterBottom
-              color="#87B5EC"
-              variant="p"
-              component="div"
-            >
-              {cardItem.name}
-            </Typography>
-            <Typography variant="body2" color="#F57647">
-              Rs.{cardItem.price}
-            </Typography>
-            {/* <Typography variant="body2" color="#9A9A9A">
+      <Card sx={{ maxWidth: 345, height: "100%" }} className="bs">
+        <CardMedia
+          component="img"
+          height="150px"
+          image={`http://localhost:5000/uploads/${cardItem.image}`}
+          alt="green iguana"
+          sx={{ width: "100%" }}
+        />
+        <CardContent>
+          <Avatar
+            variant="square"
+            src={`http://localhost:5000/uploads/${cardItem.image}`}
+            sx={{ border: "1px solid red" }}
+            sizes="small"
+          ></Avatar>
+          <Typography
+            mt={2}
+            gutterBottom
+            color="#87B5EC"
+            variant="p"
+            component="div"
+          >
+            {cardItem.name}
+          </Typography>
+          <Typography variant="body2" color="#F57647">
+            Rs.{cardItem.price}
+          </Typography>
+          {/* <Typography variant="body2" color="#9A9A9A">
               <del style={{ marginRight: "0.5rem", marginTop: "1rem" }}>
                 Rs.{cardItem.delprice}
               </del>
               {cardItem.percent}
             </Typography> */}
-            <Typography variant="body2" color="">
-              {[1, 2, 3, 4, 5].map(() => {
-                return <StarBorderPurple500Sharp sx={{ fontSize: "1rem" }} />;
-              })}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+          <Typography variant="body2" color="">
+            {[1, 2, 3, 4, 5].map(() => {
+              return <StarBorderPurple500Sharp sx={{ fontSize: "1rem" }} />;
+            })}
+          </Typography>
+        </CardContent>
       </Card>
     </Box>
   );
