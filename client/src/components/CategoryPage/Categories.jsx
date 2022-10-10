@@ -17,11 +17,11 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import './loading.css'
+import "./loading.css";
 const Categories = () => {
   const [age, setAge] = React.useState("");
   const [data, setData] = React.useState([]);
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -32,19 +32,19 @@ const Categories = () => {
 
   const getAllProducts = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.get(
         "http://localhost:5000/api/products/allproducts"
       );
       const newData = res.data.filter((x) => x.category == category);
-      setLoading(false)
+      setLoading(false);
       console.log(res.data, "------------------all");
       console.log(newData, "newdata---");
 
       setData(newData);
     } catch (error) {
       console.log(error);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -121,28 +121,40 @@ const Categories = () => {
               </Grid>
             </Grid>
             <hr></hr>
-             {loading ? (<><h5 style={{textAlign:"center"}}>Hold on, it's loading!.......</h5>
-             <div style={{display: "flex", justifyContent:"center"}}>
-             <div className="loader"></div>
-             </div>
-             </>) :(
-                 <Grid container spacing={1}>
-                 {data.map((cardItem, i) => {
-                   return (
-                     <>
-                       <Grid item md={3} xs={12} key={i}>
-                         <NavLink
-                           to={`/product/${cardItem._id}`}
-                           style={{ textDecoration: "none" }}
-                         >
-                           <CategotyCard cardItem={cardItem} />
-                         </NavLink>
-                       </Grid>
-                     </>
-                   );
-                 })}
-               </Grid> 
-             ) }
+            {loading ? (
+              <>
+                <h5 style={{ textAlign: "center" }}>
+                  Hold on, it's loading!.......
+                </h5>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "70vh",
+                  }}
+                >
+                  <div className="loader"></div>
+                </div>
+              </>
+            ) : (
+              <Grid container spacing={1}>
+                {data.map((cardItem, i) => {
+                  return (
+                    <>
+                      <Grid item md={3} xs={12} key={i}>
+                        <NavLink
+                          to={`/product/${cardItem._id}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <CategotyCard cardItem={cardItem} />
+                        </NavLink>
+                      </Grid>
+                    </>
+                  );
+                })}
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </Container>
