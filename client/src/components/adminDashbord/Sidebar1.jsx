@@ -1,0 +1,212 @@
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MailIcon from "@mui/icons-material/Mail";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PersonIcon from "@mui/icons-material/Person";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import BookIcon from "@mui/icons-material/Book";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Search } from "@mui/icons-material";
+import {
+  FormControl,
+  InputAdornment,
+  OutlinedInput,
+  InputLabel,
+  Avatar,
+} from "@mui/material";
+
+import { NavLink } from "react-router-dom";
+
+const drawerWidth = 240;
+
+export default function ResponsiveDrawer(props) {
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <div>
+      <Box
+        sx={{
+          color: "#466CFD",
+          padding: "0.5rem 0rem",
+          fontSize: "1.5rem",
+          textAlign: "center",
+        }}
+        mt={2}
+      >
+        Admin DashBoard
+      </Box>
+
+      <Divider />
+      <List>
+        <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>Main</Box>
+        <ListItemButton>
+          <ListItemIcon>
+            <DashboardIcon sx={{ color: "#466CFD" }} />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </ListItemButton>
+        <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>List</Box>
+        <NavLink to="/admin-dashbord/user" style={{ textDecoration: "none" }}>
+          <ListItemButton>
+            <ListItemIcon>
+              <PersonIcon sx={{ color: "#466CFD" }} />
+            </ListItemIcon>
+            <ListItemText primary="User" />
+          </ListItemButton>
+        </NavLink>
+        <NavLink
+          to="/admin-dashbord/products"
+          style={{ textDecoration: "none" }}
+        >
+          <ListItemButton>
+            <ListItemIcon>
+              <Inventory2Icon sx={{ color: "#466CFD" }} />
+            </ListItemIcon>
+            <ListItemText primary="Products" />
+          </ListItemButton>
+        </NavLink>
+        <ListItemButton>
+          <ListItemIcon>
+            <BookIcon sx={{ color: "#466CFD" }} />
+          </ListItemIcon>
+          <ListItemText primary="Blogs" />
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <BorderColorIcon sx={{ color: "#466CFD" }} />
+          </ListItemIcon>
+          <ListItemText primary="Orders" />
+        </ListItemButton>
+        <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>Setting</Box>
+        <ListItemButton>
+          <ListItemIcon>
+            <AccountBoxIcon sx={{ color: "#466CFD" }} />
+          </ListItemIcon>
+          <ListItemText primary="Profile" />
+        </ListItemButton>
+
+        <ListItemButton>
+          <ListItemIcon>
+            <LogoutIcon sx={{ color: "#466CFD" }} />
+          </ListItemIcon>
+          <ListItemText primary="LogOut" />
+        </ListItemButton>
+      </List>
+      <Divider />
+    </div>
+  );
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+  return (
+    <Box sx={{ display: "flex" }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` },
+          backgroundColor: "white",
+        }}
+      >
+        <Box
+          sx={{ display: "flex", justifyContent: "space-between" }}
+          px={4}
+          mt={2}
+        >
+          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">
+              Search
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type="text"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    edge="end"
+                  >
+                    <Search />
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Search"
+            />
+          </FormControl>
+          <Avatar src="" sx={{ marginTop: "1rem" }} />
+        </Box>
+      </AppBar>
+      <Box
+        component="nav"
+        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        aria-label="mailbox folders"
+      >
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+        }}
+      >
+        <Toolbar />
+        {props.children}
+      </Box>
+    </Box>
+  );
+}

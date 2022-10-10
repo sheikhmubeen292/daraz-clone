@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import userModel from "../models/userModel.js";
 // const User = require("../models/userModel")
 import jwt from "jsonwebtoken";
-import path from "path"
+import path from "path";
 
 // import bcrypt from 'bcrypt';
 import multer from "multer";
@@ -14,7 +14,10 @@ const storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + Math.random() + "-" + path.extname(file.originalname));
+    cb(
+      null,
+      Date.now() + Math.random() + "-" + path.extname(file.originalname)
+    );
   },
 });
 
@@ -29,22 +32,22 @@ async function validatePassword(plainPassword, hashedPassword) {
 }
 router.post("/register", upload.single("image"), async (req, res, next) => {
   try {
-    const { name, email, password,gender, role } = req.body;
+    const { name, email, password, gender, role } = req.body;
     if (!name || !email || !password || !gender) {
-        res.status(400);
-        throw new Error("Please add all fields");
-      }
-    
-      // Check if user exists
-      const userExists = await userModel.findOne({ email });
-    
-      if (userExists) {
-        res.status(400);
-        throw new Error("User already exists");
-      }
-   
+      res.status(400);
+      throw new Error("Please add all fields");
+    }
+
+    // Check if user exists
+    const userExists = await userModel.findOne({ email });
+
+    if (userExists) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
+
     req.body.image = req.file.filename;
-    console.log(req.body.image,"akljdfljl");
+    console.log(req.body.image, "akljdfljl");
     const image = req.body.image;
     const hashedPassword = await hashPassword(password);
     console.log(hashPassword);
@@ -64,7 +67,7 @@ router.post("/register", upload.single("image"), async (req, res, next) => {
       }
     );
     newUser.accessToken = accessToken;
- 
+
     await newUser.save();
     res.json({
       data: newUser,
@@ -73,7 +76,6 @@ router.post("/register", upload.single("image"), async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  
 });
 
 router.post("/login", async (req, res, next) => {
@@ -115,4 +117,12 @@ router.post("/login", async (req, res, next) => {
 //     });
 //   });
 
+router.get("/alluser", async (req, res) => {
+  try {
+    const user = await userModel.find({});
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
 export default router;

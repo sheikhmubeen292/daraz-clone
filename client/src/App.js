@@ -12,23 +12,24 @@ import Navbar from "./components/navbar/navbar";
 import Footer from "./components/Footer/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import AdminRoutes from "./components/AdminRoutes";
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
+
         <Routes>
           <Route path="/register" element={<Signup />} />
-          <Route path="/login" element={<Loginfoam />}></Route>
-          <Route path="/" element={<HomeScreen />}></Route>
-          <Route
-            path="/categoryPage/:category"
-            element={<CategoryPage />}
-          ></Route>
-          <Route path="/product/:id" element={<ProductPage />}></Route>
-          <Route path="/addproduct" element={<AddProduct />}></Route>
+          <Route path="/login" element={<Loginfoam />} />
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/categoryPage/:category" element={<CategoryPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/addproduct" element={<AddProduct />} />
+          <Route path="/admin-dashbord/*" element={<AdminRoutes />} />
         </Routes>
-        <Footer />
+
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );
