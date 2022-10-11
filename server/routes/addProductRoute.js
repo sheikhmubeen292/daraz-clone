@@ -68,7 +68,7 @@ router.get("/allproducts", async (req, res) => {
   }
 });
 
-// search products
+// search products.........................>
 router.get("/search/:key", async (req, res) => {
   let result = await ProductModal.find({
     $or: [

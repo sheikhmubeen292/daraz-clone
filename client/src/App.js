@@ -12,11 +12,12 @@ import AddProduct from "./components/AddProduct";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/Footer/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+// import Dropdown1 from './components/navbar/dropdown'
 import AdminRoutes from "./components/AdminRoutes";
 import { useState } from "react";
 import store from "./store/Store";
 import Cart from "./components/Cart1";
+
 function App() {
   const [resultdata, setResultdata] = useState([]);
   console.log(resultdata, "app rwsult");
@@ -29,13 +30,14 @@ function App() {
           <Routes>
             <Route path="/register" element={<Signup />} />
             <Route path="/login" element={<Loginfoam />} />
+
             <Route
               path="/"
               element={<HomeScreen dataOfResult={resultdata} />}
             />
             <Route
               path="/categoryPage/:category"
-              element={<CategoryPage dataOfResult={resultdata} />}
+              element={<CategoryPage dataOfCategory={resultdata} />}
             />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/addproduct" element={<AddProduct />} />

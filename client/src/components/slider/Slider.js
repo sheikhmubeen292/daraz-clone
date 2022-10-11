@@ -3,7 +3,8 @@ import SliderContent from "./SliderContent";
 import Dots from "./Dots";
 import sliderImage from "./sliderImage";
 import "./slider.css";
-
+import Dropdown1 from "../navbar/dropdown";
+import zIndex from "@mui/material/styles/zIndex";
 const len = sliderImage.length - 1;
 
 function Slider(props) {
@@ -17,14 +18,19 @@ function Slider(props) {
   }, [activeIndex]);
 
   return (
-    <div className="slider-container" style={{ paddingTop: "2rem", marginBottom:"2rem" }}>
+      <>
+      
+     <Dropdown1/>
+    <div className="slider-container" style={{ marginBottom:"2rem", zIndex:-1}}>
       <SliderContent activeIndex={activeIndex} sliderImage={sliderImage} />
+      
       <Dots
         activeIndex={activeIndex}
         sliderImage={sliderImage}
         onclick={(activeIndex) => setActiveIndex(activeIndex)}
       />
     </div>
+    </>
   );
 }
 
