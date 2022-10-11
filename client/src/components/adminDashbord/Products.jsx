@@ -37,10 +37,11 @@ const Product = () => {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:5000/api/products/allproducts"
+      const res = await axios.get("http://localhost:5000/api/order/allorder");
+      console.log(
+        res.data,
+        "order ---------------------------------------------"
       );
-
       setRow(res.data);
     } catch (error) {
       console.log(error);
@@ -73,37 +74,28 @@ const Product = () => {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left">Image</StyledTableCell>
-                <StyledTableCell>id</StyledTableCell>
+                <StyledTableCell align="left">Tracking Id</StyledTableCell>
+                <StyledTableCell>Product</StyledTableCell>
 
-                <StyledTableCell align="left">Name</StyledTableCell>
-                <StyledTableCell align="left">Price</StyledTableCell>
-                <StyledTableCell align="left">Quantity</StyledTableCell>
-                <StyledTableCell align="left">Category</StyledTableCell>
+                <StyledTableCell align="left">Customer</StyledTableCell>
+                <StyledTableCell align="left">Amount</StyledTableCell>
+                <StyledTableCell align="left">Date</StyledTableCell>
+                <StyledTableCell align="left">Status</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {row.map((rows, i) => (
                 <StyledTableRow key={i}>
-                  <StyledTableCell align="left">
-                    <img
-                      src={`http://localhost:5000/uploads/${rows.image}`}
-                      alt=""
-                      style={{ width: "70px", height: "70px" }}
-                    />
-                  </StyledTableCell>
+                  <StyledTableCell align="left"> {rows._id}</StyledTableCell>
                   <StyledTableCell component="th" scope="row">
-                    {rows._id}
+                    {rows.reference.map((item) => {
+                      return item.name;
+                    })}
                   </StyledTableCell>
-
-                  <StyledTableCell align="left">{rows.name}</StyledTableCell>
-                  <StyledTableCell align="left">{rows.price}</StyledTableCell>
-                  <StyledTableCell align="left">
-                    {rows.Qauntity}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {rows.category}
-                  </StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

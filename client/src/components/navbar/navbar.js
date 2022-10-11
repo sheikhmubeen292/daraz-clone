@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/system";
 
-import {
-  Grid,
-  Button,
-  Box,
-  TextField,
-  useMediaQuery,
-} from "@mui/material";
+import { Grid, Button, Box, TextField, useMediaQuery } from "@mui/material";
 import "./navbar.css";
 import { url } from "../../constants";
 import AppBar from "@mui/material/AppBar";
@@ -26,8 +20,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useSelector } from "react-redux";
 
-const Navbar = ({getresult}) => {
-  const items = useSelector((state)=>state.cart)
+const Navbar = ({ getresult }) => {
+  const items = useSelector((state) => state.cart);
   const matches = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -35,7 +29,7 @@ const Navbar = ({getresult}) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const {totalUniqueItems}=useCart()
+  const { totalUniqueItems } = useCart();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [menuPosition, setMenuPosition] = React.useState(null);
   const [menuPosition1, setMenuPosition1] = React.useState(null);
@@ -66,23 +60,22 @@ const Navbar = ({getresult}) => {
     localStorage.clear();
     navigate("/");
   }
-  function home(){
+  function home() {
     navigate("/");
-
   }
-  const searchHandle= async (event)=>{
-  let key =event.target.value;
-  if(key){
-    let result = await fetch(`${url}/api/products/search/${key}`)
-    result = await result.json();
-    console.log(result, "result ..........12")
-    if(result){
-    getresult(result);
+  const searchHandle = async (event) => {
+    let key = event.target.value;
+    if (key) {
+      let result = await fetch(`${url}/api/products/search/${key}`);
+      result = await result.json();
+      console.log(result, "result ..........12");
+      if (result) {
+        getresult(result);
+      }
+    } else {
+      getresult();
     }
-  }else{
-    getresult();
-  }
-  }
+  };
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   console.log(currentUser, "user........");
   return (
@@ -148,9 +141,7 @@ const Navbar = ({getresult}) => {
                       marginLeft: matches ? "1rem" : "0",
                     }}
                   >
-                    <MenuItem >
-                      Categories and Pets
-                    </MenuItem>
+                    <MenuItem>Categories and Pets</MenuItem>
                     <MenuItem
                       aria-controls={open ? "basic-menu" : undefined}
                       aria-haspopup="true"
@@ -163,9 +154,13 @@ const Navbar = ({getresult}) => {
                     <MenuItem onMouseLeave={handleClose}>
                       Categories and Pets
                     </MenuItem>
-                    <MenuItem onMouseLeave={handleClose}>Health and beauty</MenuItem>
+                    <MenuItem onMouseLeave={handleClose}>
+                      Health and beauty
+                    </MenuItem>
                     <MenuItem onMouseLeave={handleClose}>Mens Fashion</MenuItem>
-                    <MenuItem onMouseLeave={handleClose}>Baby and Toys</MenuItem>
+                    <MenuItem onMouseLeave={handleClose}>
+                      Baby and Toys
+                    </MenuItem>
                     <MenuItem onMouseLeave={handleClose}>
                       Home and LifyStyle
                     </MenuItem>
@@ -258,8 +253,12 @@ const Navbar = ({getresult}) => {
                     variant="outlined"
                     placeholder="search in daraz"
                     onChange={searchHandle}
-                    sx={{ width: 900, marginLeft: "4rem",borderTop:"1px solid grey", borderRadius:"5px" }}
-
+                    sx={{
+                      width: 900,
+                      marginLeft: "4rem",
+                      borderTop: "1px solid grey",
+                      borderRadius: "5px",
+                    }}
                   />
                   <Box
                     sx={{
@@ -274,18 +273,18 @@ const Navbar = ({getresult}) => {
                   </Box>
                 </Grid>
                 <Grid item xs={1}>
-                <Link className="navLink" to="/cart">
-                  <ShoppingCartSharpIcon
-                    sx={{
-                      color: "#000000",
-                      fontSize: "3rem",
-                      marginLeft: "1rem",
-                    }}
-                  />
+                  <Link className="navLink" to="/cart">
+                    <ShoppingCartSharpIcon
+                      sx={{
+                        color: "#000000",
+                        fontSize: "3rem",
+                        marginLeft: "1rem",
+                      }}
+                    />
                   </Link>
-                  <Box className='item__count'>
-                  <span>{totalUniqueItems}</span>
-                </Box>
+                  <Box className="item__count">
+                    <span>{totalUniqueItems}</span>
+                  </Box>
                   {/* <span style={{color:"black"}}>Cart Items:{items.length}</span> */}
                 </Grid>
                 <Grid item md={1}>
@@ -300,9 +299,9 @@ const Navbar = ({getresult}) => {
                           style={{
                             marginLeft: "8rem",
                             backgroundColor: "#f57224",
-                            fontSize: "1.2rem",
-                            width:"120px",
-                            textTransform:"upperCase"
+                            fontSize: "12px",
+                            width: "120px",
+                            textTransform: "upperCase",
                           }}
                         >
                           {currentUser?.data?.name}
@@ -312,19 +311,25 @@ const Navbar = ({getresult}) => {
                         </Dropdown.Menu>
                       </>
                     ) : (
-                      <Dropdown.Item  style={{
-                        marginLeft: "8rem",
-                        backgroundColor: "#f57224",
-                        fontSize: "1.2rem",
-                        width:"120px",
-                        textTransform:"upperCase",
-                        borderRadius:"10px",
-                        height:"40px",
-                        padding:"6px 20px",
-                      
-
-                       }}><Link to="/login" style={{  textDecoration:"none",
-                       color:"white"}}>Login</Link></Dropdown.Item>
+                      <Dropdown.Item
+                        style={{
+                          marginLeft: "8rem",
+                          backgroundColor: "#f57224",
+                          fontSize: "1.2rem",
+                          width: "120px",
+                          textTransform: "upperCase",
+                          borderRadius: "10px",
+                          height: "40px",
+                          padding: "6px 20px",
+                        }}
+                      >
+                        <Link
+                          to="/login"
+                          style={{ textDecoration: "none", color: "white" }}
+                        >
+                          Login
+                        </Link>
+                      </Dropdown.Item>
                     )}
                   </Dropdown>
                 </Grid>

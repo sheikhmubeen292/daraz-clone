@@ -7,7 +7,6 @@ import HomeScreen from "./components/HomeScreen";
 import CategoryPage from "./components/CategoryPage/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-
 import FlashSale from "./components/FlashSale/FlashSale";
 import AddProduct from "./components/AddProduct";
 import Navbar from "./components/navbar/navbar";
@@ -20,7 +19,7 @@ import store from "./store/Store";
 import Cart from "./components/Cart1";
 function App() {
   const [resultdata, setResultdata] = useState([]);
-  console.log(resultdata,"app rwsult");
+  console.log(resultdata, "app rwsult");
   return (
     <div>
       <Provider store={store}>
@@ -30,8 +29,14 @@ function App() {
           <Routes>
             <Route path="/register" element={<Signup />} />
             <Route path="/login" element={<Loginfoam />} />
-            <Route path="/" element={<HomeScreen dataOfResult={resultdata} />}  />
-            <Route path="/categoryPage/:category" element={<CategoryPage dataOfResult={resultdata}/>} />
+            <Route
+              path="/"
+              element={<HomeScreen dataOfResult={resultdata} />}
+            />
+            <Route
+              path="/categoryPage/:category"
+              element={<CategoryPage dataOfResult={resultdata} />}
+            />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/addproduct" element={<AddProduct />} />
             <Route path="/admin-dashbord/*" element={<AdminRoutes />} />

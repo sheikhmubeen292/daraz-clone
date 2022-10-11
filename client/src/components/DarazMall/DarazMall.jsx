@@ -1,57 +1,26 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
-import bf2 from "./DarazImg/bf-2.jpg";
-import shazz from "./DarazImg/shazz.jpeg";
-import vitamin from "./DarazImg/vitamin.jpg";
-import beauty from "./DarazImg/beauty.jpeg";
-import sac from "./DarazImg/sac.jpg";
-import sacLogo from "./DarazImg/sacLogo.jpeg";
-import pediasure from "./DarazImg/pediasure.png";
-import abboutt from "./DarazImg/abboutt.jpeg";
-import capri from "./DarazImg/capri.jpg";
-import capriLogo from "./DarazImg/capriLogo.jpeg";
-import tapal from "./DarazImg/tapal.jpg";
-import tapalLogo from "./DarazImg/tapalLogo.jpeg";
+
+import axios from "axios";
+import { url } from "../../constants";
 
 const DarazMall = () => {
-  const card = [
-    {
-      img: bf2,
-      logo: shazz,
-      text1: "Shazz Supermarket",
-      text2: "Shazz Supermarket",
-    },
-    {
-      img: vitamin,
-      logo: beauty,
-      text1: "MissBeauty",
-      text2: "MissBeauty",
-    },
-    {
-      img: sac,
-      logo: sacLogo,
-      text1: "SAC",
-      text2: "OFFICAL STORE",
-    },
-    {
-      img: pediasure,
-      logo: abboutt,
-      text1: "Abbott",
-      text2: "Abbott",
-    },
-    {
-      img: capri,
-      logo: capriLogo,
-      text1: "Capri",
-      text2: "Capri",
-    },
-    {
-      img: tapal,
-      logo: tapalLogo,
-      text1: "Tapal",
-      text2: "Truly yours",
-    },
-  ];
+  const [darazmall, setDarazMall] = React.useState([]);
+
+  const getAllProducts = async () => {
+    try {
+      const res = await axios.get(`${url}/api/products/allproducts`);
+      const newData = res.data.filter((x) => x.category == "darazmall");
+
+      setDarazMall(newData);
+      // setSearch(newData);
+    } catch (error) {}
+  };
+
+  React.useEffect(() => {
+    getAllProducts();
+  }, []);
+
   return (
     <div>
       <Box>
@@ -68,7 +37,7 @@ const DarazMall = () => {
             DarazMall
           </Typography>
           <Grid container>
-            {card.map(({ img, text1, text2, logo }) => {
+            {darazmall?.map(({ image, name }, i) => {
               return (
                 <Grid
                   item
@@ -99,7 +68,11 @@ const DarazMall = () => {
                           "linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.5) 100%)",
                       }}
                     >
-                      <img src={img} alt="" width="100%" />
+                      <img
+                        src={`${url}/uploads/${image[0]}`}
+                        alt=""
+                        width="100%"
+                      />
                     </Box>
 
                     <Box
@@ -114,10 +87,10 @@ const DarazMall = () => {
                       }}
                     >
                       <Typography sx={{ fontSize: "15px", color: "#212121" }}>
-                        {text1}
+                        {name}
                       </Typography>
                       <Typography sx={{ fontSize: "12px", color: "#9e9e9e" }}>
-                        {text2}
+                        {name}
                       </Typography>
                     </Box>
                     <Box
@@ -142,7 +115,7 @@ const DarazMall = () => {
                           //   ml: "70px",
                         }}
                       >
-                        <img src={logo} alt="bf2" />
+                        <img src={`${url}/uploads/${image[1]}`} alt="bf2" />
                       </Box>
                     </Box>
                   </Box>
