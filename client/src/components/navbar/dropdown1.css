@@ -4,15 +4,13 @@
   h1{
     font-family: arial;
   }
-  .menu{
-    margin-top:3rem;
-    margin-left: 7rem;
-    z-index: 2;
+  #menu{
+    margin-top:5px;
   }
-  .menu > ul{
+  #menu > ul{
     background: white;
   }
-  .menu ul
+  #menu ul
   {
     list-style:none;
     position:relative;
@@ -21,20 +19,18 @@
     padding:0;
   }
 
-  .menu ul a
+  #menu ul a
   {
     display:block;
     color:#757575;
     text-decoration:none;
-    line-height: 27px;
     font-weight:700;
     font-size:15px;
     line-height:32px;
-    padding:0 15px;
-    font-family:Roboto-Refular,Arial,sans-serif;
+    font-family:Helvetica,Arial,sans-serif;
   }
 
-  .menu ul li
+  #menu ul li
   {
     position:relative;
     float:left;
@@ -42,61 +38,54 @@
     padding:0
   }
 
-  .menu ul li.active
+  #menu ul li.active
   {
     background:white
   }
 
-  .menu ul li:hover
+  #menu ul li:hover
   {
     /*background:#f6f6f6*/
     background: white;
   }
 
-  .menu ul ul
+  #menu ul ul
   {
-    /* display:none; */
+    display:none;
     position:absolute;
     top:100%;
     left:0;
     background:white;
     padding:0
   }
-  .second{
-    display: none;
-  }
-  
-.third{
-    display: none;
-}
-.second:first-child:hover{
-    display: block;
-}
-  .menu ul ul li
+
+  #menu ul ul li
   {
     float:none;
     width:200px;
     border-left: 3px solid white;
   }
-  .menu ul ul li:hover{
-    /* border-left: 3px solid wheat; */
+  #menu ul ul li:hover{
     background-color:rgb(188, 177, 177);
     color: #4598d4;
   }
 
-  .menu ul ul a
+  #menu ul ul a
   {
     line-height:120%;
     padding:10px 15px
   }
 
-  .menu ul ul ul
+  #menu ul ul ul
   {
     top:-4px;
     left:100%
   }
 
-  .menu ul li:hover > ul
+  #menu ul li:hover > ul
   {
     display:block
+  }
+  .scroll{
+    display: none;
   }

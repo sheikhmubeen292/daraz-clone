@@ -411,7 +411,7 @@ function Cart() {
                           </Typography>
                         </Grid>
                         {/* {/ <img src={''} alt="wrapper" className={classes.image} /> /} */}
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} style={{width:"70%"}}>
                           <Box mt={2}>
                             <TextField
                               className={classes.formStyle}
