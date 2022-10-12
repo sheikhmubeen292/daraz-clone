@@ -87,7 +87,9 @@ const Users = () => {
                   <StyledTableCell align="left">{rows.name}</StyledTableCell>
                   <StyledTableCell align="left">{rows.email}</StyledTableCell>
                   <StyledTableCell align="left">{rows.role}</StyledTableCell>
-                  <StyledTableCell align="left">{rows.gender}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {rows.gender == "1" ? "male" : "female"}
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
