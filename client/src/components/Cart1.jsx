@@ -55,6 +55,14 @@ const StyledTableCell = styled(TableCell)(() => ({
 }));
 
 function Cart() {
+  const {
+    isEmpty,
+    items,
+    cartTotal,
+    updateItemQuantity,
+    removeItem,
+    emptyCart,
+  } = useCart();
   // const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -64,26 +72,35 @@ function Cart() {
   const classes = useStyles();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  console.log(items, "items");
+
+  const reference = items?.map(({ _id, name, quantity }) => {
+    return {
+      refernceId: _id,
+      noOfItems: quantity,
+      name: name,
+    };
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(false);
 
-    const user = {
+    const order = {
       name,
       phone,
       address,
+      reference: reference,
+      totalprice: cartTotal,
     };
-    console.log(user, "user");
+    console.log(order, "user");
     try {
       // let form = new FormData();
       // form.append("name", name);
       // form.append("phone", phone);
       // form.append("address", address);
-      const result = await axios.post(`${url}/api/order/order`, {
-        name,
-        phone,
-        address,
-      });
+      const result = await axios.post(`${url}/api/order/order`, order);
       console.log(result.data, "resultform data");
       if (result.data) {
         alert("Order Completed Successfully!");
@@ -94,14 +111,6 @@ function Cart() {
   };
   // const { enqueueSnackbar }: any = useSnackbar();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const {
-    isEmpty,
-    items,
-    cartTotal,
-    updateItemQuantity,
-    removeItem,
-    emptyCart,
-  } = useCart();
 
   if (isEmpty)
     return (
@@ -411,7 +420,7 @@ function Cart() {
                           </Typography>
                         </Grid>
                         {/* {/ <img src={''} alt="wrapper" className={classes.image} /> /} */}
-                        <form onSubmit={handleSubmit} style={{width:"70%"}}>
+                        <form onSubmit={handleSubmit} style={{ width: "70%" }}>
                           <Box mt={2}>
                             <TextField
                               className={classes.formStyle}

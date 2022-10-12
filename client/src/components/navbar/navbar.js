@@ -15,7 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import logo from "../../assets/daraz.png";
 import { useCart } from "react-use-cart";
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete from "@mui/material/Autocomplete";
 import download from "../../assets/download.png";
 import "./dropdown.css";
 import Menu from "@mui/material/Menu";
@@ -25,7 +25,7 @@ import { useSelector } from "react-redux";
 import { top100Films } from "../../constants";
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
- 
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 520) {
@@ -123,24 +123,26 @@ const Navbar = ({ getresult }) => {
                     }}
                     xs={6}
                   >
-                     <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={top100Films}
-      sx={{ width: 400 }}
-      renderInput={(params) =><TextField
-        id="outlined-basic"
-        variant="outlined"
-        placeholder="search in daraz"
-        {...params}
-        onChange={searchHandle}
-        sx={{
-          width: 400,
-          borderTop: "1px solid grey",
-          borderRadius: "5px",
-        }}
-      />}
-    />
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      options={top100Films}
+                      sx={{ width: 400 }}
+                      renderInput={(params) => (
+                        <TextField
+                          id="outlined-basic"
+                          variant="outlined"
+                          placeholder="search in daraz"
+                          {...params}
+                          onChange={searchHandle}
+                          sx={{
+                            width: 400,
+                            borderTop: "1px solid grey",
+                            borderRadius: "5px",
+                          }}
+                        />
+                      )}
+                    />
                     {/* <TextField
                       id="outlined-basic"
                       variant="outlined"
@@ -229,7 +231,7 @@ const Navbar = ({ getresult }) => {
                     </Dropdown>
                   </Grid>
                 </Grid>
-                <Grid sx={{display: visible ? "block" : "none"}}>
+                <Grid sx={{ display: visible ? "block" : "none" }}>
                   <Dropdown2 />
                 </Grid>
               </Container>

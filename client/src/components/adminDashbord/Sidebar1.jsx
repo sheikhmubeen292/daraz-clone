@@ -69,12 +69,14 @@ export default function ResponsiveDrawer(props) {
       <Divider />
       <List>
         <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>Main</Box>
-        <ListItemButton>
-          <ListItemIcon>
-            <DashboardIcon sx={{ color: "#466CFD" }} />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItemButton>
+        <NavLink to="/admin-dashbord" style={{ textDecoration: "none" }}>
+          <ListItemButton>
+            <ListItemIcon>
+              <DashboardIcon sx={{ color: "#466CFD" }} />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </NavLink>
         <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>List</Box>
         <NavLink to="/admin-dashbord/user" style={{ textDecoration: "none" }}>
           <ListItemButton>
@@ -93,6 +95,14 @@ export default function ResponsiveDrawer(props) {
               <Inventory2Icon sx={{ color: "#466CFD" }} />
             </ListItemIcon>
             <ListItemText primary="Products" />
+          </ListItemButton>
+        </NavLink>
+        <NavLink to="/admin-dashbord/order" style={{ textDecoration: "none" }}>
+          <ListItemButton>
+            <ListItemIcon>
+              <Inventory2Icon sx={{ color: "#466CFD" }} />
+            </ListItemIcon>
+            <ListItemText primary="Order" />
           </ListItemButton>
         </NavLink>
 
