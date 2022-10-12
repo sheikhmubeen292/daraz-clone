@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/system";
-
+import axios from "axios";
 import { Grid, Button, Box, TextField, useMediaQuery } from "@mui/material";
 import "./navbar.css";
 import { url } from "../../constants";
@@ -17,14 +17,30 @@ import logo from "../../assets/daraz.png";
 import { useCart } from "react-use-cart";
 import Autocomplete from "@mui/material/Autocomplete";
 import download from "../../assets/download.png";
+import { useSelector } from 'react-redux';
 import "./dropdown.css";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Dropdown2 from "./dropdown1";
-import { useSelector } from "react-redux";
-import { top100Films } from "../../constants";
+// import { top100Films } from "../../constants";
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
+  const [search, setSearch] = useState([])
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  const getAllProducts = async () => {
+    try {
+      const res = await axios.get(
+        `${url}/api/products/allproducts`
+      );
+      setSearch(res.data);
+    } catch (error) {}
+  };
+
+  React.useEffect(() => {
+    getAllProducts();
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -35,10 +51,7 @@ const Navbar = ({ getresult }) => {
       }
     });
   }, []);
-  const items = useSelector((state) => state.cart);
-  const matchesScroll = useMediaQuery("(min-height:80vh)");
 
-  const matches = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
   const drawerWidth = 240;
@@ -64,7 +77,7 @@ const Navbar = ({ getresult }) => {
       getresult();
     }
   };
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   console.log(currentUser, "user........");
   return (
     <>
@@ -126,7 +139,9 @@ const Navbar = ({ getresult }) => {
                     <Autocomplete
                       disablePortal
                       id="combo-box-demo"
-                      options={top100Films}
+                      options={search.map(({name})=>{
+                        return name
+                      })}
                       sx={{ width: 400 }}
                       renderInput={(params) => (
                         <TextField

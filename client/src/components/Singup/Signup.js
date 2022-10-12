@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Typography,
   Container,
@@ -17,10 +17,12 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { useSelector } from 'react-redux';
 // import Stack from "@mui/material/Stack";
 import { Link, useNavigate } from "react-router-dom";
 import {url} from '../../constants'
 function Signup() {
+  const user = useSelector((state) => state.user.currentUser);
   const [image, setImage] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -29,6 +31,11 @@ function Signup() {
   const [error, setError] = useState(false);
   // const classes = useStyles();
   const navigate = useNavigate();
+  useEffect(() => {
+    if(user){
+        navigate('/')
+    }
+});
   const matches = useMediaQuery("(max-width:600px)");
   const handleSubmit = async (e) => {
     e.preventDefault();
