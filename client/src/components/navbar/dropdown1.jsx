@@ -11,7 +11,7 @@ export default function Dropdown2() {
       <nav id="menu">
         <ul>
           <li>
-            <NavLink href="#">
+            <NavLink to="#">
               Categories
               <KeyboardArrowDownIcon
                 fontSize="inherit"
@@ -68,46 +68,37 @@ export default function Dropdown2() {
                     </ul>
                   </li>
                   <li>
-                    <NavLink href="http://localhost:3000/categoryPage/paintguns">
-                      {" "}
+                    <NavLink to="/categoryPage/paintguns">
                       Sports and Outdoor
                     </NavLink>
                   </li>
                 </ul>
               </li>
               <li>
-                <NavLink href="http://localhost:3000/product/633c2a69e61b3de006af2acf">
-                  {" "}
+                <NavLink to="/product/633c2a69e61b3de006af2acf">
                   Home and LifyStyle
                 </NavLink>
               </li>
               <li>
-                <NavLink href="http://localhost:3000/categoryPage/mobiles">
-                  {" "}
-                  Electronic Devices
-                </NavLink>
+                <NavLink to="/categoryPage/mobiles">Electronic Devices</NavLink>
               </li>
               <li>
-                <NavLink href="http://localhost:3000/product/633d21b0da90b1266dd260c8">
-                  {" "}
+                <NavLink to="/product/633d21b0da90b1266dd260c8">
                   Watches, bags and Jewellery
                 </NavLink>
               </li>
               <li>
-                <NavLink href="http://localhost:3000/categoryPage/paintguns">
-                  {" "}
+                <NavLink to="/categoryPage/paintguns">
                   Sports and Outdoor
                 </NavLink>
               </li>
               <li>
-                <NavLink href="http://localhost:3000/categoryPage/diningsets">
-                  {" "}
+                <NavLink to="/categoryPage/diningsets">
                   TV & Home Appliances
                 </NavLink>
               </li>
               <li>
-                <NavLink href="http://localhost:3000/categoryPage/featurephone">
-                  {" "}
+                <NavLink to="/categoryPage/featurephone">
                   Automotiv & Jewellary
                 </NavLink>
               </li>
