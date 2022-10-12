@@ -2,6 +2,7 @@ import { useMediaQuery } from "@mui/material";
 import React from "react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import "./dropdown1.css";
+import { NavLink } from "react-router-dom";
 export default function Dropdown2() {
   // const matches = useMediaQuery('(height:100vh)')
 
@@ -10,109 +11,109 @@ export default function Dropdown2() {
       <nav id="menu">
         <ul>
           <li>
-            <a href="#" >
+          <NavLink to="#" >
               Categories
               <KeyboardArrowDownIcon
     fontSize="inherit"
     style={{ fontSize: "20px" }}
   />
-            </a>
+            </NavLink>
             <ul>
               <li>
-                <a href="http://localhost:3000/categoryPage/cleaninggloves">
+              <NavLink to="/categoryPage/cleaninggloves">
                   Cleaning Gloves
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="http://localhost:3000/categoryPage/alaramclocks">
+              <NavLink to="/categoryPage/alaramclocks">
                   Health and beauty
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="http://localhost:3000/product/634507f58000a613bc142a62">
+              <NavLink to="/product/634507f58000a613bc142a62">
                   Mens Fashion
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="http://localhost:3000/categoryPage/garlictools">
+              <NavLink to="/categoryPage/garlictools">
                   Toys and Games
-                </a>
+                </NavLink>
                 <ul>
                   <li>
-                    <a href="http://localhost:3000/categoryPage/microcard">
+                  <NavLink to="/categoryPage/microcard">
                       Feeding
-                    </a>
+                    </NavLink>
                     <ul>
                       <li>
-                        <a href="http://localhost:3000/product/633c2c95e61b3de006af2ae7">
+                      <NavLink to="/product/633c2c95e61b3de006af2ae7">
                           Art and Cart for kids
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
-                        <a href="http://localhost:3000/product/633c2ae2e61b3de006af2ad5">
+                      <NavLink to="/product/633c2ae2e61b3de006af2ad5">
                           Dolls and Accessories
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
-                        <a href="http://localhost:3000/product/633c2898e61b3de006af2ac5">
+                      <NavLink to="/product/633c2898e61b3de006af2ac5">
                           Learning and Education
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
-                        <a href="http://localhost:3000/product/633c2ac4e61b3de006af2ad3">
+                      <NavLink to="/product/633c2ac4e61b3de006af2ad3">
                           Clothing and Games
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
-                        <a href="http://localhost:3000/categoryPage/diningsets">
+                      <NavLink to="/categoryPage/diningsets">
                           Remote controle & Vehicles
-                        </a>
+                        </NavLink>
                       </li>
                     </ul>
                   </li>
                   <li>
-                    <a href="http://localhost:3000/categoryPage/paintguns">
+                  <NavLink to="/categoryPage/paintguns">
                       {" "}
                       Sports and Outdoor
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="http://localhost:3000/product/633c2a69e61b3de006af2acf">
+              <NavLink to="/product/633c2a69e61b3de006af2acf">
                   {" "}
                   Home and LifyStyle
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="http://localhost:3000/categoryPage/mobiles">
+              <NavLink to="/categoryPage/mobiles">
                   {" "}
                   Electronic Devices
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="http://localhost:3000/product/633d21b0da90b1266dd260c8">
+              <NavLink to="/product/633d21b0da90b1266dd260c8">
                   {" "}
                   Watches, bags and Jewellery
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="http://localhost:3000/categoryPage/paintguns">
+              <NavLink to="/categoryPage/paintguns">
                   {" "}
                   Sports and Outdoor
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="http://localhost:3000/categoryPage/diningsets">
+              <NavLink to="/categoryPage/diningsets">
                   {" "}
                   TV & Home Appliances
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="http://localhost:3000/categoryPage/featurephone">
+              <NavLink to="/categoryPage/featurephone">
                   {" "}
                   Automotiv & Jewellary
-                </a>
+                </NavLink>
               </li>
             </ul>
           </li>

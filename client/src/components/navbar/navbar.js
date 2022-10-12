@@ -27,12 +27,16 @@ const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
   const [search, setSearch] = useState([]);
   const currentUser = useSelector((state) => state.user.currentUser);
-
+  const [keystate,setKeystate]=useState('');
+  const [allpoducts,setAllproducts]=useState([]);
   const getAllProducts = async () => {
     try {
-      const res = await axios.get(`${url}/api/products/allproducts`);
-      setSearch(res.data);
-    } catch (error) {}
+      const {data} = await axios.get(`${url}/api/products/allproducts`);
+
+      setAllproducts(data);
+    } catch (error) {
+      console.log("get allproducts",error);
+    }
   };
 
   React.useEffect(() => {
@@ -63,22 +67,28 @@ const Navbar = ({ getresult }) => {
     localStorage.clear();
     // location.reload(true);
   }
-
-  const searchHandle = async (event) => {
+let result1;
+  const searchHandle =  (event,value) => {
     let key = event.target.value;
-    if (key) {
-      let result = await fetch(`${url}/api/products/search/${key}`);
-      result = await result.json();
-      console.log(result, "result ..........12");
-      if (result) {
-        getresult(result);
-      }
-    } else {
-      getresult();
+    console.log("key:",key,"value",value);
+    setKeystate(key);
+    if(key){
+    result1 =search.filter((items)=>items?.name?.toLowerCase().includes(key?.toLowerCase()?.trim()))
+  }else{
+     result1 =search.filter((items)=>items?.name?.toLowerCase().includes(value.name?.toLowerCase()?.trim()))
     }
   };
-  // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser, "user........");
+
+  useEffect(()=>{
+    if(keystate){
+      console.log("set old value");
+      setSearch(result1);
+    }else{
+      setSearch(allpoducts);
+    }
+  })
+ 
+console.log("search:",search);
   return (
     <>
       <div>
@@ -137,11 +147,15 @@ const Navbar = ({ getresult }) => {
                     xs={6}
                   >
                     <Autocomplete
-                      disablePortal
+                      disablePortal={true}
+                      multiple={false}
                       id="combo-box-demo"
-                      options={search.map(({ name }) => {
-                        return name;
-                      })}
+                      options={search}
+                      onChange={searchHandle}
+                      getOptionLabel={(option)=>option?.name || ''}
+                      isOptionEqualToValue={(option,value)=>
+                       option?.name==value?.name
+                      }
                       sx={{ width: 400 }}
                       renderInput={(params) => (
                         <TextField
@@ -158,18 +172,6 @@ const Navbar = ({ getresult }) => {
                         />
                       )}
                     />
-                    {/* <TextField
-                      id="outlined-basic"
-                      variant="outlined"
-                      placeholder="search in daraz"
-                      onChange={searchHandle}
-                      sx={{
-                        width: 900,
-                        marginLeft: "4rem",
-                        borderTop: "1px solid grey",
-                        borderRadius: "5px",
-                      }}
-                    /> */}
                     <Box
                       sx={{
                         backgroundColor: "#F57208",
@@ -195,7 +197,6 @@ const Navbar = ({ getresult }) => {
                     <Box className="item__count">
                       <span>{totalUniqueItems}</span>
                     </Box>
-                    {/* <span style={{color:"black"}}>Cart Items:{items.length}</span> */}
                   </Grid>
                   <Grid item md={1}>
                     <img src={download} width={200} height={50} alt="" />
