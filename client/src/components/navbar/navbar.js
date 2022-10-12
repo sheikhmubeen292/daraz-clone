@@ -18,8 +18,7 @@ import { useCart } from "react-use-cart";
 import Autocomplete from "@mui/material/Autocomplete";
 import download from "../../assets/download.png";
 import "./dropdown.css";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+
 import Dropdown2 from "./dropdown1";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -55,9 +54,13 @@ const Navbar = ({ getresult }) => {
     setMobileOpen(!mobileOpen);
   };
   const { totalUniqueItems } = useCart();
+ 
   function logout() {
+    console.log("log out");
+    // navigate("/");  
+    window.location.href='/'
     localStorage.clear();
-    navigate("/");
+    // location.reload(true);
   }
 
   const searchHandle = async (event) => {
