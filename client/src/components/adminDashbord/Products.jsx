@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { Fragment } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Divider } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -23,13 +23,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  margintTop: "20px",
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
+  "&:last-child td, &:last-child th": {},
 }));
 
 const Product = () => {
@@ -74,9 +73,10 @@ const Product = () => {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left">Tracking Id</StyledTableCell>
-                <StyledTableCell>Product</StyledTableCell>
-                <StyledTableCell>Num items</StyledTableCell>
+                <StyledTableCell align="center">
+                  Tracking Details
+                </StyledTableCell>
+
                 <StyledTableCell align="left">Customer</StyledTableCell>
                 <StyledTableCell align="left">Adress</StyledTableCell>
 
@@ -87,32 +87,46 @@ const Product = () => {
             </TableHead>
             <TableBody>
               {row.map((rows, i) => (
-                <StyledTableRow key={i}>
-                  <StyledTableCell align="left"> {rows._id}</StyledTableCell>
-                  <StyledTableCell
-                    component="th"
-                    sx={{ width: "500px" }}
-                    scope="row"
-                  >
-                    {rows.reference.map((item) => {
-                      return <li> {item.name}</li>;
-                    })}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {rows.reference.length}
-                  </StyledTableCell>
+                <Fragment key={i}>
+                  <StyledTableRow>
+                    <StyledTableCell align="left">
+                      <Box>
+                        <p>{rows._id}</p>
+                        {rows.reference.map(({ name, noOfItems }) => {
+                          return (
+                            <Box sx={{ display: "flex", gap: 3 }}>
+                              <p>{name.slice(0, 20)}...</p> <p>{noOfItems}</p>
+                              <Divider sx={{ borderBottom: "1px solid red" }} />
+                            </Box>
+                          );
+                        })}
+                      </Box>
+                    </StyledTableCell>
 
-                  <StyledTableCell align="left">{rows.name}</StyledTableCell>
-                  <StyledTableCell align="left">{rows.address}</StyledTableCell>
+                    <StyledTableCell align="left">{rows.name}</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {rows.address}
+                    </StyledTableCell>
 
-                  <StyledTableCell align="left">
-                    {rows.totalprice}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" sx={{ width: "120px" }}>
-                    {rows.addedAt.slice(0, 10)}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{rows.status}</StyledTableCell>
-                </StyledTableRow>
+                    <StyledTableCell align="left">
+                      {rows.totalprice}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" sx={{ width: "120px" }}>
+                      {rows.addedAt.slice(0, 10)}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {rows.status}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                  {/* {rows.reference.map(({ name, noOfItems }) => {
+                    return (
+                      <Box sx={{ display: "flex", gap: 3 }}>
+                        <p>{name}</p> <p>{noOfItems}</p>
+                        <Divider sx={{ borderBottom: "1px solid red" }} />
+                      </Box>
+                    );
+                  })} */}
+                </Fragment>
               ))}
             </TableBody>
           </Table>
