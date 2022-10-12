@@ -17,14 +17,14 @@ import logo from "../../assets/daraz.png";
 import { useCart } from "react-use-cart";
 import Autocomplete from "@mui/material/Autocomplete";
 import download from "../../assets/download.png";
-import { useSelector } from "react-redux";
 import "./dropdown.css";
 import Dropdown2 from "./dropdown1";
-
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
   const [search, setSearch] = useState([]);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const getAllProducts = async () => {
     try {
