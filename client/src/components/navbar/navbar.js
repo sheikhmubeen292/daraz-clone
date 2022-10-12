@@ -19,11 +19,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import download from "../../assets/download.png";
 import { useSelector } from "react-redux";
 import "./dropdown.css";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Dropdown2 from "./dropdown1";
-import { useSelector } from "react-redux";
-import axios from "axios";
+
 import { NavLink } from "react-router-dom";
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
