@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/system";
-
+import axios from "axios";
 import { Grid, Button, Box, TextField, useMediaQuery } from "@mui/material";
 import "./navbar.css";
 import { url } from "../../constants";
@@ -17,16 +17,39 @@ import logo from "../../assets/daraz.png";
 import { useCart } from "react-use-cart";
 import Autocomplete from "@mui/material/Autocomplete";
 import download from "../../assets/download.png";
+import { useSelector } from 'react-redux';
 import "./dropdown.css";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Dropdown2 from "./dropdown1";
+<<<<<<< HEAD
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
   const [search, setSearch] = useState([]);
+=======
+// import { top100Films } from "../../constants";
+const Navbar = ({ getresult }) => {
+  const [visible, setVisible] = useState(false);
+  const [search, setSearch] = useState([])
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  const getAllProducts = async () => {
+    try {
+      const res = await axios.get(
+        `${url}/api/products/allproducts`
+      );
+      setSearch(res.data);
+    } catch (error) {}
+  };
+
+  React.useEffect(() => {
+    getAllProducts();
+  }, []);
+>>>>>>> 16d0415aed01e14f527372579f1a43452f70447e
 
   const getAllProducts = async () => {
     try {
@@ -47,10 +70,7 @@ const Navbar = ({ getresult }) => {
       }
     });
   }, []);
-  const items = useSelector((state) => state.cart);
-  const matchesScroll = useMediaQuery("(min-height:80vh)");
 
-  const matches = useMediaQuery("(min-width:600px)");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
   const drawerWidth = 240;
@@ -62,9 +82,7 @@ const Navbar = ({ getresult }) => {
     localStorage.clear();
     navigate("/");
   }
-  function home() {
-    navigate("/");
-  }
+
   const searchHandle = async (event) => {
     let key = event.target.value;
     if (key) {
@@ -78,7 +96,7 @@ const Navbar = ({ getresult }) => {
       getresult();
     }
   };
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   console.log(currentUser, "user........");
   return (
     <>
@@ -116,11 +134,20 @@ const Navbar = ({ getresult }) => {
               >
                 <Grid alignItems="center" container spacing={1}>
                   <Grid item md={2}>
+<<<<<<< HEAD
                     <NavLink to="/">
                       <Box sx={{ marginLeft: "-6rem" }}>
                         <img src={logo} width={200} height={60} alt="" />
                       </Box>
                     </NavLink>
+=======
+
+                    <Box sx={{ marginLeft: "-6rem" }}>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <img src={logo} width={200} height={60} alt=""  />
+                      </Link>
+                    </Box>
+>>>>>>> 16d0415aed01e14f527372579f1a43452f70447e
                   </Grid>
                   <Grid
                     container
@@ -140,8 +167,13 @@ const Navbar = ({ getresult }) => {
                     <Autocomplete
                       disablePortal
                       id="combo-box-demo"
+<<<<<<< HEAD
                       options={search.map(({ name }) => {
                         return name;
+=======
+                      options={search.map(({name})=>{
+                        return name
+>>>>>>> 16d0415aed01e14f527372579f1a43452f70447e
                       })}
                       sx={{ width: 400 }}
                       renderInput={(params) => (

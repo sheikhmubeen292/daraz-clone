@@ -5,6 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { url } from "../../constants";
 import axios from "axios";
+import { loginFailure, loginStart, loginSuccess } from "../../store/userSlice";
+import { useDispatch, useSelector } from 'react-redux';
+
 const useStyles = makeStyles((theme) => ({
   spanstyle: { color: "red", marginTop: "10px" },
   typo: { padding: "1rem" },
@@ -12,40 +15,35 @@ const useStyles = makeStyles((theme) => ({
 function Loginfoam() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
   const classes = useStyles();
   const navigate = useNavigate();
-
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  // console.log(currentUser.user,"user........//")
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.currentUser);
   useEffect(() => {
-    if (currentUser) {
-      navigate("/");
-    }
-  }, []);
+      if(user){
+          navigate('/')
+      }
+  },[]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(false);
-    const user = { email, password };
-    console.log(user);
-    // dispatch(loginUser(user));
-    try {
-      const result = await axios.post(`${url}/api/users/login`, {
-        email,
-        password,
-      });
-      if (result.data) {
-        alert("User Login Successfully!");
-        let localdata = localStorage.setItem(
-          "currentUser",
-          JSON.stringify(result.data)
-        );
-        navigate("/cart");
+    login(dispatch, { email, password });
+  }
+    const login = async(dispatch,user)=>{
+      dispatch(loginStart());
+      try {
+        const result = await axios.post(`${url}/api/users/login`, {
+          email,
+          password,
+        });
+        dispatch(loginSuccess(result.data));
+        localStorage.setItem('currentUser',JSON.stringify(result.data))
+        window.location.href='/'
+        
+      } catch (error) {
+        dispatch(loginFailure());
       }
-    } catch (err) {
-      console.log(err, "err");
-      setError(true);
-    }
   };
   return (
     <React.Fragment>
@@ -177,6 +175,7 @@ function Loginfoam() {
                       variant="contained"
                       size="large"
                       onClick={handleSubmit}
+                      disabled={isFetching}
                       sx={{
                         backgroundColor: "#F57224",
                         width: "200px",
