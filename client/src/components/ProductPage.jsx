@@ -70,7 +70,7 @@ const ProductPage = () => {
                     <Box width={{ xs: "100%", md: "40%" }}>
                       <Box
                         component="img"
-                        src={`${url}/uploads/${data.image}`}
+                        src={`${url}/uploads/${data.image[0]}`}
                         alt=""
                         width="100%"
                         height="315px"
@@ -81,7 +81,7 @@ const ProductPage = () => {
                         <Box
                           onMouseEnter={() => setImage(robe1)}
                           component="img"
-                          src={`${url}/uploads/${data.image}`}
+                          src={`${url}/uploads/${data.image[0]}`}
                           alt=""
                           width="70px"
                           height="70px"
