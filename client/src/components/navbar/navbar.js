@@ -50,9 +50,7 @@ const Navbar = ({ getresult }) => {
     localStorage.clear();
     navigate("/");
   }
-  function home() {
-    navigate("/");
-  }
+
   const searchHandle = async (event) => {
     let key = event.target.value;
     if (key) {
@@ -103,8 +101,11 @@ const Navbar = ({ getresult }) => {
               >
                 <Grid alignItems="center" container spacing={1}>
                   <Grid item md={2}>
+
                     <Box sx={{ marginLeft: "-6rem" }}>
-                      <img src={logo} width={200} height={60} alt="" />
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <img src={logo} width={200} height={60} alt=""  />
+                      </Link>
                     </Box>
                   </Grid>
                   <Grid
