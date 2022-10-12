@@ -10,8 +10,6 @@ const orderSchema = new mongoose.Schema(
         },
         name: String,
         noOfItems: Number,
-
-        status: { default: "pending", type: String },
       },
     ],
     name: {
@@ -26,6 +24,7 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    status: { default: "pending", type: String },
 
     totalprice: Number,
     addedAt: {

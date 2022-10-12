@@ -22,10 +22,22 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Dropdown2 from "./dropdown1";
 import { useSelector } from "react-redux";
-import { top100Films } from "../../constants";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
+  const [search, setSearch] = useState([]);
 
+  const getAllProducts = async () => {
+    try {
+      const res = await axios.get(`${url}/api/products/allproducts`);
+      setSearch(res.data);
+    } catch (error) {}
+  };
+
+  React.useEffect(() => {
+    getAllProducts();
+  }, []);
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 520) {
@@ -85,6 +97,7 @@ const Navbar = ({ getresult }) => {
                 <Box m={{ xs: 1, sm: 1, md: 0 }}>
                   <img src={logo} width={130} height={60} alt="" />
                 </Box>
+
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
@@ -103,9 +116,11 @@ const Navbar = ({ getresult }) => {
               >
                 <Grid alignItems="center" container spacing={1}>
                   <Grid item md={2}>
-                    <Box sx={{ marginLeft: "-6rem" }}>
-                      <img src={logo} width={200} height={60} alt="" />
-                    </Box>
+                    <NavLink to="/">
+                      <Box sx={{ marginLeft: "-6rem" }}>
+                        <img src={logo} width={200} height={60} alt="" />
+                      </Box>
+                    </NavLink>
                   </Grid>
                   <Grid
                     container
@@ -125,7 +140,9 @@ const Navbar = ({ getresult }) => {
                     <Autocomplete
                       disablePortal
                       id="combo-box-demo"
-                      options={top100Films}
+                      options={search.map(({ name }) => {
+                        return name;
+                      })}
                       sx={{ width: 400 }}
                       renderInput={(params) => (
                         <TextField
@@ -230,7 +247,12 @@ const Navbar = ({ getresult }) => {
                     </Dropdown>
                   </Grid>
                 </Grid>
-                <Grid sx={{ display: visible ? "block" : "none" }}>
+                <Grid
+                  sx={{
+                    display: visible ? "block" : "none",
+                    marginLeft: "-1.2rem",
+                  }}
+                >
                   <Dropdown2 />
                 </Grid>
               </Container>

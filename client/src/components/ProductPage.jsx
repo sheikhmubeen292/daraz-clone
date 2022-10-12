@@ -17,12 +17,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import { useParams } from "react-router-dom";
-import { add, increament } from "../store/cartSlice";
-import { useDispatch } from "react-redux";
-import categoryData from "../components/CategoryPage/CategoryData";
-import { v4 as uuidv4 } from "uuid";
 import { url } from "../constants";
-
 import robe1 from "../assets/robe1.jpg";
 import robe2 from "../assets/robe2.jpg";
 import robe3 from "../assets/robe3.jpg";
@@ -40,15 +35,12 @@ const ProductPage = () => {
   const { id } = useParams();
 
   console.log(id, "my Id");
-  // console.log(newData.name, "newdaataaa");
-  // const newData = data.filter((x) => x.id == id);
-  // console.log(newData[0]?.imgsrc);
+
   const getAllProducts = async () => {
     try {
       const res = await axios.get(`${url}/api/products/allproducts`);
       const newData = res.data.filter((x) => x._id == id);
 
-      // console.log(res.data, "------------------all");
       console.log(newData, "newdata---");
 
       setData(newData);
@@ -355,7 +347,6 @@ const ProductPage = () => {
                             Sold by
                           </Typography>
                           <Typography sx={{ fontSize: "14px" }}>
-                            {" "}
                             MY Trading (Karachi)
                           </Typography>
                         </Box>

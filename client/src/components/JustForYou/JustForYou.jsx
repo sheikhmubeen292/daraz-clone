@@ -13,9 +13,7 @@ const JustForYou = () => {
 
   const fetchAllProduct = async () => {
     try {
-      const res = await axios.get(
-        `${url}/api/products/allproducts`
-      );
+      const res = await axios.get(`${url}/api/products/allproducts`);
       setData(res.data);
     } catch (error) {}
   };
@@ -31,7 +29,7 @@ const JustForYou = () => {
           >
             Just For You
           </Typography>
-          <Grid container sx={{display:"flex", justifyContent:"center"}}>
+          <Grid container sx={{ display: "flex", justifyContent: "center" }}>
             {data?.slice(0, visible).map(({ image, name, price, _id }) => {
               return (
                 <Grid
@@ -97,11 +95,17 @@ const JustForYou = () => {
             <Button
               onClick={showMoreItems}
               size="large"
-              sx={{ margin: "2rem 0rem", fontSize: "1rem", backgroundColor:"#F57208", 
-              color:"white", display:"flex", alignItems:"center",  
-            "&:hover":{
-              backgroundColor:"#F57208"
-            } }}
+              sx={{
+                margin: "2rem 0rem",
+                fontSize: "1rem",
+                backgroundColor: "#F57208",
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+                "&:hover": {
+                  backgroundColor: "#F57208",
+                },
+              }}
             >
               Show More
             </Button>

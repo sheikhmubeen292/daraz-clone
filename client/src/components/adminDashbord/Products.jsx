@@ -76,8 +76,10 @@ const Product = () => {
               <TableRow>
                 <StyledTableCell align="left">Tracking Id</StyledTableCell>
                 <StyledTableCell>Product</StyledTableCell>
-
+                <StyledTableCell>Num items</StyledTableCell>
                 <StyledTableCell align="left">Customer</StyledTableCell>
+                <StyledTableCell align="left">Adress</StyledTableCell>
+
                 <StyledTableCell align="left">Amount</StyledTableCell>
                 <StyledTableCell align="left">Date</StyledTableCell>
                 <StyledTableCell align="left">Status</StyledTableCell>
@@ -87,15 +89,29 @@ const Product = () => {
               {row.map((rows, i) => (
                 <StyledTableRow key={i}>
                   <StyledTableCell align="left"> {rows._id}</StyledTableCell>
-                  <StyledTableCell component="th" scope="row">
+                  <StyledTableCell
+                    component="th"
+                    sx={{ width: "500px" }}
+                    scope="row"
+                  >
                     {rows.reference.map((item) => {
-                      return item.name;
+                      return <li> {item.name}</li>;
                     })}
                   </StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left">
+                    {rows.reference.length}
+                  </StyledTableCell>
+
+                  <StyledTableCell align="left">{rows.name}</StyledTableCell>
+                  <StyledTableCell align="left">{rows.address}</StyledTableCell>
+
+                  <StyledTableCell align="left">
+                    {rows.totalprice}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: "120px" }}>
+                    {rows.addedAt.slice(0, 10)}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{rows.status}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
