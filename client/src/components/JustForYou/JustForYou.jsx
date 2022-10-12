@@ -29,7 +29,11 @@ const JustForYou = () => {
           >
             Just For You
           </Typography>
-          <Grid container sx={{ display: "flex", justifyContent: "center" }}>
+          <Grid
+            container
+            sx={{ display: "flex", justifyContent: "center" }}
+            spacing={2}
+          >
             {data?.slice(0, visible).map(({ image, name, price, _id }) => {
               return (
                 <Grid
@@ -58,6 +62,7 @@ const JustForYou = () => {
                           boxShadow: "0 0 4px 0 rgb(0 0 0 / 85%)",
                           cursor: "pointer",
                         },
+                        height: "100%",
                       }}
                     >
                       <Box>
@@ -65,6 +70,7 @@ const JustForYou = () => {
                           src={`${url}/uploads/${image}`}
                           alt=""
                           width="100%"
+                          height="200px"
                         />
                       </Box>
                       <Typography
@@ -74,6 +80,7 @@ const JustForYou = () => {
                           WebkitLineClamp: "2",
                           WebkitBoxOrient: "vertical",
                           overflow: "hidden",
+                          height: { md: "50px", xs: "10px" },
                         }}
                       >
                         {name}
