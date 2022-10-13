@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Modal from "@mui/material/Modal";
 import { styled } from "@mui/material/styles";
+import { ToastContainer,toast } from "react-toastify";
+
 import { makeStyles } from "@mui/styles";
 import { url } from "../constants";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -103,9 +105,14 @@ function Cart() {
       const result = await axios.post(`${url}/api/order/order`, order);
       console.log(result.data, "resultform data");
       if (result.data) {
-        alert("Order Completed Successfully!");
+        toast.success("Order Completed Successfully!",{
+          position:"top-center"
+        });
       }
     } catch (err) {
+      toast.error("Something Went Wrong",{
+        position:"top-center"
+      })
       setError(true);
     }
   };
@@ -407,6 +414,7 @@ function Cart() {
                   // aria-labelledby="modal-modal-title"
                   // aria-describedby="modal-modal-description"
                 >
+                  
                   <Box sx={style}>
                     <Grid>
                       <Paper elevation={20} className={classes.paperStyle}>
@@ -471,6 +479,7 @@ function Cart() {
           </Grid>
         </Grid>
       </Container>
+      <ToastContainer />
     </Box>
   );
 }

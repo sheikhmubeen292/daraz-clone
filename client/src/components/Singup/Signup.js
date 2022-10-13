@@ -12,6 +12,8 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import FormGroup from "@mui/material/FormGroup";
@@ -62,10 +64,15 @@ function Signup() {
       const result = await axios.post(`${url}/api/users/register`, form);
       console.log(result.data, "result data");
       if (result.data) {
-        alert("User Created Successfully!");
         navigate("/login");
+        toast.success("User Created Successfully!",{
+          position:"top-center"
+        });
       }
     } catch (err) {
+      toast.error("Something we wrong",{
+        position:"top-center"
+      })
       setError(true);
     }
   };
@@ -350,6 +357,7 @@ function Signup() {
           </Box>
         </Container>
       </Box>
+      <ToastContainer />
     </React.Fragment>
   );
 

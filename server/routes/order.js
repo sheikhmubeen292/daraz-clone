@@ -17,7 +17,7 @@ router.post("/order", async (req, res) => {
     console.log(req.body);
     const newOrder = new Order(req.body);
     await newOrder.save();
-    res.send("Order Generated Successfully");
+    res.send("Order Generated Successfully",);
   } catch (error) {
     return res.status(400).json({ message: error });
   }

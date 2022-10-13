@@ -10,20 +10,20 @@ import {
 } from "@mui/material";
 import { useCart } from "react-use-cart";
 import ShareIcon from "@mui/icons-material/Share";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import { shareURL } from "../constants";
+import { Link } from "react-router-dom";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import { useParams } from "react-router-dom";
-import { url } from "../constants";
 import robe1 from "../assets/robe1.jpg";
 import robe2 from "../assets/robe2.jpg";
 import robe3 from "../assets/robe3.jpg";
 import banner from "../assets/banner.jpg";
+import {LinkedinShareButton } from 'react-share'
 import axios from "axios";
-
+import './CategoryPage/loading.css'
+import { url } from "../constants";
 const ProductPage = () => {
   const { addItem } = useCart();
   console.log(addItem, "hsdfhdjas");
@@ -31,20 +31,23 @@ const ProductPage = () => {
   const [image, setImage] = useState(robe1);
 
   const [newData, setData] = useState([]);
-
+  const [loading, setLoading] = useState(false)
   const { id } = useParams();
 
   console.log(id, "my Id");
 
   const getAllProducts = async () => {
     try {
+      setLoading(true)
       const res = await axios.get(`${url}/api/products/allproducts`);
       const newData = res.data.filter((x) => x._id == id);
-
+      setLoading(false)
       console.log(newData, "newdata---");
 
       setData(newData);
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false)
+    }
   };
 
   useEffect(() => {
@@ -53,7 +56,13 @@ const ProductPage = () => {
 
   return (
     <Box sx={{ bgcolor: "#EFF0F5", py: 5 }}>
-      <Container>
+      {loading?(<><h5 style={{textAlign:"center"}}>Hold on, it's loading!.......</h5>
+             <div style={{display: "flex", justifyContent:"center"}}>
+             <div className="loader"></div>
+             </div>
+             </>):(
+        <Container>
+
         {newData.map((data, i) => {
           return (
             <>
@@ -154,8 +163,11 @@ const ProductPage = () => {
                           </Typography>
                         </Box>
                         <Box>
-                          <ShareIcon sx={{ mr: 1, cursor: "pointer" }} />
-                          <FavoriteBorderIcon sx={{ cursor: "pointer" }} />
+                          <LinkedinShareButton url={`${url}`}>
+                        {/* <a href={`https://www.linkedin.com/${url}/product/${id}`} target="_blank" rel="noreferrer">
+                       </a> */}
+                          <ShareIcon sx={{ mr: 1, cursor: "pointer" }}  />
+                       </LinkedinShareButton>
                         </Box>
                       </Box>
 
@@ -173,12 +185,6 @@ const ProductPage = () => {
                       >
                         Rs.{data.price}
                       </Typography>
-                      {/* <Typography sx={{ fontSize: "12px", mb: 3 }}>
-                  <span style={{ color: "grey", marginRight: "1rem" }}>
-                    <s>{newData[0].delprice}</s>
-                  </span>
-                  {newData[0].percent}
-                </Typography> */}
                       <Divider color="#eff0f5" />
 
                       <Box sx={{ display: "flex", mt: 1 }}>
@@ -212,23 +218,12 @@ const ProductPage = () => {
                           />
                         </Box>
                       </Box>
-                      <Box sx={{ display: "flex", my: 2 }}>
-                        <Typography sx={{ color: "grey !important" }}>
-                          Quantity
-                        </Typography>
-                        <Box
-                          sx={{ display: "flex", alignItems: "center", ml: 4 }}
-                        >
-                          <RemoveIcon sx={{ mx: 1 }} />
-                          1
-                          <AddIcon sx={{ mx: 1 }} />
-                        </Box>
-                      </Box>
                       <Button
                         sx={{
                           bgcolor: "#2ABBE8",
                           color: "white",
                           px: 3,
+                          my: 2,
                           "&:hover": { bgcolor: "#2ABBE8a1" },
                         }}
                       >
@@ -418,6 +413,8 @@ const ProductPage = () => {
           );
         })}
       </Container>
+      )
+      }
     </Box>
   );
 };

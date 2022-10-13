@@ -5,15 +5,17 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import router from "./routes/userRoute.js";
 import order from "./routes/order.js";
-import { join } from "path";
-import { dirname } from "path";
+import path from "path";
+import url from "url";
+// import { dirname } from "path";
 import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 
 const port = process.env.PORT || 5000;
 
-const __dirname = dirname;
 app.use("/uploads", express.static("./uploads"));
 app.use(express.static("./build"));
 
@@ -28,9 +30,9 @@ app.use("/api/order/", order);
 app.use("/api/users/", router);
 
 app.get("/*", (req, res) => {
-  res.sendFile(join(__dirname, "./build/index.html"), function (err) {
+  res.sendFile(path.join(__dirname, "./build/index.html"), function (err) {
     if (err) {
-      res.status(500).send(err);
+      res.status(500).send(err, { error: "server Error" });
     }
   });
 });
