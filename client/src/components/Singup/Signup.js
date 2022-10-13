@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Container,
@@ -17,10 +17,10 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 // import Stack from "@mui/material/Stack";
 import { Link, useNavigate } from "react-router-dom";
-import {url} from '../../constants'
+import { url } from "../../constants";
 function Signup() {
   const user = useSelector((state) => state.user.currentUser);
   const [image, setImage] = useState("");
@@ -32,10 +32,10 @@ function Signup() {
   // const classes = useStyles();
   const navigate = useNavigate();
   useEffect(() => {
-    if(user){
-        navigate('/')
+    if (user) {
+      navigate("/");
     }
-});
+  });
   const matches = useMediaQuery("(max-width:600px)");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,10 +59,7 @@ function Signup() {
       form.append("gender", gender);
       form.append("image", image.image);
 
-      const result = await axios.post(
-        `${url}/api/users/register`,
-        form
-      );
+      const result = await axios.post(`${url}/api/users/register`, form);
       console.log(result.data, "result data");
       if (result.data) {
         alert("User Created Successfully!");
@@ -381,8 +378,8 @@ function Signup() {
             onChange={handleChange}
             sx={{ width: 128 }}
           >
-            <MenuItem value={1}>Male</MenuItem>
-            <MenuItem value={2}>Female</MenuItem>
+            <MenuItem value="male">Male</MenuItem>
+            <MenuItem value="female">Female</MenuItem>
           </Select>
         </FormControl>
       </Box>

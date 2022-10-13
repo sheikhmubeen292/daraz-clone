@@ -9,7 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+
+import swal from "sweetalert2";
 import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,15 +39,28 @@ const Users = () => {
   const fetchUser = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/users/alluser");
-
-      setRow(res.data);
+      const newData = res.data.filter((x) => x.role === "user");
+      setRow(newData);
     } catch (error) {
       console.log(error);
     }
   };
   React.useEffect(() => {
     fetchUser();
-  }, []);
+  }, [row]);
+
+  const handleDele = async (_id) => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/users/delete", {
+        _id,
+      });
+      swal.fire("Congrants", "Users is Deletd sucessfully", "success");
+    } catch (error) {
+      console.log(error);
+      swal.fire("Oops", "something went wrong", "error");
+    }
+  };
+
   return (
     <Box sx={{}} px={4}>
       <Box py={5} sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -76,6 +90,7 @@ const Users = () => {
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Role</StyledTableCell>
                 <StyledTableCell align="left">Gender</StyledTableCell>
+                <StyledTableCell align="center">Action</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -87,8 +102,38 @@ const Users = () => {
                   <StyledTableCell align="left">{rows.name}</StyledTableCell>
                   <StyledTableCell align="left">{rows.email}</StyledTableCell>
                   <StyledTableCell align="left">{rows.role}</StyledTableCell>
-                  <StyledTableCell align="left">
-                    {rows.gender == "1" ? "male" : "female"}
+                  <StyledTableCell align="left">{rows.gender}</StyledTableCell>
+                  <StyledTableCell align="center">
+                    <Box>
+                      <NavLink to={`edit/${rows._id}`}>
+                        <Button
+                          sx={{
+                            color: "white",
+                            backgroundColor: "#7451F8",
+                            "&:hover": {
+                              background: "#7451F8",
+                            },
+                            marginRight: "1rem",
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      </NavLink>
+                      <Button
+                        sx={{
+                          color: "white",
+                          backgroundColor: "#7451F8",
+                          "&:hover": {
+                            background: "#7451F8",
+                          },
+                        }}
+                        onClick={() => {
+                          handleDele(rows._id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </Box>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

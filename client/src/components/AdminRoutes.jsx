@@ -6,6 +6,7 @@ import AddnewUser from "./adminDashbord/AddnewUser";
 import Product from "./adminDashbord/Products";
 import AddnewProduct from "./adminDashbord/AddnewProducts";
 import Dashboard from "./adminDashbord/Dashboard";
+import UserEdit from "./adminDashbord/UserEdit";
 const AdminRoutes = () => {
   return (
     <div>
@@ -13,8 +14,11 @@ const AdminRoutes = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/user" element={<Users />} />
+          <Route path="/user/edit/:id" element={<UserEdit />} />
+
           <Route path="/user/addnew" element={<AddnewUser />} />
           <Route path="/products" element={<Product />} />
+
           <Route path="/products/addnew" element={<AddnewProduct />} />
         </Routes>
       </Sidebar1>

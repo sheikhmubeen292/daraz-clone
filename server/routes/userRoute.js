@@ -125,4 +125,59 @@ router.get("/alluser", async (req, res) => {
     console.log(error);
   }
 });
+// --------------------------------get user by id
+router.post("/userbyid", async (req, res) => {
+  const _id = req.body;
+
+  try {
+    const user = await userModel.findById(_id);
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//  --------------------------- Delete user
+
+router.post("/delete", (req, res) => {
+  const { _id } = req.body;
+
+  userModel
+    .findByIdAndDelete(_id)
+    .then(() => {
+      res.status(201).json({ messege: "User Deleted" });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+// --------------------update user
+router.put("/update/:id", async (req, res) => {
+  try {
+    await userModel.findByIdAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    res.json({ success: true, message: "Successfully Updated!" });
+  } catch (error) {
+    console.log("err", error);
+  }
+});
+
+// To Update The Employee Details
+//  employeeRoute.route('/updateEmployee/:id').post(function (req, res) {
+//   employeeModel.findById(req.params.id, function (err, employee) {
+//   if (!employee)
+//   return next(new Error('Unable To Find Employee With This Id'));
+//   else {
+//   employee.firstName = req.body.firstName;
+//   employee.lastName = req.body.lastName;
+//   employee.email = req.body.email;
+//   employee.phone = req.body.phone;
+
+//   employee.save().then(emp => {
+//   res.json('Employee Updated Successfully');
+//   })
+
 export default router;
