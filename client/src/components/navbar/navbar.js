@@ -23,25 +23,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Dropdown2 from "./dropdown1";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { AllOutSharp } from "@mui/icons-material";
+import {MuiAutocomplete} from './Autocomplete'
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
-  const [search, setSearch] = useState([]);
   const currentUser = useSelector((state) => state.user.currentUser);
-  const [keystate,setKeystate]=useState('');
-  const [allpoducts,setAllproducts]=useState([]);
-  const getAllProducts = async () => {
-    try {
-      const {data} = await axios.get(`${url}/api/products/allproducts`);
-
-      setAllproducts(data);
-    } catch (error) {
-      console.log("get allproducts",error);
-    }
-  };
-
-  React.useEffect(() => {
-    getAllProducts();
-  }, []);
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 520) {
@@ -67,28 +53,9 @@ const Navbar = ({ getresult }) => {
     localStorage.clear();
     // location.reload(true);
   }
-let result1;
-  const searchHandle =  (event,value) => {
-    let key = event.target.value;
-    console.log("key:",key,"value",value);
-    setKeystate(key);
-    if(key){
-    result1 =search.filter((items)=>items?.name?.toLowerCase().includes(key?.toLowerCase()?.trim()))
-  }else{
-     result1 =search.filter((items)=>items?.name?.toLowerCase().includes(value.name?.toLowerCase()?.trim()))
-    }
-  };
 
-  useEffect(()=>{
-    if(keystate){
-      console.log("set old value");
-      setSearch(result1);
-    }else{
-      setSearch(allpoducts);
-    }
-  })
+
  
-console.log("search:",search);
   return (
     <>
       <div>
@@ -146,39 +113,15 @@ console.log("search:",search);
                     }}
                     xs={6}
                   >
-                    <Autocomplete
-                      disablePortal={true}
-                      multiple={false}
-                      id="combo-box-demo"
-                      options={search}
-                      onChange={searchHandle}
-                      getOptionLabel={(option)=>option?.name || ''}
-                      isOptionEqualToValue={(option,value)=>
-                       option?.name==value?.name
-                      }
-                      sx={{ width: 400 }}
-                      renderInput={(params) => (
-                        <TextField
-                          id="outlined-basic"
-                          variant="outlined"
-                          placeholder="search in daraz"
-                          {...params}
-                          onChange={searchHandle}
-                          sx={{
-                            width: 400,
-                            borderTop: "1px solid grey",
-                            borderRadius: "5px",
-                          }}
-                        />
-                      )}
-                    />
+                    <MuiAutocomplete />
                     <Box
                       sx={{
                         backgroundColor: "#F57208",
-                        width: "4rem",
+                        width: "3rem",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        marginLeft:"9.3rem"
                       }}
                     >
                       <SearchIcon />

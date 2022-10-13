@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { url } from "../../constants";
 import axios from "axios";
+import { ToastContainer,toast } from "react-toastify";
 import { loginFailure, loginStart, loginSuccess } from "../../store/userSlice";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -28,6 +29,7 @@ function Loginfoam() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     login(dispatch, { email, password });
   }
     const login = async(dispatch,user)=>{
@@ -37,16 +39,23 @@ function Loginfoam() {
           email,
           password,
         });
+
         dispatch(loginSuccess(result.data));
         localStorage.setItem('currentUser',JSON.stringify(result.data))
         window.location.href='/'
-        
+        toast.success("User login Successfully!",{
+      position:"top-center"
+    });
       } catch (error) {
+        toast.error("Something we wrong",{
+          position:"top-center"
+        })
         dispatch(loginFailure());
       }
   };
   return (
     <React.Fragment>
+       <ToastContainer />
       <Box
         width="100vw"
         height="70vh"

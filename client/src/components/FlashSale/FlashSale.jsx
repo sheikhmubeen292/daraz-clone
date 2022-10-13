@@ -2,21 +2,27 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import '../CategoryPage/loading.css'
 import { url } from "../../constants";
+import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
 const FlashSale = ({dataOfResult}) => {
   console.log(dataOfResult, "result flash")
   const [flashSale, setData] = React.useState([]);
-
+  const [loading, setLoading] = useState(false);
   const getAllProducts = async () => {
     try {
+      setLoading(true)
       const res = await axios.get(
         `${url}/api/products/allproducts`
       );
       const newData = res.data.filter((x) => x.category == "flashsale");
 
       setData(newData);
+      setLoading(false);
       // setSearch(newData);
-    } catch (error) {}
+    } catch (error) {
+      setLoading(finalPropsSelectorFactory)
+    }
   };
 
   React.useEffect(() => {
@@ -32,6 +38,12 @@ const FlashSale = ({dataOfResult}) => {
           >
             Flash Sale
           </Typography>
+          {loading? (<><h5 style={{textAlign:"center"}}>Hold on, it's loading!.......</h5>
+             <div style={{display: "flex", justifyContent:"center"}}>
+             <div className="loader"></div>
+             </div>
+             </>):(
+
           <Grid container>
             {  dataOfResult?.length>0 ? dataOfResult?.map(({ image, name, price, _id }) => {
               return (
@@ -156,6 +168,8 @@ const FlashSale = ({dataOfResult}) => {
             })
             }
           </Grid>
+          )
+          }
         </Container>
       </Box>
     </div>
