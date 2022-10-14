@@ -22,7 +22,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 import { Search } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import {
   FormControl,
@@ -33,13 +33,15 @@ import {
 } from "@mui/material";
 
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
   const navigate = useNavigate();
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser, "----------------");
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+  console.log(currentUser.data, "user................123123");
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -52,6 +54,7 @@ export default function ResponsiveDrawer(props) {
       navigate("/");
     }
   });
+
   const drawer = (
     <div>
       <Box
@@ -116,13 +119,18 @@ export default function ResponsiveDrawer(props) {
         </NavLink>
 
         <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>Setting</Box>
-        <ListItemButton>
-          <ListItemIcon>
-            <AccountBoxIcon sx={{ color: "#466CFD" }} />
-          </ListItemIcon>
-          <ListItemText primary="Profile" />
-        </ListItemButton>
+        <NavLink
+          to="/admin-dashbord/adminprofile"
+          style={{ textDecoration: "none" }}
+        >
+          <ListItemButton>
+            <ListItemIcon>
+              <AccountBoxIcon sx={{ color: "#466CFD" }} />
+            </ListItemIcon>
 
+            <ListItemText primary="Profile" />
+          </ListItemButton>
+        </NavLink>
         <ListItemButton>
           <ListItemIcon>
             <LogoutIcon sx={{ color: "#466CFD" }} />

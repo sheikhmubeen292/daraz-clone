@@ -30,6 +30,8 @@ function Signup() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
+  const [option, setOption] = useState("");
+
   const [error, setError] = useState(false);
   // const classes = useStyles();
   const navigate = useNavigate();
@@ -51,6 +53,7 @@ function Signup() {
         email,
         password,
         gender,
+        option
       };
     }
     try {
@@ -60,6 +63,7 @@ function Signup() {
       form.append("password", password);
       form.append("gender", gender);
       form.append("image", image.image);
+      form.append("option", option)
 
       const result = await axios.post(`${url}/api/users/register`, form);
       console.log(result.data, "result data");
@@ -84,12 +88,12 @@ function Signup() {
     <React.Fragment>
       <Box
         width="100vw"
-        height="70vh"
+        height="80vh"
         backgroundColor="#EFF0F5"
         paddingTop="50px"
         sx={{
-          width: matches ? "100%" : "100vw",
-          height: matches ? "110%" : "100vh",
+          width: matches ? "100%" : "90vw",
+          height: matches ? "100%" : "100vh",
         }}
       >
         <Container>
@@ -139,7 +143,7 @@ function Signup() {
             <Box
               sx={{
                 width: matches ? "100%" : "65%",
-                height: matches ? "80%" : "450px",
+                height: matches ? "80%" : "500px",
                 backgroundColor: "#FFFFFF",
                 marginTop: matches ? "10px" : "30px",
               }}
@@ -193,7 +197,7 @@ function Signup() {
                     sx={{
                       display: "flex",
                       flexDirection: matches ? "column" : "column",
-                      spacing: 4,
+                      // spacing: 4,
                     }}
                   >
                     <Box>
@@ -224,7 +228,7 @@ function Signup() {
                     <Box
                       sx={{
                         width: "100%",
-                        height: "300px",
+                        height: "100px",
                       }}
                     >
                       <Typography
@@ -236,6 +240,18 @@ function Signup() {
                       </Typography>
 
                       <GenderSelect />
+                    </Box>
+
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: "14px",
+                        }}
+                      >
+                        Who is
+                      </Typography>
+
+                      <RoleSelect />
                     </Box>
                   </Box>
                 </Box>
@@ -375,6 +391,7 @@ function Signup() {
     const handleChange = (event) => {
       setGender(event.target.value);
     };
+   
     return (
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
@@ -382,12 +399,35 @@ function Signup() {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
+            
             value={gender}
             onChange={handleChange}
             sx={{ width: 128 }}
           >
             <MenuItem value="male">Male</MenuItem>
             <MenuItem value="female">Female</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+    );
+  }
+  function RoleSelect() {
+    const handleChange = (event) => {
+      setOption(event.target.value);
+    };
+    return (
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label"></InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={option}
+            onChange={handleChange}
+            sx={{ width: 128 }}
+          >
+            <MenuItem value="buyer">Buyer</MenuItem>
+            <MenuItem value="seller">Seller</MenuItem>
           </Select>
         </FormControl>
       </Box>

@@ -118,14 +118,6 @@ const Product = () => {
                       {rows.status}
                     </StyledTableCell>
                   </StyledTableRow>
-                  {/* {rows.reference.map(({ name, noOfItems }) => {
-                    return (
-                      <Box sx={{ display: "flex", gap: 3 }}>
-                        <p>{name}</p> <p>{noOfItems}</p>
-                        <Divider sx={{ borderBottom: "1px solid red" }} />
-                      </Box>
-                    );
-                  })} */}
                 </Fragment>
               ))}
             </TableBody>

@@ -8,6 +8,8 @@ import AddnewProduct from "./adminDashbord/AddnewProducts";
 import Dashboard from "./adminDashbord/Dashboard";
 import UserEdit from "./adminDashbord/UserEdit";
 import Admin from "./adminDashbord/Admin";
+import CreateAdminprofile from "../components/adminDashbord/AdminProfile";
+
 const AdminRoutes = () => {
   return (
     <div>
@@ -28,6 +30,7 @@ const AdminRoutes = () => {
           {/* Products Routes */}
           <Route path="/products" element={<Product />} />
           <Route path="/products/addnew" element={<AddnewProduct />} />
+          <Route path="/adminprofile" element={<CreateAdminprofile />} />
         </Routes>
       </Sidebar1>
     </div>
