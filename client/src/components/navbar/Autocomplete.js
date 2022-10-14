@@ -7,10 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 export const MuiAutocomplete = () => {
   const [value, setValue] = useState(null);
   const [allpoducts, setAllproducts] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const getAllProducts = async () => {
     try {
-      const {data} = await axios.get(`${url}/api/products/allproducts`);
+      const { data } = await axios.get(`${url}/api/products/allproducts`);
       setAllproducts(data);
       console.log(data, "=-------------------------------");
     } catch (error) {
@@ -20,16 +20,14 @@ export const MuiAutocomplete = () => {
   useEffect(() => {
     getAllProducts();
   }, []);
-  const navigateHandle = (id)=> {
+  const navigateHandle = (id) => {
     navigate(`/product/${id}`);
   };
   return (
     <Stack spacing={2} width="250px">
       <Autocomplete
         options={allpoducts}
-        isOptionEqualToValue={(options, value) =>
-          options?._id === value?._id
-        }
+        isOptionEqualToValue={(options, value) => options?._id === value?._id}
         getOptionLabel={(options) => options?.name}
         renderOption={(props, options) => (
           <Box
@@ -37,10 +35,10 @@ export const MuiAutocomplete = () => {
               color: "#757575",
               fontSize: "15px",
               py: 1,
-              fontFamily:"Arial",
-              marginTop:"1rem",
-              textTransform:"capitalize",
-              fontWeight:700,
+              fontFamily: "Arial",
+              marginTop: "1rem",
+              textTransform: "capitalize",
+              fontWeight: 700,
               borderBottom: "1px solid #757575",
               cursor: "pointer",
               outline: "none",
@@ -53,7 +51,7 @@ export const MuiAutocomplete = () => {
               navigateHandle(options._id);
             }}
           >
-            {console.log(options._id,"options._id")}
+            {console.log(options._id, "options._id")}
             {options.name || ""}{" "}
           </Box>
         )}
@@ -72,7 +70,6 @@ export const MuiAutocomplete = () => {
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
-        
       />
     </Stack>
   );

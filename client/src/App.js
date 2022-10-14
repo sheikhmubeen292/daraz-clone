@@ -27,6 +27,7 @@ function App() {
         <BrowserRouter>
           {/* <Navbar /> */}
           <Navbar getresult={setResultdata} />
+          {/* <Register /> */}
           <Routes>
             <Route path="/register" element={<Signup />} />
             <Route path="/login" element={<Loginfoam />} />

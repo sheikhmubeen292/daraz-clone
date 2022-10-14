@@ -24,7 +24,7 @@ import Dropdown2 from "./dropdown1";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { AllOutSharp } from "@mui/icons-material";
-import {MuiAutocomplete} from './Autocomplete'
+import { MuiAutocomplete } from "./Autocomplete";
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -45,17 +45,15 @@ const Navbar = ({ getresult }) => {
     setMobileOpen(!mobileOpen);
   };
   const { totalUniqueItems } = useCart();
- 
+
   function logout() {
     console.log("log out");
-    // navigate("/");  
-    window.location.href='/'
+    // navigate("/");
+    window.location.href = "/";
     localStorage.clear();
     // location.reload(true);
   }
 
-
- 
   return (
     <>
       <div>
@@ -121,7 +119,7 @@ const Navbar = ({ getresult }) => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        marginLeft:"9.3rem"
+                        marginLeft: "9.3rem",
                       }}
                     >
                       <SearchIcon />

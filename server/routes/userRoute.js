@@ -32,8 +32,8 @@ async function validatePassword(plainPassword, hashedPassword) {
 }
 router.post("/register", upload.single("image"), async (req, res, next) => {
   try {
-    const { name, email, password, gender, role } = req.body;
-    if (!name || !email || !password || !gender) {
+    const { name, email, password, gender, role,option } = req.body;
+    if (!name || !email || !password || !gender || !option) {
       res.status(400);
       throw new Error("Please add all fields");
     }
@@ -58,6 +58,7 @@ router.post("/register", upload.single("image"), async (req, res, next) => {
       password: hashedPassword,
       gender,
       role: role || "user",
+      option
     });
     const accessToken = jwt.sign(
       { userId: newUser._id },
@@ -125,17 +126,36 @@ router.get("/alluser", async (req, res) => {
     console.log(error);
   }
 });
-// --------------------------------get user by id
-router.post("/userbyid", async (req, res) => {
-  const _id = req.body;
 
-  try {
-    const user = await userModel.findById(_id);
-    res.json(user);
-  } catch (error) {
-    console.log(error);
-  }
-});
+// --------------------------------get user by id
+// router.post("/userbyid", async (req, res) => {
+//   const _id = req.body;
+
+//   try {
+//     const user = await userModel.findById(_id);
+//     res.json(user);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+router.get("/getUserprofile/:id", async(request, response)=>{
+  userModel.findOne({ where: { _id: request.params.id } }).then(user => {
+    if (user === null) {
+      response.status(401).json({
+        message: "Invalid credentials!",
+      });
+    } else {
+      response.status(200).json({
+        userModel: user
+      });
+    }
+  }).catch(error => {
+    response.status(500).json({
+      message: "Something went wrong!",
+    });
+  });
+})
 
 //  --------------------------- Delete user
 

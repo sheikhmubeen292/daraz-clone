@@ -33,13 +33,16 @@ import {
 } from "@mui/material";
 
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
+
   const navigate = useNavigate();
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser.data.role);
+  // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = useSelector((state)=>state.user.currentUser)
+  console.log(currentUser.data, "user................123123");
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -48,10 +51,11 @@ export default function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
   React.useEffect(() => {
-    if (currentUser.data.role === "user ") {
+    if (currentUser.data.role === "user") {
       navigate("/");
     }
   });
+ 
   const drawer = (
     <div>
       <Box
@@ -97,23 +101,25 @@ export default function ResponsiveDrawer(props) {
             <ListItemText primary="Products" />
           </ListItemButton>
         </NavLink>
-        <NavLink to="/admin-dashbord/order" style={{ textDecoration: "none" }}>
+        {/* <NavLink to="/admin-dashbord/order" style={{ textDecoration: "none" }}>
           <ListItemButton>
             <ListItemIcon>
               <Inventory2Icon sx={{ color: "#466CFD" }} />
             </ListItemIcon>
             <ListItemText primary="Order" />
           </ListItemButton>
-        </NavLink>
+        </NavLink> */}
 
         <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>Setting</Box>
+        <NavLink to="/admin-dashbord/adminprofile" style={{ textDecoration: "none"}}>
         <ListItemButton>
           <ListItemIcon>
             <AccountBoxIcon sx={{ color: "#466CFD" }} />
           </ListItemIcon>
+
           <ListItemText primary="Profile" />
         </ListItemButton>
-
+        </NavLink>
         <ListItemButton>
           <ListItemIcon>
             <LogoutIcon sx={{ color: "#466CFD" }} />
