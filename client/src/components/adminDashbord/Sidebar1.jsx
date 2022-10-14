@@ -24,6 +24,7 @@ import BookIcon from "@mui/icons-material/Book";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Search } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+
 import {
   FormControl,
   InputAdornment,
@@ -38,6 +39,7 @@ import { useSelector } from "react-redux";
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
+ 
 
   const navigate = useNavigate();
   // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -101,22 +103,13 @@ export default function ResponsiveDrawer(props) {
             <ListItemText primary="Products" />
           </ListItemButton>
         </NavLink>
-        {/* <NavLink to="/admin-dashbord/order" style={{ textDecoration: "none" }}>
-          <ListItemButton>
-            <ListItemIcon>
-              <Inventory2Icon sx={{ color: "#466CFD" }} />
-            </ListItemIcon>
-            <ListItemText primary="Order" />
-          </ListItemButton>
-        </NavLink> */}
 
         <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>Setting</Box>
-        <NavLink to="/admin-dashbord/adminprofile" style={{ textDecoration: "none"}}>
+        <NavLink to={`adminprofile/${currentUser.data.id}`} style={{ textDecoration: "none"}}>
         <ListItemButton>
           <ListItemIcon>
             <AccountBoxIcon sx={{ color: "#466CFD" }} />
           </ListItemIcon>
-
           <ListItemText primary="Profile" />
         </ListItemButton>
         </NavLink>

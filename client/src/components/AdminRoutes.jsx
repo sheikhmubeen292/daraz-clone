@@ -22,7 +22,7 @@ const AdminRoutes = () => {
           <Route path="/products" element={<Product />} />
 
           <Route path="/products/addnew" element={<AddnewProduct />} />
-          <Route path= "/adminprofile" element={<CreateAdminprofile />} />
+          <Route path= "/adminprofile/:id" element={<CreateAdminprofile />} />
         </Routes>
       </Sidebar1>
     </div>

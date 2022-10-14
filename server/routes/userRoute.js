@@ -96,7 +96,7 @@ router.post("/login", async (req, res, next) => {
     );
     await userModel.findByIdAndUpdate(user._id, { accessToken });
     res.status(200).json({
-      data: { name: user.name, email: user.email, role: user.role },
+      data: { name: user.name, email: user.email, role: user.role, id:user._id },
       accessToken,
     });
   } catch (error) {
@@ -128,19 +128,9 @@ router.get("/alluser", async (req, res) => {
 });
 
 // --------------------------------get user by id
-// router.post("/userbyid", async (req, res) => {
-//   const _id = req.body;
-
-//   try {
-//     const user = await userModel.findById(_id);
-//     res.json(user);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
 
 router.get("/getUserprofile/:id", async(request, response)=>{
-  userModel.findOne({ where: { _id: request.params.id } }).then(user => {
+  userModel.findById({ _id: request.params._id }).then(user => {
     if (user === null) {
       response.status(401).json({
         message: "Invalid credentials!",

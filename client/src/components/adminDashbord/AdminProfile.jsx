@@ -5,19 +5,18 @@ import { makeStyles } from "@mui/styles";
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from "react-router-dom";
 
 // import Alert from '@mui/material/Alert';
 // import AlertTitle from '@mui/material/AlertTitle';
-import { adminprofileFailure, adminprofileStart, adminprofileSuccess } from "../../store/AdminProfileSlice";
+import { loginFailure, loginStart, loginSuccess } from "../../store/userSlice";
 const useStyle = makeStyles(theme => ({
     Userprofile:{
         fontFamily:"Quicksand"
     },
     container: {
         margin: '100px 110px',
-        // [theme.breakpoints.down('md')]: {
-        //     marginTop: 110,
-        // },
+
     },
     text1:{
         borderBottom: "2px solid #DBD7D7",
@@ -44,22 +43,22 @@ const useStyle = makeStyles(theme => ({
 }));
 const initialUserprofile = {
     gender: '',
-    phonenumber: '',
-    bio: '',
+    name: '',
+    email: '',
     image:'',
 }
 const CreateAdminprofile = () => {
+    const { id } = useParams();
+    console.log(id,"--------------------------ss")
     const classes = useStyle();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.currentUser);
     const [userprofiledata, setUserprofiledata] = useState(initialUserprofile);
     const [imageurl, setImageurl] = useState('');
-    const  isFetching= useSelector((state) => state.adminprofile);
-    console.log(isFetching)
     const imgbefore = `http://localhost:5000/${userprofiledata.image.slice(7,)}`
     const userid = user.id;
-    const name = user.name;
-    const email = user.email;
+    // const name = user.name;
+    // const email = user.email;
     useEffect(() => {
         const getImage = async () => {
             if (userprofiledata.image) {
@@ -74,11 +73,12 @@ const CreateAdminprofile = () => {
     }, [userprofiledata.image])
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`http://localhost:5000/api/users/getUserprofile/${userid}`)
-            setUserprofiledata({gender: response.data.userprofile.gender,phonenumber: response.data.userprofile.phonenumber, bio: response.data.userprofile.bio,image:response.data.userprofile.image})
+            const response = await axios.get(`http://localhost:5000/api/users/getUserprofile/${id}`)
+            console.log(response.data,"-------------------------")
+            setUserprofiledata({gender: response.data.currentUser.gender,name: response.data.currentUser.name, email: response.data.currentUser.email,image:response.data.currentUser.image})
         }
         fetchData()
-    }, [])
+    }, [id])
     const saveUserprofile = async () => {
         await createUserprofile(dispatch, userprofiledata);
     }
@@ -86,13 +86,13 @@ const CreateAdminprofile = () => {
         setUserprofiledata({ ...userprofiledata, [e.target.name]: e.target.type==="file"? e.target.files[0]:e.target.value });
     }
     const createUserprofile = async (dispatch, userprofile) => {
-        dispatch(adminprofileStart());
+        dispatch(loginStart());
         try {
             const data = new FormData();
             data.append("image", userprofiledata.image);
             data.append("gender", userprofiledata.gender);
-            data.append("phonenumber", userprofiledata.phonenumber);
-            data.append("bio", userprofiledata.bio);
+            data.append("email", userprofiledata.email);
+            data.append("name", userprofiledata.name);
             const result = await axios.post(`http://localhost:8000/userprofile/${userid}`,
                 data, {
                 headers: {
@@ -100,7 +100,7 @@ const CreateAdminprofile = () => {
                 }
             }
             );
-            dispatch(adminprofileSuccess(result.data));
+            dispatch(loginSuccess(result.data));
             toast.success('User Profile Saved Successfully!',{
                 position:'top-center'
             });
@@ -108,7 +108,7 @@ const CreateAdminprofile = () => {
             toast.error('Profile not Saved, Something went Wrong!',{
                 position:"top-center"
             })
-            dispatch(adminprofileFailure());
+            dispatch(loginFailure());
         }
     };
     return (
@@ -127,10 +127,10 @@ const CreateAdminprofile = () => {
                         </div>
                         <Grid container spacing={1} direction="row" justifyContent="center" alignItems="center">
                             <Grid item xs={7} >
-                                <input value={name} variant="outlined" disabled fullWidth className={classes.paddingadd}/>
+                                <input defaultValue={userprofiledata.name} variant="outlined" placeholder="Enter name" onChange={(e) => handleChange(e)}  fullWidth className={classes.paddingadd}/>
                             </Grid>
                             <Grid xs={7} item >
-                                <input value={email} type='email' variant="outlined" disabled fullWidth className={classes.paddingadd} />
+                                <input defaultValue={userprofiledata.email} type='email' placeholder="Enter email" variant="outlined" onChange={(e) => handleChange(e)}  fullWidth className={classes.paddingadd} />
                             </Grid>
                         </Grid>
                         <Grid container spacing={1} direction="row" justifyContent="center" alignItems="center">
@@ -146,14 +146,14 @@ const CreateAdminprofile = () => {
                             <Grid xs={7} item  >
                                 <input defaultValue={userprofiledata.gender} name='gender' placeholder="Enter gender" onChange={(e) => handleChange(e)} variant="outlined" fullWidth className={classes.paddingadd}/>
                             </Grid>
-                            <Grid item xs={7} >
+                            {/* <Grid item xs={7} >
                                 <input defaultValue={userprofiledata.phonenumber} name='phonenumber' type="number" onChange={(e) => handleChange(e)} placeholder="Enter phone number" variant="outlined" fullWidth className={classes.paddingadd}/>
                             </Grid>
                             <Grid item xs={7} >
                                 <input defaultValue={userprofiledata.bio} name='bio' multiline rows={4} onChange={(e) => handleChange(e)} placeholder="Type your bio here" variant="outlined" fullWidth className={classes.paddingadd}/>
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={7} >
-                                <Button onClick={saveUserprofile} disabled={isFetching} variant="contained" color="primary" style={{width:'90%'}}>Save Changes</Button>
+                                <Button onClick={saveUserprofile} variant="contained" color="primary" style={{width:'90%'}}>Save Changes</Button>
                             </Grid>
                         </Grid>
                         
