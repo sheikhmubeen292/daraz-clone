@@ -1,5 +1,3 @@
-// import Register from "./components/Singup/Register";
-// import Login from "./components/Login/Login";
 import Signup from "./components/Singup/Signup";
 import Loginfoam from "./components/Login/Login1";
 import ProductPage from "./components/ProductPage";
@@ -7,12 +5,9 @@ import HomeScreen from "./components/HomeScreen";
 import CategoryPage from "./components/CategoryPage/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import FlashSale from "./components/FlashSale/FlashSale";
 import AddProduct from "./components/AddProduct";
 import Navbar from "./components/navbar/navbar";
-import Footer from "./components/Footer/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Dropdown1 from './components/navbar/dropdown'
 import AdminRoutes from "./components/AdminRoutes";
 import { useState } from "react";
 import store from "./store/Store";

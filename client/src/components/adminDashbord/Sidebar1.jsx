@@ -5,23 +5,21 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
-import MenuIcon from "@mui/icons-material/Menu";
+
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import BookIcon from "@mui/icons-material/Book";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+
 import { Search } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
@@ -42,8 +40,8 @@ export default function ResponsiveDrawer(props) {
  
 
   const navigate = useNavigate();
-  // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const currentUser = useSelector((state)=>state.user.currentUser)
+
+  const currentUser = useSelector((state) => state.user.currentUser);
   console.log(currentUser.data, "user................123123");
 
   const { window } = props;
@@ -57,7 +55,7 @@ export default function ResponsiveDrawer(props) {
       navigate("/");
     }
   });
- 
+
   const drawer = (
     <div>
       <Box
@@ -87,11 +85,28 @@ export default function ResponsiveDrawer(props) {
         <NavLink to="/admin-dashbord/user" style={{ textDecoration: "none" }}>
           <ListItemButton>
             <ListItemIcon>
-              <PersonIcon sx={{ color: "#466CFD" }} />
+              <SupervisorAccountIcon sx={{ color: "#466CFD" }} />
             </ListItemIcon>
             <ListItemText primary="User" />
           </ListItemButton>
         </NavLink>
+
+        {currentUser.data.role === "superadmin" ? (
+          <NavLink
+            to="/admin-dashbord/admin"
+            style={{ textDecoration: "none" }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonIcon sx={{ color: "#466CFD" }} />
+              </ListItemIcon>
+              <ListItemText primary="Admin" />
+            </ListItemButton>
+          </NavLink>
+        ) : (
+          ""
+        )}
+
         <NavLink
           to="/admin-dashbord/products"
           style={{ textDecoration: "none" }}

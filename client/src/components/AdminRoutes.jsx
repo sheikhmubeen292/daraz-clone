@@ -7,7 +7,8 @@ import Product from "./adminDashbord/Products";
 import AddnewProduct from "./adminDashbord/AddnewProducts";
 import Dashboard from "./adminDashbord/Dashboard";
 import UserEdit from "./adminDashbord/UserEdit";
-import CreateAdminprofile from '../components/adminDashbord/AdminProfile'
+import Admin from "./adminDashbord/Admin";
+import CreateAdminprofile from "../components/adminDashbord/AdminProfile";
 
 const AdminRoutes = () => {
   return (
@@ -15,14 +16,25 @@ const AdminRoutes = () => {
       <Sidebar1>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+
+          {/* user Routes */}
           <Route path="/user" element={<Users />} />
           <Route path="/user/edit/:id" element={<UserEdit />} />
-
           <Route path="/user/addnew" element={<AddnewUser />} />
-          <Route path="/products" element={<Product />} />
 
+          {/* admin routes */}
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/edit/:id" element={<UserEdit />} />
+          <Route path="/admin/addnew" element={<AddnewUser />} />
+
+          {/* Products Routes */}
+          <Route path="/products" element={<Product />} />
           <Route path="/products/addnew" element={<AddnewProduct />} />
+<<<<<<< HEAD
           <Route path= "/adminprofile/:id" element={<CreateAdminprofile />} />
+=======
+          <Route path="/adminprofile" element={<CreateAdminprofile />} />
+>>>>>>> 90bd67c5a2441f7de87d5abc36424d8b51bc9803
         </Routes>
       </Sidebar1>
     </div>

@@ -84,7 +84,7 @@ router.post("/login", async (req, res, next) => {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email });
     if (!user) return next(new Error("Email does not exist"));
-    console.log(password, user.password, "password, user.password");
+    // console.log(password, user.password, "password, user.password");
     const validPassword = await validatePassword(password, user.password);
     if (!validPassword) return next(new Error("Password is not correct"));
     const accessToken = jwt.sign(
