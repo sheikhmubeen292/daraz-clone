@@ -76,7 +76,7 @@ export default function EditUser() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Update User
+            Update
           </Typography>
           <Box component="form" onSubmit={submitHandler} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -140,7 +140,7 @@ export default function EditUser() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Update User
+              Update
             </Button>
           </Box>
         </Box>

@@ -103,7 +103,7 @@ export default function AddUser() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Add New User
+            Add New
           </Typography>
           <Box component="form" onSubmit={submitHandler} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -191,7 +191,7 @@ export default function AddUser() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Add User
+              Add
             </Button>
           </Box>
         </Box>

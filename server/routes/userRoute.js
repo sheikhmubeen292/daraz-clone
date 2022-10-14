@@ -83,7 +83,7 @@ router.post("/login", async (req, res, next) => {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email });
     if (!user) return next(new Error("Email does not exist"));
-    console.log(password, user.password, "password, user.password");
+    // console.log(password, user.password, "password, user.password");
     const validPassword = await validatePassword(password, user.password);
     if (!validPassword) return next(new Error("Password is not correct"));
     const accessToken = jwt.sign(
@@ -95,7 +95,12 @@ router.post("/login", async (req, res, next) => {
     );
     await userModel.findByIdAndUpdate(user._id, { accessToken });
     res.status(200).json({
-      data: { name: user.name, email: user.email, role: user.role },
+      data: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        option: user.option,
+      },
       accessToken,
     });
   } catch (error) {

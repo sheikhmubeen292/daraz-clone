@@ -5,25 +5,25 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
-import MenuIcon from "@mui/icons-material/Menu";
+
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import BookIcon from "@mui/icons-material/Book";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+
 import { Search } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import {
   FormControl,
   InputAdornment,
@@ -39,7 +39,7 @@ const drawerWidth = 240;
 export default function ResponsiveDrawer(props) {
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser.data.role);
+  console.log(currentUser, "----------------");
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -48,7 +48,7 @@ export default function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
   React.useEffect(() => {
-    if (currentUser.data.role === "user ") {
+    if (currentUser.data.role === "user") {
       navigate("/");
     }
   });
@@ -81,11 +81,28 @@ export default function ResponsiveDrawer(props) {
         <NavLink to="/admin-dashbord/user" style={{ textDecoration: "none" }}>
           <ListItemButton>
             <ListItemIcon>
-              <PersonIcon sx={{ color: "#466CFD" }} />
+              <SupervisorAccountIcon sx={{ color: "#466CFD" }} />
             </ListItemIcon>
             <ListItemText primary="User" />
           </ListItemButton>
         </NavLink>
+
+        {currentUser.data.role === "superadmin" ? (
+          <NavLink
+            to="/admin-dashbord/admin"
+            style={{ textDecoration: "none" }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonIcon sx={{ color: "#466CFD" }} />
+              </ListItemIcon>
+              <ListItemText primary="Admin" />
+            </ListItemButton>
+          </NavLink>
+        ) : (
+          ""
+        )}
+
         <NavLink
           to="/admin-dashbord/products"
           style={{ textDecoration: "none" }}
@@ -95,14 +112,6 @@ export default function ResponsiveDrawer(props) {
               <Inventory2Icon sx={{ color: "#466CFD" }} />
             </ListItemIcon>
             <ListItemText primary="Products" />
-          </ListItemButton>
-        </NavLink>
-        <NavLink to="/admin-dashbord/order" style={{ textDecoration: "none" }}>
-          <ListItemButton>
-            <ListItemIcon>
-              <Inventory2Icon sx={{ color: "#466CFD" }} />
-            </ListItemIcon>
-            <ListItemText primary="Order" />
           </ListItemButton>
         </NavLink>
 
