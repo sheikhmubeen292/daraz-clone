@@ -5,6 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@ethersproject/contracts": "^5.7.0",
+    "@ethersproject/providers": "^5.7.0",
+    "@ethersproject/units": "^5.7.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.9",
     "@mui/styles": "^5.10.8",
@@ -12,7 +15,9 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@walletconnect/web3-provider": "^1.8.0",
     "axios": "^0.27.2",
+    "ethers": "^5.7.0",
     "bootstrap": "^5.2.1",
     "immutable": "^4.1.0",
     "install": "^0.13.0",
@@ -30,13 +35,14 @@
     "react-use-cart": "^1.13.0",
     "sweetalert2": "^11.4.37",
     "swiper": "6.8.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3": "^1.7.5",
+    "web3modal": "^1.9.9"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "nodemon": "nodemon app.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "set \"GENERATE_SOURCEMAP=false\" && react-app-rewired start",
+    "build": "set \"GENERATE_SOURCEMAP=false\" && react-app-rewired build",
+    "test": "set \"GENERATE_SOURCEMAP=false\" && react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -56,5 +62,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "autoprefixer": "^10.4.7",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0"
   }
 }

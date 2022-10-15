@@ -9,19 +9,30 @@ import AddProduct from "./components/AddProduct";
 import Navbar from "./components/navbar/navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AdminRoutes from "./components/AdminRoutes";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "./utils";
 import store from "./store/Store";
 import Cart from "./components/Cart1";
 
 function App() {
   const [resultdata, setResultdata] = useState([]);
+  const { account, connect, disconnect } = useContext(AppContext);
   console.log(resultdata, "app rwsult");
+
+  useEffect(() => {
+    if (!account) {
+      connect();
+    }
+  }, [connect, account]);
+
   return (
     <div>
       <Provider store={store}>
         <BrowserRouter>
           {/* <Navbar /> */}
           <Navbar getresult={setResultdata} />
+          <button onClick={connect}>connect</button>
+          <p>{account}</p>
           {/* <Register /> */}
           <Routes>
             <Route path="/register" element={<Signup />} />

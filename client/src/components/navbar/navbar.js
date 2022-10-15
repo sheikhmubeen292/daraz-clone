@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container } from "@mui/system";
 import axios from "axios";
 import { Grid, Button, Box, TextField, useMediaQuery } from "@mui/material";
@@ -25,8 +25,10 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { AllOutSharp } from "@mui/icons-material";
 import { MuiAutocomplete } from "./Autocomplete";
+import { AppContext } from "../../utils";
 const Navbar = ({ getresult }) => {
   const [visible, setVisible] = useState(false);
+
   const currentUser = useSelector((state) => state.user.currentUser);
   useEffect(() => {
     window.addEventListener("scroll", () => {
