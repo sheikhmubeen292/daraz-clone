@@ -42,7 +42,7 @@ export default function ResponsiveDrawer(props) {
   const navigate = useNavigate();
 
   const currentUser = useSelector((state) => state.user.currentUser);
-  console.log(currentUser.data, "user................123123");
+  console.log(currentUser?.data, "user................123123");
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -51,7 +51,7 @@ export default function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
   React.useEffect(() => {
-    if (currentUser.data.role === "user") {
+    if (currentUser?.data.role === "user") {
       navigate("/");
     }
   });
@@ -91,7 +91,7 @@ export default function ResponsiveDrawer(props) {
           </ListItemButton>
         </NavLink>
 
-        {currentUser.data.role === "superadmin" ? (
+        {currentUser?.data.role === "superadmin" ? (
           <NavLink
             to="/admin-dashbord/admin"
             style={{ textDecoration: "none" }}
@@ -120,7 +120,7 @@ export default function ResponsiveDrawer(props) {
         </NavLink>
 
         <Box sx={{ fontSize: "1.2rem ", paddingLeft: "5px" }}>Setting</Box>
-        <NavLink to={`adminprofile/${currentUser.data.id}`} style={{ textDecoration: "none"}}>
+        <NavLink to={`adminprofile/${currentUser?.data.id}`} style={{ textDecoration: "none"}}>
         <ListItemButton>
           <ListItemIcon>
             <AccountBoxIcon sx={{ color: "#466CFD" }} />

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { useParams } from "react-router-dom";
-
+import { url } from '../../constants';
 // import Alert from '@mui/material/Alert';
 // import AlertTitle from '@mui/material/AlertTitle';
 import { loginFailure, loginStart, loginSuccess } from "../../store/userSlice";
@@ -55,8 +55,8 @@ const CreateAdminprofile = () => {
     const user = useSelector((state) => state.user.currentUser);
     const [userprofiledata, setUserprofiledata] = useState(initialUserprofile);
     const [imageurl, setImageurl] = useState('');
-    const imgbefore = `http://localhost:5000/${userprofiledata.image.slice(7,)}`
-    const userid = user.id;
+    const imgbefore = `${url}/uploads/${userprofiledata.image}`
+    const userid = user?.id;
 
     useEffect(() => {
         const getImage = async () => {
@@ -72,7 +72,7 @@ const CreateAdminprofile = () => {
     }, [userprofiledata.image])
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`http://localhost:5000/api/users/getUserprofile/${id}`)
+            const response = await axios.get(`${url}/api/users/getUserprofile/${id}`)
             console.log(response.data,"-------------------------")
             setUserprofiledata({gender: response.data.userProfile.gender,name: response.data.userProfile.name, email: response.data.userProfile.email,image:response.data.userProfile.image})
         }
