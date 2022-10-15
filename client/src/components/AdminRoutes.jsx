@@ -30,11 +30,7 @@ const AdminRoutes = () => {
           {/* Products Routes */}
           <Route path="/products" element={<Product />} />
           <Route path="/products/addnew" element={<AddnewProduct />} />
-<<<<<<< HEAD
           <Route path= "/adminprofile/:id" element={<CreateAdminprofile />} />
-=======
-          <Route path="/adminprofile" element={<CreateAdminprofile />} />
->>>>>>> 90bd67c5a2441f7de87d5abc36424d8b51bc9803
         </Routes>
       </Sidebar1>
     </div>

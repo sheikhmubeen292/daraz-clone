@@ -29,13 +29,13 @@ app.use("/api/order/", order);
 
 app.use("/api/users/", router);
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./build/index.html"), function (err) {
-    if (err) {
-      res.status(500).send(err, { error: "server Error" });
-    }
-  });
-});
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./build/index.html"), function (err) {
+//     if (err) {
+//       res.status(500).send(err, { error: "server Error" });
+//     }
+//   });
+// });
 app.listen(port, (req, res) => {
   console.log(`server is strated at port ${port}`);
 });

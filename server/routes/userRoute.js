@@ -103,20 +103,6 @@ router.post("/login", async (req, res, next) => {
     next(error);
   }
 });
-// router.post("/login", (req, res) => {
-//     const { email, password } = req.body;
-//     User.findOne({ email: email }, (err, user) => {
-//       if (user) {
-//         if (password === user.password) {
-//           res.send({ message: "login sucess", user: user });
-//         } else {
-//           res.send({ message: "wrong credentials" });
-//         }
-//       } else {
-//         res.send("not register");
-//       }
-//     });
-//   });
 
 router.get("/alluser", async (req, res) => {
   try {
@@ -130,14 +116,14 @@ router.get("/alluser", async (req, res) => {
 // --------------------------------get user by id
 
 router.get("/getUserprofile/:id", async(request, response)=>{
-  userModel.findById({ _id: request.params._id }).then(user => {
+  userModel.findOne({ where: { userId: request.params.id } }).then(user => {
     if (user === null) {
       response.status(401).json({
         message: "Invalid credentials!",
       });
     } else {
       response.status(200).json({
-        userModel: user
+        userProfile: user
       });
     }
   }).catch(error => {
@@ -146,6 +132,57 @@ router.get("/getUserprofile/:id", async(request, response)=>{
     });
   });
 })
+//create profile
+router.post("/userprofile/:id", async(req, res)=>{
+  try {
+    userModel.findOne({ where: { userId: req.params.id } }).then(user => {
+      if (user !== null) {
+          const userprofileId = user.id;
+          const picture = req.file?.path ? req.file.path : '';
+          const { gender, name, email } = req.body
+          return userModel
+            .findByPk(userprofileId)
+            .then((userprofile) => {
+              userprofile.update({
+                gender: gender !==userprofile.gender?gender:userprofile.gender,
+                name: name !==userprofile.name?name:userprofile.name,
+                email: email !==userprofile.email?email:userprofile.email,
+                picture: picture || userprofile.picture
+              })
+                .then((updatedUserprofile) => {
+                  res.status(200).send({
+                    message: 'User-profile Updated Successfully',
+                    data: {
+                      gender: gender || updatedUserprofile.gender,
+                      name: name || updatedUserprofile.name,
+                      email: email || updatedUserprofile.email,
+                      picture: picture || updatedUserprofile.picture
+                    }
+                  })
+                })
+                .catch(error => res.status(400).send(error));
+            })
+            .catch(error => res.status(400).send(error));
+      } else {
+        const userId = req.params.id;
+        const picture = req.file?.path? req.file.path:""
+        const { gender, name, email } = req.body;
+        const users = Userprofile.create({
+          gender: gender,
+          name: name,
+          email: email,
+          picture: picture,
+          userId: userId
+        });
+        return res
+          .status(200)
+          .json({ status: 200, message: 'User-Profile Created Successfully', users });
+      }
+    })
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: e.message });
+  }
+});
 
 //  --------------------------- Delete user
 

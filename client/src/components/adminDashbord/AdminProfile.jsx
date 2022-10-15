@@ -57,8 +57,7 @@ const CreateAdminprofile = () => {
     const [imageurl, setImageurl] = useState('');
     const imgbefore = `http://localhost:5000/${userprofiledata.image.slice(7,)}`
     const userid = user.id;
-    // const name = user.name;
-    // const email = user.email;
+
     useEffect(() => {
         const getImage = async () => {
             if (userprofiledata.image) {
@@ -75,42 +74,42 @@ const CreateAdminprofile = () => {
         const fetchData = async () => {
             const response = await axios.get(`http://localhost:5000/api/users/getUserprofile/${id}`)
             console.log(response.data,"-------------------------")
-            setUserprofiledata({gender: response.data.currentUser.gender,name: response.data.currentUser.name, email: response.data.currentUser.email,image:response.data.currentUser.image})
+            setUserprofiledata({gender: response.data.userProfile.gender,name: response.data.userProfile.name, email: response.data.userProfile.email,image:response.data.userProfile.image})
         }
         fetchData()
     }, [id])
-    const saveUserprofile = async () => {
-        await createUserprofile(dispatch, userprofiledata);
-    }
+    // const saveUserprofile = async () => {
+    //     await createUserprofile(dispatch, userprofiledata);
+    // }
     const handleChange = (e) => {
         setUserprofiledata({ ...userprofiledata, [e.target.name]: e.target.type==="file"? e.target.files[0]:e.target.value });
     }
-    const createUserprofile = async (dispatch, userprofile) => {
-        dispatch(loginStart());
-        try {
-            const data = new FormData();
-            data.append("image", userprofiledata.image);
-            data.append("gender", userprofiledata.gender);
-            data.append("email", userprofiledata.email);
-            data.append("name", userprofiledata.name);
-            const result = await axios.post(`http://localhost:8000/userprofile/${userid}`,
-                data, {
-                headers: {
-                    Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
-                }
-            }
-            );
-            dispatch(loginSuccess(result.data));
-            toast.success('User Profile Saved Successfully!',{
-                position:'top-center'
-            });
-        } catch (err) {
-            toast.error('Profile not Saved, Something went Wrong!',{
-                position:"top-center"
-            })
-            dispatch(loginFailure());
-        }
-    };
+    // const createUserprofile = async (dispatch, userprofile) => {
+    //     dispatch(loginStart());
+    //     try {
+    //         const data = new FormData();
+    //         data.append("image", userprofiledata.image);
+    //         data.append("gender", userprofiledata.gender);
+    //         data.append("email", userprofiledata.email);
+    //         data.append("name", userprofiledata.name);
+    //         const result = await axios.post(`http://localhost:8000/userprofile/${userid}`,
+    //             data, {
+    //             headers: {
+    //                 Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
+    //             }
+    //         }
+    //         );
+    //         dispatch(loginSuccess(result.data));
+    //         toast.success('User Profile Saved Successfully!',{
+    //             position:'top-center'
+    //         });
+    //     } catch (err) {
+    //         toast.error('Profile not Saved, Something went Wrong!',{
+    //             position:"top-center"
+    //         })
+    //         dispatch(loginFailure());
+    //     }
+    // };
     return (
         <div className="Userprofile">
             <Grid className={classes.container}>
@@ -146,14 +145,9 @@ const CreateAdminprofile = () => {
                             <Grid xs={7} item  >
                                 <input defaultValue={userprofiledata.gender} name='gender' placeholder="Enter gender" onChange={(e) => handleChange(e)} variant="outlined" fullWidth className={classes.paddingadd}/>
                             </Grid>
-                            {/* <Grid item xs={7} >
-                                <input defaultValue={userprofiledata.phonenumber} name='phonenumber' type="number" onChange={(e) => handleChange(e)} placeholder="Enter phone number" variant="outlined" fullWidth className={classes.paddingadd}/>
-                            </Grid>
+                          
                             <Grid item xs={7} >
-                                <input defaultValue={userprofiledata.bio} name='bio' multiline rows={4} onChange={(e) => handleChange(e)} placeholder="Type your bio here" variant="outlined" fullWidth className={classes.paddingadd}/>
-                            </Grid> */}
-                            <Grid item xs={7} >
-                                <Button onClick={saveUserprofile} variant="contained" color="primary" style={{width:'90%'}}>Save Changes</Button>
+                                <Button  variant="contained" color="primary" style={{width:'90%'}}>Save Changes</Button>
                             </Grid>
                         </Grid>
                         

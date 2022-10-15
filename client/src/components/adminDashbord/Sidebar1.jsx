@@ -13,7 +13,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 import Toolbar from "@mui/material/Toolbar";
-
+// import { SupervisorAccountIcon } from "@mui/icons-material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
@@ -85,7 +85,7 @@ export default function ResponsiveDrawer(props) {
         <NavLink to="/admin-dashbord/user" style={{ textDecoration: "none" }}>
           <ListItemButton>
             <ListItemIcon>
-              <SupervisorAccountIcon sx={{ color: "#466CFD" }} />
+              {/* <SupervisorAccountIcon sx={{ color: "#466CFD" }} /> */}
             </ListItemIcon>
             <ListItemText primary="User" />
           </ListItemButton>
